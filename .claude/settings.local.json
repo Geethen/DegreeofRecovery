@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python degreeRecover/scripts/analysis/score_test_sites.py)",
+      "Bash(python -c \"import ee; ee.Initialize\\(project='ee-gsingh'\\); print\\('GEE OK'\\)\")",
+      "Bash(python -c \"import duckdb; print\\(duckdb.__version__\\)\")",
+      "Bash(rm -f degreeRecover/data/recover_reference_samples_alphaearth.parquet degreeRecover/data/recover_reference_samples_alphaearth.parquet.checkpoint.json degreeRecover/data/test_site_alphaearth_2024.parquet)",
+      "Bash(python degreeRecover/scripts/sampling/sample_reference_states.py --limit 2 --verbose)",
+      "Bash(python degreeRecover/scripts/extraction/extract_alphaearth_embeddings.py --test_mode)",
+      "Bash(python degreeRecover/scripts/extraction/extract_test_site_embeddings.py --overwrite)",
+      "Bash(python -c \"import geopandas, shapely, fiona; print\\('gpd', geopandas.__version__, 'shapely', shapely.__version__\\)\")"
+    ]
+  }
+}

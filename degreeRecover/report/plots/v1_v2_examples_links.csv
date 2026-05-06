@@ -1,0 +1,5 @@
+parent_id,transition,parent_label,lat,lon,dor_v1,dor_v2,google_earth_url,google_maps_pin_url
+00000000000000000176,indistinguishable → recovering,built_loss,-26.488579662595335,29.137015230111093,0.5002752373185344,0.6577268895390618,"https://earth.google.com/web/search/-26.488580,29.137015/","https://www.google.com/maps?q=-26.488580,29.137015"
+00000000000000000442,recovering → degraded,built_loss,52.115757157692876,107.12912588378376,0.7464368820784286,0.3252001137405086,"https://earth.google.com/web/search/52.115757,107.129126/","https://www.google.com/maps?q=52.115757,107.129126"
+00000000000000000291,recovering → recovering,crop_loss,43.8367666940161,69.16760564567063,0.8814918197912559,0.8818759387456236,"https://earth.google.com/web/search/43.836767,69.167606/","https://www.google.com/maps?q=43.836767,69.167606"
+00000000000000000632,degraded → degraded,crop_loss,57.643584320832744,45.68549361783428,0.0824635360855613,0.0770125482209059,"https://earth.google.com/web/search/57.643584,45.685494/","https://www.google.com/maps?q=57.643584,45.685494"

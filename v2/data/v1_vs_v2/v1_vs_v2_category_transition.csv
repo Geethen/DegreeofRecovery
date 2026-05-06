@@ -1,0 +1,10 @@
+category_v1,category_v2,n_sites
+degraded,degraded,46
+degraded,indistinguishable,12
+degraded,recovering,4
+indistinguishable,degraded,14
+indistinguishable,indistinguishable,15
+indistinguishable,recovering,14
+recovering,degraded,7
+recovering,indistinguishable,9
+recovering,recovering,37

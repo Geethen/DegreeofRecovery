@@ -1,0 +1,50 @@
+{
+  "input": "degreeRecover/data/recover_reference_samples_alphaearth.parquet",
+  "n_boot": 600,
+  "corr_range_m": 500.0,
+  "seed": 42,
+  "strategies": [
+    {
+      "name": "random_100",
+      "method": "random",
+      "max_raw": 100,
+      "thin_m": 0.0
+    },
+    {
+      "name": "random_60",
+      "method": "random",
+      "max_raw": 60,
+      "thin_m": 0.0
+    },
+    {
+      "name": "random_40",
+      "method": "random",
+      "max_raw": 40,
+      "thin_m": 0.0
+    },
+    {
+      "name": "feature_diverse_60",
+      "method": "feature_diverse",
+      "max_raw": 60,
+      "thin_m": 0.0
+    },
+    {
+      "name": "spatial_thin_150_cap60",
+      "method": "spatial_thin",
+      "max_raw": 60,
+      "thin_m": 150.0
+    },
+    {
+      "name": "spatial_thin_300_cap60",
+      "method": "spatial_thin",
+      "max_raw": 60,
+      "thin_m": 300.0
+    },
+    {
+      "name": "hybrid_300_diverse_60",
+      "method": "hybrid",
+      "max_raw": 60,
+      "thin_m": 300.0
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+dist/
+build/
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Tools
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.pdm.toml
+poetry.toml
+pyrightconfig.json
+
+# Large data / binaries
+*.parquet
+*.7z
+*.zip
+*.tar.gz
+
+# Large CSVs (per-point data, re-derivable from parquets)
+v3/data/within_parent_site_scores.csv
+v3/data/within_parent_site_scores_per_label_cal.csv
+v2/data/*/sampling_strategy_selected_points.csv
+
+# Large report images
+degreeRecover/report/plots/v1_v2_examples_2018_vs_2024.png
+
+# OS
+.DS_Store
+Thumbs.db

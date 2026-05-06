@@ -1,0 +1,178 @@
+{
+  "input": "v2/data/recover_reference_samples_v2_mask_off_large_alphaearth.parquet",
+  "n_boot": 800,
+  "corr_range_m": 150.0,
+  "seed": 42,
+  "x_obs_source": "test_site",
+  "test_embeddings": "degreeRecover/data/test_site_alphaearth_2024.parquet",
+  "strategies": [
+    {
+      "name": "random_40",
+      "method": "random",
+      "max_raw": 40,
+      "thin_m": 0.0
+    },
+    {
+      "name": "random_60",
+      "method": "random",
+      "max_raw": 60,
+      "thin_m": 0.0
+    },
+    {
+      "name": "random_100",
+      "method": "random",
+      "max_raw": 100,
+      "thin_m": 0.0
+    },
+    {
+      "name": "random_150",
+      "method": "random",
+      "max_raw": 150,
+      "thin_m": 0.0
+    },
+    {
+      "name": "random_200",
+      "method": "random",
+      "max_raw": 200,
+      "thin_m": 0.0
+    },
+    {
+      "name": "fscs_60",
+      "method": "fscs",
+      "max_raw": 60,
+      "thin_m": 0.0
+    },
+    {
+      "name": "fscs_100",
+      "method": "fscs",
+      "max_raw": 100,
+      "thin_m": 0.0
+    },
+    {
+      "name": "fscs_150",
+      "method": "fscs",
+      "max_raw": 150,
+      "thin_m": 0.0
+    },
+    {
+      "name": "fscs_200",
+      "method": "fscs",
+      "max_raw": 200,
+      "thin_m": 0.0
+    },
+    {
+      "name": "feature_diverse_60",
+      "method": "feature_diverse",
+      "max_raw": 60,
+      "thin_m": 0.0
+    },
+    {
+      "name": "feature_diverse_100",
+      "method": "feature_diverse",
+      "max_raw": 100,
+      "thin_m": 0.0
+    },
+    {
+      "name": "feature_diverse_150",
+      "method": "feature_diverse",
+      "max_raw": 150,
+      "thin_m": 0.0
+    },
+    {
+      "name": "spatial_thin_100_cap60",
+      "method": "spatial_thin",
+      "max_raw": 60,
+      "thin_m": 100.0
+    },
+    {
+      "name": "spatial_thin_150_cap60",
+      "method": "spatial_thin",
+      "max_raw": 60,
+      "thin_m": 150.0
+    },
+    {
+      "name": "spatial_thin_250_cap60",
+      "method": "spatial_thin",
+      "max_raw": 60,
+      "thin_m": 250.0
+    },
+    {
+      "name": "spatial_thin_300_cap60",
+      "method": "spatial_thin",
+      "max_raw": 60,
+      "thin_m": 300.0
+    },
+    {
+      "name": "spatial_thin_100_cap100",
+      "method": "spatial_thin",
+      "max_raw": 100,
+      "thin_m": 100.0
+    },
+    {
+      "name": "spatial_thin_150_cap100",
+      "method": "spatial_thin",
+      "max_raw": 100,
+      "thin_m": 150.0
+    },
+    {
+      "name": "spatial_thin_250_cap100",
+      "method": "spatial_thin",
+      "max_raw": 100,
+      "thin_m": 250.0
+    },
+    {
+      "name": "spatial_thin_300_cap100",
+      "method": "spatial_thin",
+      "max_raw": 100,
+      "thin_m": 300.0
+    },
+    {
+      "name": "spatial_thin_100_cap150",
+      "method": "spatial_thin",
+      "max_raw": 150,
+      "thin_m": 100.0
+    },
+    {
+      "name": "spatial_thin_150_cap150",
+      "method": "spatial_thin",
+      "max_raw": 150,
+      "thin_m": 150.0
+    },
+    {
+      "name": "spatial_thin_250_cap150",
+      "method": "spatial_thin",
+      "max_raw": 150,
+      "thin_m": 250.0
+    },
+    {
+      "name": "spatial_thin_300_cap150",
+      "method": "spatial_thin",
+      "max_raw": 150,
+      "thin_m": 300.0
+    },
+    {
+      "name": "hybrid_150_diverse_100",
+      "method": "hybrid",
+      "max_raw": 100,
+      "thin_m": 150.0
+    },
+    {
+      "name": "hybrid_300_diverse_100",
+      "method": "hybrid",
+      "max_raw": 100,
+      "thin_m": 300.0
+    },
+    {
+      "name": "hybrid_150_diverse_150",
+      "method": "hybrid",
+      "max_raw": 150,
+      "thin_m": 150.0
+    },
+    {
+      "name": "hybrid_300_diverse_150",
+      "method": "hybrid",
+      "max_raw": 150,
+      "thin_m": 300.0
+    }
+  ]
+}

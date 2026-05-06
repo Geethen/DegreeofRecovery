@@ -1,0 +1,11 @@
+step,parent_label,degraded,indistinguishable,recovering
+category_baseline,built_loss,32,19,39
+category_baseline,crop_loss,34,20,14
+category_step1_calibrated_t,built_loss,24,19,47
+category_step1_calibrated_t,crop_loss,31,17,20
+category_step2_deadband,built_loss,12,43,35
+category_step2_deadband,crop_loss,25,30,13
+category_step3_deadband_effect,built_loss,11,44,35
+category_step3_deadband_effect,crop_loss,25,31,12
+category_step4_knn,built_loss,9,71,10
+category_step4_knn,crop_loss,7,55,6

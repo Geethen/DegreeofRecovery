@@ -1,0 +1,16 @@
+# Changes here will be overwritten by Copier
+_commit: v0.2.6
+_src_path: gh:ninanor/template-python
+author_name: ninanor
+debug: true
+default_branch_name: main
+docker: false
+email: ninanor@nina.no
+notebook: true
+notebook_type: marimo
+project_name: Degree of recovery
+project_slug: degree_of_recovery
+repo_name: degree_of_recovery
+repo_org: ninanor
+template_type: python
+type_annotations: true
