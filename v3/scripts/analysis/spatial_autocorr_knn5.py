@@ -35,7 +35,7 @@ REFS_PATH = os.path.join(
     BASE_DIR, "v2", "data", "v2real_mask_on_corr300_exhaustive",
     "sampling_strategy_selected_points.parquet",
 )
-TEST_SITES_PATH = os.path.join(BASE_DIR, "degreeRecover", "data",
+TEST_SITES_PATH = os.path.join(BASE_DIR, "v1", "data",
                                "test_site_alphaearth_2024.parquet")
 OUT_DIR = os.path.join(BASE_DIR, "v3", "plots")
 STRATEGY = "random_100"

@@ -25,7 +25,7 @@ Step 4 (kNN cosine, k=5): false-degraded = 1.8 %, false-recovering = 0.9 %, abst
 ## Repository layout
 
 ```
-degreeRecover/          # v1 production pipeline
+v1/                     # v1 production pipeline
   data/                 # scored shapefiles and CSVs
   plots/
   report/
@@ -52,6 +52,20 @@ v3/                     # v3 experiments (kNN cosine scorer)
   report/
     METHOD.md                         # full method and validation writeup
   scripts/analysis/
+
+v4/                     # v4 stable-pixel extension (per-class thresholds)
+  data/
+    stable_state_classification.csv   # multi-source vote per stable_stable parent
+    test_site_dor_v4.csv              # 158 sites + stable_* sanity rows
+    calibrated_thresholds_v4.json     # per stable_class thresholds
+  plots/
+  report/
+    METHOD.md                         # method writeup
+    RESULTS.md                        # results writeup
+  scripts/{classification,sampling,extraction,analysis,reporting}/
+
+scratch/                # local-only scratch (gitignored)
+  diem/                 # DIEM-distance experiments + helper module
 ```
 
 ---
@@ -122,13 +136,13 @@ uv run pre-commit install   # optional: code-quality hooks
 
 ```bash
 # 1. Sample reference points (GEE batch task, ~1 min)
-uv run degreeRecover/scripts/sampling/sample_reference_states.py --export
+uv run v1/scripts/sampling/sample_reference_states.py --export
 
 # 2. Extract embeddings at reference points (~1 min, resumable)
-uv run degreeRecover/scripts/extraction/extract_alphaearth_embeddings.py
+uv run v1/scripts/extraction/extract_alphaearth_embeddings.py
 
 # 3. Extract embeddings at test-site centroids
-uv run degreeRecover/scripts/extraction/extract_test_site_embeddings.py --overwrite
+uv run v1/scripts/extraction/extract_test_site_embeddings.py --overwrite
 
 # 4. Score test sites (v3 kNN cosine)
 uv run v3/scripts/analysis/score_test_sites_v3.py
@@ -146,7 +160,7 @@ uv run v3/scripts/analysis/export_knn_shp.py
 | `v3/data/test_site_knn5_scores.shp` | 158 test sites, ranked by `dor_knn` (rank 1 = most recovering) |
 | `v3/data/test_site_dor_v3.csv` | Raw scores, CIs, and categories for all 158 sites |
 | `v3/data/within_parent_site_scores.csv` | 31,600 validation probe scores |
-| `degreeRecover/data/test_site_dor.shp` | v1 production shapefile (dor_median) |
+| `v1/data/test_site_dor.shp` | v1 production shapefile (dor_median) |
 | `v2/data/test_site_dor_v2.shp` | v2 shapefile |
 
 ---

@@ -17,7 +17,7 @@ from shapely.geometry import Point
 BASE_DIR = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 )
-TEST_SITES_PATH = os.path.join(BASE_DIR, "degreeRecover", "data",
+TEST_SITES_PATH = os.path.join(BASE_DIR, "v1", "data",
                                "test_site_alphaearth_2024.parquet")
 SCORES_CSV = os.path.join(BASE_DIR, "v3", "data", "test_site_dor_v3.csv")
 OUT_DIR = os.path.join(BASE_DIR, "v3", "data")

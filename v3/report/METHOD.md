@@ -41,8 +41,9 @@ Two scores are computed for each `x_obs`:
 s_med = median_cos(x_obs, bad) / (median_cos(x_obs, good) + median_cos(x_obs, bad))
 ```
 
-Values near 1 indicate `x_obs` is closer to bad references; near 0 indicates
-closer to good references.
+Values near 1 indicate `x_obs` is closer to good references (small
+`median_cos(x_obs, good)` → numerator dominates); near 0 indicates closer to
+bad references.
 
 **kNN-margin score** (step 4, k=5 by default):
 
@@ -101,6 +102,28 @@ Calibrated values (strategy `random_100`, 158 parents):
 **Per-label calibration** (built_loss vs crop_loss) was tested and found to
 give negligible improvement (<0.1 pp change in overall error) while shifting
 errors between labels rather than reducing them. Pooled calibration is used.
+
+**Sample-size sanity check (n=199 LOO vs n=80 fold-train):** The global
+threshold is fitted on full-pool LOO scores (each ref scored against the
+other 199 refs of its parent) but operationally evaluated against only the
+~80 retained fold-training refs. To check the fitted threshold is not
+biased by this sample-size gap, the validator was re-run with
+`--calibration per_fold`, which refits on the same n=80 scores the probes
+see. Per-fold calibrated thresholds (5 folds):
+
+| Fold | t_med | t_knn |
+|------|-------|-------|
+| 0    | 0.4738 | 0.4878 |
+| 1    | 0.4617 | 0.4843 |
+| 2    | 0.4818 | 0.4885 |
+| 3    | 0.4679 | 0.4801 |
+| 4    | 0.4790 | 0.4939 |
+| **Global (n=199)** | **0.4728** | **0.4859** |
+
+Per-fold drift is ≤±0.012 for both thresholds — small relative to the
+deadband halfwidth (`hw=0.05`), and aggregate validation metrics (1.8% /
+0.9% step-4 error) are identical across calibration modes. Sample-size
+bias in the fitted threshold is negligible.
 
 ---
 
@@ -169,8 +192,16 @@ structurally correct test.
    achieved lower error (0.7% / 0.3%) only by pushing 50–56% to abstention.
    Unified cosine distance makes more decisive correct calls.
 
-4. **Brier scores** improve at step 4, confirming the kNN scorer has better
-   probabilistic calibration than the median scorer.
+4. **Brier scores** improve at step 4 (0.158 → 0.126 on the scorer-compare
+   probe pool). A reliability decomposition (10 equal-frequency bins,
+   `v3/data/reliability_dor.csv`) attributes this gain to **refinement**
+   (sharper, more decisive scores), not calibration: ECE is essentially
+   identical (`dor_median` 0.188 vs `dor_knn` 0.188) and MCE is marginally
+   worse for `dor_knn` (0.290 → 0.296). Both scorers are overconfident-good
+   in the lower half of the score range and overconfident-bad in the upper
+   half. The operational threshold (Youden-J ≈ 0.486) sits near the
+   crossover where both scorers are well-calibrated locally, so this does
+   not undermine deployed accuracy.
 
 #### Per-label breakdown (error rates)
 
@@ -319,12 +350,15 @@ Step 4 with default hyperparameters is the recommended default.
 |------|-------------|
 | `v3/data/within_parent_site_scores.csv` | Per-probe scores and classifications (31,600 rows) |
 | `v3/data/within_parent_summary.csv` | Aggregated metrics per step × probe_state × label |
+| `v3/data/within_parent_per_parent.csv` | Error/abstention rates per parent × step × probe_state |
 | `v3/data/sensitivity_sweep.csv` | Hyperparameter grid results |
 | `v3/data/test_site_dor_v3.csv` | Per-site dor_knn + dor_median scores and classifications (158 sites) |
 | `v3/data/v2_vs_v3_comparison.csv` | Site-level v2→v3 category transitions |
 | `v3/data/scorer_compare_summary.csv` | Six-scorer comparison metrics |
 | `v3/data/k_sweep_knn.csv` | kNN k-sweep results (k=1–75) |
 | `v3/data/k_sweep_median_sample_sizes.csv` | dor_median at n=40–200 refs |
+| `v3/data/reliability_dor.csv` | Equal-frequency bin table (calibration view) |
+| `v3/data/reliability_summary.csv` | ECE / MCE / Brier per scorer |
 
 ### Scripts
 
@@ -336,3 +370,5 @@ Step 4 with default hyperparameters is the recommended default.
 | `v3/scripts/analysis/sensitivity_sweep.py` | Hyperparameter sensitivity grid |
 | `v3/scripts/analysis/compare_scorers.py` | Six-variant scorer comparison |
 | `v3/scripts/analysis/compare_k_sweep.py` | k-sweep for kNN variants vs dor_median sample sizes |
+| `v3/scripts/analysis/reliability_dor.py` | Reliability decomposition (ECE / MCE) for dor_median vs dor_knn |
+| `v3/scripts/analysis/plot_reliability.py` | Generates `v3/plots/reliability_dor.png` |

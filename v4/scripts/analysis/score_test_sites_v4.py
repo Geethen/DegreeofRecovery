@@ -27,13 +27,21 @@ import duckdb
 import numpy as np
 import pandas as pd
 
+from degree_of_recovery.core import (
+    EPS,
+    bootstrap_ci,
+    classify,
+    cosine_dists_to_set,
+    knn_score as _knn_score,
+    median_score as _median_score,
+)
+
 EMBED_COLS = [f"A{i:02d}" for i in range(64)]
-EPS = 1e-12
 
 BASE_DIR = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 )
-V1_DATA_DIR = os.path.join(BASE_DIR, "degreeRecover", "data")
+V1_DATA_DIR = os.path.join(BASE_DIR, "v1", "data")
 V4_DATA_DIR = os.path.join(BASE_DIR, "v4", "data")
 DEFAULT_REFS = os.path.join(
     V4_DATA_DIR, "v4_stable_refs_alphaearth.parquet"
@@ -54,53 +62,6 @@ CALIBRATED_KNN_THRESHOLDS_V4 = {
     "stable_built":  0.4859,
 }
 MEDIAN_THRESHOLD = 0.5
-
-
-# ---------------------------------------------------------------------------
-# Distance / scorers
-# ---------------------------------------------------------------------------
-
-def cosine_dists_to_set(x: np.ndarray, points: np.ndarray) -> np.ndarray:
-    nx = np.linalg.norm(x) + EPS
-    np_pts = np.linalg.norm(points, axis=1) + EPS
-    return 1.0 - (points @ x) / (np_pts * nx)
-
-
-def _knn_score(d_g: np.ndarray, d_b: np.ndarray, k: int) -> float:
-    if len(d_g) < k or len(d_b) < k:
-        return float("nan")
-    m_g = float(np.mean(np.partition(d_g, k - 1)[:k]))
-    m_b = float(np.mean(np.partition(d_b, k - 1)[:k]))
-    return m_b / (m_g + m_b + EPS)
-
-
-def _median_score(d_g: np.ndarray, d_b: np.ndarray) -> float:
-    return float(np.median(d_b) / (np.median(d_g) + np.median(d_b) + EPS))
-
-
-def bootstrap_ci(score_fn, d_g: np.ndarray, d_b: np.ndarray,
-                 n_boot: int, rng: np.random.Generator
-                 ) -> tuple[float, float, float]:
-    point = score_fn(d_g, d_b)
-    if not np.isfinite(point):
-        return float("nan"), float("nan"), float("nan")
-    n_g, n_b = len(d_g), len(d_b)
-    ig = rng.integers(0, n_g, size=(n_boot, n_g))
-    ib = rng.integers(0, n_b, size=(n_boot, n_b))
-    boots = np.array([score_fn(d_g[ig[i]], d_b[ib[i]]) for i in range(n_boot)])
-    return (float(point),
-            float(np.nanpercentile(boots, 2.5)),
-            float(np.nanpercentile(boots, 97.5)))
-
-
-def classify(score: float, ci_lo: float, ci_hi: float, threshold: float) -> str:
-    if not (np.isfinite(score) and np.isfinite(ci_lo) and np.isfinite(ci_hi)):
-        return "no_data"
-    if ci_lo > threshold:
-        return "recovering"
-    if ci_hi < threshold:
-        return "degraded"
-    return "indistinguishable"
 
 
 # ---------------------------------------------------------------------------

@@ -27,83 +27,25 @@ from pathlib import Path
 import duckdb
 import numpy as np
 import pandas as pd
-from scipy.spatial.distance import cdist
+
+from degree_of_recovery.core_batch import (
+    CAT_DEGRADED,
+    CAT_INDISTINGUISHABLE,
+    CAT_NAMES,
+    CAT_NO_DATA,
+    CAT_RECOVERING,
+    bootstrap_ci_batch,
+    classify_batch,
+    cosine_dist_matrix,
+    knn_mean_3d as _knn_mean_3d,
+    median_3d as _median_3d,
+)
 
 EMBED_COLS = [f"A{i:02d}" for i in range(64)]
 EPS = 1e-12
 
 V3_KNN_T = 0.4859
 V3_MED_T = 0.4728
-
-
-# ---------------------------------------------------------------------------
-# Vectorised primitives — ported verbatim from v3 (no semantic change)
-# ---------------------------------------------------------------------------
-
-def cosine_dist_matrix(A: np.ndarray, B: np.ndarray) -> np.ndarray:
-    return cdist(A, B, metric="cosine")
-
-
-def _median_3d(D_boot: np.ndarray) -> np.ndarray:
-    return np.median(D_boot, axis=2)
-
-
-def _knn_mean_3d(D_boot: np.ndarray, k: int) -> np.ndarray:
-    return np.mean(np.partition(D_boot, k - 1, axis=2)[..., :k], axis=2)
-
-
-def bootstrap_ci_batch(D_g: np.ndarray, D_b: np.ndarray, metric: str,
-                       n_boot: int, rng: np.random.Generator, k: int = 5
-                       ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    n_probes, n_g = D_g.shape
-    n_b = D_b.shape[1]
-    ig = rng.integers(0, n_g, size=(n_boot, n_g))
-    ib = rng.integers(0, n_b, size=(n_boot, n_b))
-    Dg_boot = D_g[:, ig]
-    Db_boot = D_b[:, ib]
-
-    if metric == "median":
-        mg_boot = _median_3d(Dg_boot)
-        mb_boot = _median_3d(Db_boot)
-        point_g = np.median(D_g, axis=1)
-        point_b = np.median(D_b, axis=1)
-    elif metric == "knn":
-        if n_g < k or n_b < k:
-            nan = np.full(n_probes, np.nan)
-            return nan, nan, nan
-        mg_boot = _knn_mean_3d(Dg_boot, k)
-        mb_boot = _knn_mean_3d(Db_boot, k)
-        point_g = np.mean(np.partition(D_g, k - 1, axis=1)[:, :k], axis=1)
-        point_b = np.mean(np.partition(D_b, k - 1, axis=1)[:, :k], axis=1)
-    else:
-        raise ValueError(metric)
-
-    boots = mb_boot / (mg_boot + mb_boot + EPS)
-    point = point_b / (point_g + point_b + EPS)
-    boots.sort(axis=1)
-    lo_idx = max(int(round(0.025 * (n_boot - 1))), 0)
-    hi_idx = min(int(round(0.975 * (n_boot - 1))), n_boot - 1)
-    return point, boots[:, lo_idx], boots[:, hi_idx]
-
-
-CAT_NO_DATA = 0
-CAT_RECOVERING = 1
-CAT_DEGRADED = 2
-CAT_INDISTINGUISHABLE = 3
-CAT_NAMES = np.array(["no_data", "recovering", "degraded", "indistinguishable"],
-                     dtype=object)
-
-
-def classify_batch(score: np.ndarray, lo: np.ndarray, hi: np.ndarray,
-                   t_lo: float, t_hi: float, delta: float) -> np.ndarray:
-    out = np.full(len(score), CAT_NO_DATA, dtype=np.int8)
-    finite = np.isfinite(score) & np.isfinite(lo) & np.isfinite(hi)
-    rec = finite & (lo > t_hi) & ((score - t_hi) >= delta)
-    deg = finite & (hi < t_lo) & ((t_lo - score) >= delta)
-    out[finite] = CAT_INDISTINGUISHABLE
-    out[rec] = CAT_RECOVERING
-    out[deg] = CAT_DEGRADED
-    return out
 
 
 # ---------------------------------------------------------------------------

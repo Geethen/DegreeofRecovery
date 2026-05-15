@@ -143,7 +143,7 @@ good state), so we keep the v2/v3 union pool (crop ∪ built).
 - Sampling: `v4/scripts/sampling/sample_stable_references_v4.py`
 - Embedding extraction: `v4/scripts/extraction/extract_stable_refs_alphaearth.py`
   (thin wrapper around v1 extractor)
-- Test-site embedding cache: `degreeRecover/scripts/extraction/extract_test_site_embeddings.py`
+- Test-site embedding cache: `v1/scripts/extraction/extract_test_site_embeddings.py`
 - Validation/calibration: `v4/scripts/analysis/validate_steps_within_parent_v4.py`
 - Scoring: `v4/scripts/analysis/score_test_sites_v4.py`
 - Charts: `v4/scripts/reporting/make_v4_charts.py`

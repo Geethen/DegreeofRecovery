@@ -9,7 +9,7 @@
   "corr_range_m": 300.0,
   "seed": 42,
   "x_obs_source": "test_site",
-  "test_embeddings": "degreeRecover/data/test_site_alphaearth_2024.parquet",
+  "test_embeddings": "v1/data/test_site_alphaearth_2024.parquet",
   "strategies": [
     {
       "name": "random_40",

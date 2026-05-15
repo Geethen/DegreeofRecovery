@@ -1,5 +1,5 @@
 {
-  "input": "degreeRecover/data/recover_reference_samples_alphaearth.parquet",
+  "input": "v1/data/recover_reference_samples_alphaearth.parquet",
   "n_boot": 400,
   "corr_range_m": 500.0,
   "seed": 42,

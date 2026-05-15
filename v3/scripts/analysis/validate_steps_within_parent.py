@@ -54,118 +54,22 @@ from pathlib import Path
 import duckdb
 import numpy as np
 import pandas as pd
-from scipy.spatial.distance import cdist
+
+from degree_of_recovery.core_batch import (
+    CAT_DEGRADED,
+    CAT_INDISTINGUISHABLE,
+    CAT_NAMES,
+    CAT_NO_DATA,
+    CAT_RECOVERING,
+    bootstrap_ci_batch,
+    classify_batch,
+    cosine_dist_matrix,
+    knn_mean_3d as _knn_mean_3d,
+    median_3d as _median_3d,
+)
 
 EMBED_COLS = [f"A{i:02d}" for i in range(64)]
 EPS = 1e-12
-
-
-# ---------------------------------------------------------------------------
-# Vectorised scoring primitives
-# ---------------------------------------------------------------------------
-
-def cosine_dist_matrix(A: np.ndarray, B: np.ndarray) -> np.ndarray:
-    """Pairwise cosine distances |A| × |B| via scipy (no memory explosion)."""
-    return cdist(A, B, metric="cosine")
-
-
-
-# ---------------------------------------------------------------------------
-# Vectorised bootstrap CI over a (n_probes, n_refs) distance matrix
-# ---------------------------------------------------------------------------
-
-def _median_3d(D_boot: np.ndarray) -> np.ndarray:
-    """Median along last axis of a 3D (n_probes, n_boot, n_refs) array."""
-    return np.median(D_boot, axis=2)
-
-
-def _knn_mean_3d(D_boot: np.ndarray, k: int) -> np.ndarray:
-    """Mean of k smallest along last axis of (n_probes, n_boot, n_refs)."""
-    return np.mean(np.partition(D_boot, k - 1, axis=2)[..., :k], axis=2)
-
-
-def bootstrap_ci_batch(
-    D_g: np.ndarray,
-    D_b: np.ndarray,
-    metric: str,
-    n_boot: int,
-    rng: np.random.Generator,
-    k: int = 5,
-) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """
-    Returns (point, lo, hi) each of shape (n_probes,).
-
-    Fully vectorised: builds (n_probes, n_boot, n_refs) resampled matrices,
-    reduces along the refs axis directly (no flatten/transpose), and uses
-    sorted-quantile lookup (no nanpercentile fallback).
-    """
-    n_probes, n_g = D_g.shape
-    n_b = D_b.shape[1]
-
-    # Generate resample indices once
-    ig = rng.integers(0, n_g, size=(n_boot, n_g))   # (n_boot, n_g)
-    ib = rng.integers(0, n_b, size=(n_boot, n_b))   # (n_boot, n_b)
-
-    # Build (n_probes, n_boot, n_refs) resampled distance arrays.
-    # D_g[:, ig] gives shape (n_probes, n_boot, n_g) directly.
-    Dg_boot = D_g[:, ig]
-    Db_boot = D_b[:, ib]
-
-    if metric == "median":
-        mg_boot = _median_3d(Dg_boot)            # (n_probes, n_boot)
-        mb_boot = _median_3d(Db_boot)
-        point_g = np.median(D_g, axis=1)
-        point_b = np.median(D_b, axis=1)
-    elif metric == "knn":
-        if n_g < k or n_b < k:
-            nan = np.full(n_probes, np.nan)
-            return nan, nan, nan
-        mg_boot = _knn_mean_3d(Dg_boot, k)
-        mb_boot = _knn_mean_3d(Db_boot, k)
-        point_g = np.mean(np.partition(D_g, k - 1, axis=1)[:, :k], axis=1)
-        point_b = np.mean(np.partition(D_b, k - 1, axis=1)[:, :k], axis=1)
-    else:
-        raise ValueError(metric)
-
-    boots = mb_boot / (mg_boot + mb_boot + EPS)            # (n_probes, n_boot)
-    point = point_b / (point_g + point_b + EPS)            # (n_probes,)
-
-    # Fast quantile via sort + index lookup (no nanpercentile penalty)
-    boots.sort(axis=1)                                      # in-place sort
-    lo_idx = max(int(round(0.025 * (n_boot - 1))), 0)
-    hi_idx = min(int(round(0.975 * (n_boot - 1))), n_boot - 1)
-    lo = boots[:, lo_idx]
-    hi = boots[:, hi_idx]
-    return point, lo, hi
-
-
-# ---------------------------------------------------------------------------
-# Vectorised classify over arrays
-# ---------------------------------------------------------------------------
-
-# Category integer codes (decoded only at output time)
-CAT_NO_DATA = 0
-CAT_RECOVERING = 1
-CAT_DEGRADED = 2
-CAT_INDISTINGUISHABLE = 3
-CAT_NAMES = np.array(
-    ["no_data", "recovering", "degraded", "indistinguishable"], dtype=object
-)
-
-
-def classify_batch(
-    score: np.ndarray, lo: np.ndarray, hi: np.ndarray,
-    t_lo: float, t_hi: float, delta: float,
-) -> np.ndarray:
-    """Returns int8 codes — string decoding deferred to output time."""
-    out = np.full(len(score), CAT_NO_DATA, dtype=np.int8)
-    finite = np.isfinite(score) & np.isfinite(lo) & np.isfinite(hi)
-    rec = finite & (lo > t_hi) & ((score - t_hi) >= delta)
-    deg = finite & (hi < t_lo) & ((t_lo - score) >= delta)
-    out[finite] = CAT_INDISTINGUISHABLE
-    out[rec] = CAT_RECOVERING
-    out[deg] = CAT_DEGRADED
-    return out
 
 
 # ---------------------------------------------------------------------------
@@ -588,11 +492,33 @@ def main() -> None:
                 })
     summary_df = pd.DataFrame(summary_rows)
 
+    # ------------------------------------------------------------------
+    # Per-parent error rates: distinguishes "evenly spread" from
+    # "a few high-error parents dominate the aggregate".
+    # ------------------------------------------------------------------
+    per_parent_rows = []
+    for probe in ("good", "bad"):
+        sub = site_df[site_df["probe_state"] == probe]
+        for cat_col, step_lbl in zip(cat_cols, step_labels):
+            for (pid, lbl), grp in sub.groupby(["parent_id", "parent_label"], sort=False):
+                m = metrics(grp[cat_col].to_numpy(), probe)
+                per_parent_rows.append({
+                    "parent_id":    pid,
+                    "parent_label": lbl,
+                    "probe_state":  probe,
+                    "step":         step_lbl,
+                    "n":            len(grp),
+                    **m,
+                })
+    per_parent_df = pd.DataFrame(per_parent_rows)
+
     suffix = "_per_label_cal" if args.per_label_calibration else ""
     site_out = out_dir / f"within_parent_site_scores{suffix}.csv"
     summary_out = out_dir / f"within_parent_summary{suffix}.csv"
+    per_parent_out = out_dir / f"within_parent_per_parent{suffix}.csv"
     site_df.to_csv(site_out, index=False)
     summary_df.to_csv(summary_out, index=False)
+    per_parent_df.to_csv(per_parent_out, index=False)
 
     # ------------------------------------------------------------------
     # Console report
@@ -643,8 +569,24 @@ def main() -> None:
                 r = r.iloc[0]
                 print(f"  {step:<33} {lbl:<12} {probe:>5}  {r['error_rate']:>6.1%}")
 
+    # Concentration check: how many parents account for most of the step-4 error?
+    s4 = per_parent_df[per_parent_df["step"] == "step4_knn"]
+    if not s4.empty:
+        worst = (
+            s4.groupby(["parent_id", "parent_label"])["error_rate"]
+              .mean().sort_values(ascending=False).head(10)
+        )
+        n_zero = int((s4.groupby("parent_id")["error_rate"].mean() == 0).sum())
+        n_total = s4["parent_id"].nunique()
+        print(f"\n{'-'*78}\n  Step-4 per-parent error concentration\n{'-'*78}")
+        print(f"  Parents with zero step-4 error: {n_zero}/{n_total}")
+        print(f"  Worst 10 parents (mean error_rate across good+bad probes):")
+        for (pid, lbl), e in worst.items():
+            print(f"    {pid:<24} {lbl:<12}  {e:>6.1%}")
+
     print(f"\nWrote: {site_out}")
     print(f"Wrote: {summary_out}")
+    print(f"Wrote: {per_parent_out}")
 
 
 if __name__ == "__main__":

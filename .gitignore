@@ -17,6 +17,9 @@ env/
 # Jupyter
 .ipynb_checkpoints/
 
+# Marimo
+__marimo__/
+
 # Tools
 .mypy_cache/
 .ruff_cache/
@@ -25,15 +28,27 @@ env/
 poetry.toml
 pyrightconfig.json
 
+# Local scratch / experiments
+scratch/
+
 # Large data / binaries
 *.parquet
 *.7z
 *.zip
 *.tar.gz
 
-# Large CSVs (per-point data, re-derivable from parquets)
+# Large derived CSVs (per-point sampling-strategy data, re-derivable from parquets)
 v2/data/*/sampling_strategy_selected_points.csv
+v2/data/*/sampling_strategy_selected_points_diem.csv
+
+# Claude scheduled-tasks lockfile (runtime state, not source)
+.claude/scheduled_tasks.lock
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp

@@ -174,7 +174,7 @@ v4/
 ## 7. Outstanding work
 
 - AlphaEarth embedding extraction for v4 stable refs (reuse
-  `degreeRecover/scripts/extraction/extract_alphaearth_embeddings.py`
+  `v1/scripts/extraction/extract_alphaearth_embeddings.py`
   pointed at the v4 export asset). The expected output parquet is
   `v4/data/v4_stable_refs_alphaearth.parquet` and the schema must match
   v2's `sampling_strategy_selected_points.parquet` (with a `strategy`

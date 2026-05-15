@@ -1,10 +1,10 @@
 """v3 test-site scorer: dor_knn (mean cosine, k=5) as primary score.
 
-Identical structure to degreeRecover/scripts/analysis/score_test_sites.py
+Identical structure to v1/scripts/analysis/score_test_sites.py
 but replaces dor_median with dor_knn as the primary score. dor_median is
 retained as a secondary score for comparison.
 
-Key differences from production (degreeRecover):
+Key differences from production (v1):
   - PRIMARY_SCORE = dor_knn  (mean cosine k=5, threshold=0.4859)
   - dor_median retained as SECONDARY_SCORE
   - Classification uses KNN_THRESHOLD (Youden-J calibrated) not 0.5
@@ -21,13 +21,21 @@ import duckdb
 import numpy as np
 import pandas as pd
 
+from degree_of_recovery.core import (
+    EPS,
+    bootstrap_ci,
+    classify,
+    cosine_dists_to_set,
+    knn_score as _knn_score,
+    median_score as _median_score,
+)
+
 EMBED_COLS = [f"A{i:02d}" for i in range(64)]
-EPS = 1e-12
 
 BASE_DIR = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 )
-DATA_DIR = os.path.join(BASE_DIR, "degreeRecover", "data")
+DATA_DIR = os.path.join(BASE_DIR, "v1", "data")
 V3_DATA_DIR = os.path.join(BASE_DIR, "v3", "data")
 DEFAULT_REFS = os.path.join(
     BASE_DIR,
@@ -37,64 +45,14 @@ DEFAULT_REFS = os.path.join(
 DEFAULT_TEST_SITES = os.path.join(DATA_DIR, "test_site_alphaearth_2024.parquet")
 
 KNN_K = 5
-KNN_THRESHOLD = 0.4859   # Youden-J calibrated on random_100 (v3 experiments)
-MEDIAN_THRESHOLD = 0.5
+# Calibrated thresholds are tied to the refs strategy used during calibration.
+# Keys must match --strategy values; refuse to run on un-calibrated strategies.
+CALIBRATED_KNN_THRESHOLDS = {
+    "random_100": 0.4859,   # Youden-J, v3 within-parent LOO
+}
+MEDIAN_THRESHOLD = 0.5      # uncalibrated, baseline 0.5
 N_BOOT = 2000
 SEED = 42
-
-
-# ---------------------------------------------------------------------------
-# Distance
-# ---------------------------------------------------------------------------
-
-def cosine_dists_to_set(x: np.ndarray, points: np.ndarray) -> np.ndarray:
-    nx = np.linalg.norm(x) + EPS
-    np_pts = np.linalg.norm(points, axis=1) + EPS
-    return 1.0 - (points @ x) / (np_pts * nx)
-
-
-# ---------------------------------------------------------------------------
-# Scorers
-# ---------------------------------------------------------------------------
-
-def _knn_score(d_g: np.ndarray, d_b: np.ndarray, k: int) -> float:
-    if len(d_g) < k or len(d_b) < k:
-        return float("nan")
-    m_g = float(np.mean(np.partition(d_g, k - 1)[:k]))
-    m_b = float(np.mean(np.partition(d_b, k - 1)[:k]))
-    return m_b / (m_g + m_b + EPS)
-
-
-def _median_score(d_g: np.ndarray, d_b: np.ndarray) -> float:
-    return float(np.median(d_b) / (np.median(d_g) + np.median(d_b) + EPS))
-
-
-def bootstrap_ci(
-    score_fn, d_g: np.ndarray, d_b: np.ndarray,
-    n_boot: int, rng: np.random.Generator
-) -> tuple[float, float, float]:
-    point = score_fn(d_g, d_b)
-    if not np.isfinite(point):
-        return float("nan"), float("nan"), float("nan")
-    n_g, n_b = len(d_g), len(d_b)
-    ig = rng.integers(0, n_g, size=(n_boot, n_g))
-    ib = rng.integers(0, n_b, size=(n_boot, n_b))
-    boots = np.array([score_fn(d_g[ig[i]], d_b[ib[i]]) for i in range(n_boot)])
-    return float(point), float(np.nanpercentile(boots, 2.5)), float(np.nanpercentile(boots, 97.5))
-
-
-# ---------------------------------------------------------------------------
-# Classification
-# ---------------------------------------------------------------------------
-
-def classify(score: float, ci_lo: float, ci_hi: float, threshold: float) -> str:
-    if not (np.isfinite(score) and np.isfinite(ci_lo) and np.isfinite(ci_hi)):
-        return "no_data"
-    if ci_lo > threshold:
-        return "recovering"
-    if ci_hi < threshold:
-        return "degraded"
-    return "indistinguishable"
 
 
 # ---------------------------------------------------------------------------
@@ -143,6 +101,14 @@ def main() -> None:
     parser.add_argument("--knn-k",      type=int, default=KNN_K)
     args = parser.parse_args()
 
+    if args.strategy not in CALIBRATED_KNN_THRESHOLDS:
+        raise SystemExit(
+            f"No calibrated kNN threshold for strategy={args.strategy!r}. "
+            f"Calibrated strategies: {sorted(CALIBRATED_KNN_THRESHOLDS)}. "
+            f"Run within-parent LOO calibration before scoring with a new strategy."
+        )
+    knn_threshold = CALIBRATED_KNN_THRESHOLDS[args.strategy]
+
     os.makedirs(args.out_dir, exist_ok=True)
     rng = np.random.default_rng(args.seed)
 
@@ -160,13 +126,17 @@ def main() -> None:
     median_fn = lambda dg, db: _median_score(dg, db)
 
     rows = []
+    skipped_no_parent: list[str] = []
+    skipped_no_refs: list[str] = []
     for pid, x_obs in test_emb.items():
         sub = refs_groups.get(pid)
         if sub is None:
+            skipped_no_parent.append(pid)
             continue
         good = sub.loc[sub["ref_state"] == "good", EMBED_COLS].to_numpy(dtype=float)
         bad  = sub.loc[sub["ref_state"] == "bad",  EMBED_COLS].to_numpy(dtype=float)
         if len(good) == 0 or len(bad) == 0:
+            skipped_no_refs.append(pid)
             continue
 
         d_g = cosine_dists_to_set(x_obs, good)
@@ -184,7 +154,7 @@ def main() -> None:
             "dor_knn":            s_knn,
             "dor_knn_ci_low":     lo_knn,
             "dor_knn_ci_high":    hi_knn,
-            "category_knn":       classify(s_knn, lo_knn, hi_knn, KNN_THRESHOLD),
+            "category_knn":       classify(s_knn, lo_knn, hi_knn, knn_threshold),
             # Secondary: dor_median
             "dor_median":         s_med,
             "dor_median_ci_low":  lo_med,
@@ -198,11 +168,17 @@ def main() -> None:
     df.to_csv(out_path, index=False)
 
     print(f"\n{'='*60}")
-    print(f"V3 TEST SITE SCORES  (primary = dor_knn, k={args.knn_k}, threshold={KNN_THRESHOLD})")
+    print(f"V3 TEST SITE SCORES  (primary = dor_knn, k={args.knn_k}, threshold={knn_threshold})")
     print(f"{'='*60}")
-    print(f"Sites scored: {len(df)}")
+    print(f"Sites scored:                    {len(df)}")
+    print(f"Sites skipped (no parent in refs): {len(skipped_no_parent)}")
+    print(f"Sites skipped (no good or bad):    {len(skipped_no_refs)}")
+    if skipped_no_parent:
+        print(f"  no-parent ids: {skipped_no_parent[:10]}{'...' if len(skipped_no_parent) > 10 else ''}")
+    if skipped_no_refs:
+        print(f"  no-refs   ids: {skipped_no_refs[:10]}{'...' if len(skipped_no_refs) > 10 else ''}")
 
-    for scorer, col, t in [("dor_knn",    "category_knn",    KNN_THRESHOLD),
+    for scorer, col, t in [("dor_knn",    "category_knn",    knn_threshold),
                             ("dor_median", "category_median", MEDIAN_THRESHOLD)]:
         counts = df[col].value_counts(dropna=False)
         print(f"\n  {scorer} (threshold={t}):")

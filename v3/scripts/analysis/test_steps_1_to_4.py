@@ -237,7 +237,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--test-sites",
-        default="degreeRecover/data/test_site_alphaearth_2024.parquet",
+        default="v1/data/test_site_alphaearth_2024.parquet",
     )
     parser.add_argument("--strategy", default="random_100")
     parser.add_argument("--out-dir", default="v3/data")

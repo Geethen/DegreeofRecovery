@@ -74,6 +74,6 @@ Shapefile DBF fields are limited to short names, so several columns are renamed:
 
 ## Provenance
 
-- Scoring: `degreeRecover/scripts/analysis/score_test_sites.py` (v2 input refs)
-- Export: `degreeRecover/scripts/reporting/build_summary.py`
+- Scoring: `v1/scripts/analysis/score_test_sites.py` (v2 input refs)
+- Export: `v1/scripts/reporting/build_summary.py`
 - Product: v2 DoR outputs.

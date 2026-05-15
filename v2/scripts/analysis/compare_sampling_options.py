@@ -22,6 +22,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+from degree_of_recovery.core import cosine_dists_to_set
+
 EMBED_COLS = [f"A{i:02d}" for i in range(64)]
 EARTH_RADIUS_M = 6371000.0
 
@@ -281,13 +283,6 @@ def select_indices(
     raise ValueError(strategy.method)
 
 
-def cosine_dists_to_set(x: np.ndarray, points: np.ndarray) -> np.ndarray:
-    nx = np.linalg.norm(x) + 1e-12
-    np_pts = np.linalg.norm(points, axis=1) + 1e-12
-    sims = (points @ x) / (np_pts * nx)
-    return 1.0 - sims
-
-
 def dor_median_with_ci(
     d_g: np.ndarray, d_b: np.ndarray, n_boot: int, rng: np.random.Generator
 ) -> tuple[float, float, float]:
@@ -512,7 +507,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--input",
-        default="degreeRecover/data/recover_reference_samples_alphaearth.parquet",
+        default="v1/data/recover_reference_samples_alphaearth.parquet",
         help="Path to reference embedding parquet.",
     )
     parser.add_argument(
@@ -540,7 +535,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--test-embeddings",
-        default="degreeRecover/data/test_site_alphaearth_2024.parquet",
+        default="v1/data/test_site_alphaearth_2024.parquet",
         help="Test-site embedding parquet for x_obs (operationally meaningful DoR).",
     )
     parser.add_argument(

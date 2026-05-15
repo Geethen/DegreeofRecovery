@@ -25,6 +25,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+from degree_of_recovery.core import cosine_dists_to_set
+
 EMBED_COLS = [f"A{i:02d}" for i in range(64)]
 EARTH_RADIUS_M = 6371000.0
 
@@ -84,12 +86,6 @@ def compute_neff(dist_m: np.ndarray, corr_range_m: float) -> float:
     return float((dist_m.shape[0] ** 2) / max(np.sum(w), 1e-12))
 
 
-def cosine_dists_to_set(x: np.ndarray, points: np.ndarray) -> np.ndarray:
-    nx = np.linalg.norm(x) + 1e-12
-    np_pts = np.linalg.norm(points, axis=1) + 1e-12
-    return 1.0 - (points @ x) / (np_pts * nx)
-
-
 def dor_with_ci(
     d_g: np.ndarray, d_b: np.ndarray, n_boot: int, rng: np.random.Generator
 ) -> tuple[float, float]:
@@ -110,7 +106,7 @@ def main() -> None:
     parser.add_argument("--input", required=True)
     parser.add_argument(
         "--test-embeddings",
-        default="degreeRecover/data/test_site_alphaearth_2024.parquet",
+        default="v1/data/test_site_alphaearth_2024.parquet",
     )
     parser.add_argument("--out-dir", required=True)
     parser.add_argument("--plot-dir", required=True)
