@@ -10,7 +10,8 @@
       "Bash(python v1/scripts/extraction/extract_test_site_embeddings.py --overwrite)",
       "Bash(python -c \"import geopandas, shapely, fiona; print\\('gpd', geopandas.__version__, 'shapely', shapely.__version__\\)\")",
       "Bash(ls \"P:\\\\155020_recover\\\\WP1\\\\degree_of_recovery\\\\\" 2>&1)",
-      "Read(//p/155020_recover/WP1/**)"
+      "Read(//p/155020_recover/WP1/**)",
+      "Bash(python -c ' *)"
     ]
   }
 }

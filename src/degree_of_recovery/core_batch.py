@@ -98,9 +98,17 @@ def classify_batch(
     t_hi: float,
     delta: float,
 ) -> np.ndarray:
-    """Vectorised CI classifier with deadband + effect-size gate.
+    """Vectorised CI classifier with a deadband and a score-margin.
 
-    Returns int8 codes (CAT_*); call `CAT_NAMES[out]` to decode.
+    Calls ``recovering`` when the CI lower bound clears the upper deadband
+    edge (``lo > t_hi``) *and* the point score lies at least ``delta`` above
+    that edge (``score - t_hi >= delta``); mirrored for ``degraded`` below
+    ``t_lo``. Sites that satisfy neither are returned as ``indistinguishable``.
+    The interval ``[t_lo, t_hi]`` is the deadband around the calibrated
+    threshold (set ``t_lo = t_hi`` to disable); ``delta`` is a score-margin
+    requirement, not a check on reference-cloud separation.
+
+    Returns int8 codes (CAT_*); call ``CAT_NAMES[out]`` to decode.
     """
     out = np.full(len(score), CAT_NO_DATA, dtype=np.int8)
     finite = np.isfinite(score) & np.isfinite(lo) & np.isfinite(hi)

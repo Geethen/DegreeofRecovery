@@ -73,19 +73,25 @@ We additionally retain the v3 pooled thresholds (`t_med = 0.4728`, `t_knn = 0.48
 
 ## Stage 6 — Scoring each test site
 
-With the per-class cut-offs fixed, each `stable_stable` test site is scored against its parent's reference clouds. Every site receives one of four outcomes:
+With the per-class cut-offs fixed, each `stable_stable` test site is scored against its parent's reference clouds. Uncertainty is quantified with **bootstrap confidence intervals** (2,000 resamples of the reference pools), so each site is reported with a DoR point estimate, a 95 % CI, and a categorical call.
 
-- **`recovering`** — the site's embedding sits clearly closer to the good cloud than to the bad cloud (DoR above the cut-off, with confident separation between the two clouds);
-- **`degraded`** — the site's embedding sits clearly closer to the bad cloud (DoR below the cut-off);
-- **`indistinguishable`** — the site lies in a *deadband* around the cut-off where the call would be unreliable, **or** the good and bad clouds for this parent are too similar to each other for the comparison to be meaningful (an effect-size gate). We deliberately abstain rather than force a noisy call;
-- **`no_data`** — the AlphaEarth embedding is missing or invalid for the site.
+The production scorer (`score_test_sites_v4.py` → `degree_of_recovery.core.classify`) is a pure CI-vs-threshold rule. Every site receives one of four outcomes:
 
-Two safeguards keep the categorical call honest:
+- **`recovering`** — the 95 % CI lies entirely above the per-class cut-off (`ci_lo > t`);
+- **`degraded`** — the 95 % CI lies entirely below the cut-off (`ci_hi < t`);
+- **`indistinguishable`** — the CI straddles the cut-off (insufficient bootstrap-level evidence to make a directional call);
+- **`no_data`** — the AlphaEarth embedding is missing or the score is non-finite.
 
-1. **Deadband around the threshold.** Scores within a small margin of the cut-off are returned as `indistinguishable`. A score of 0.51 should not be reported as confidently "recovering" when 0.49 would have been "degraded".
-2. **Effect-size gate.** If the good and bad reference clouds are not appreciably separated for this parent — i.e. the references themselves don't establish a meaningful contrast — we return `indistinguishable` rather than rely on a cut-off applied to a near-degenerate score distribution.
+No deadband around the threshold and no reference-cloud-separation gate are applied at this stage; the CI itself is the safeguard against over-confident calls near the cut-off, and abstention happens naturally when the bootstrap CI is wide enough to straddle the threshold.
 
-Uncertainty is quantified with **bootstrap confidence intervals** (2,000 resamples of the reference pools), so each test site is reported with a DoR point estimate, a 95 % CI, and the categorical call.
+### Sensitivity variants (validation only)
+
+The within-parent validator (`validate_steps_within_parent_v4.py` → `degree_of_recovery.core_batch.classify_batch`) sweeps stricter classifier variants alongside the production rule as a sensitivity check:
+
+- a **deadband** of half-width 0.05 around the threshold (`t − hw`, `t + hw`), so scores within ±0.05 of the cut-off are forced to `indistinguishable`;
+- an additional **score-margin** of 0.03 beyond the deadband edge (`score − t_hi ≥ δ` and `t_lo − score ≥ δ`).
+
+These variants are reported as the `s1`–`s4` columns in `within_parent_site_scores_v4.csv` and inform how stable the categorical call is under tighter operating points. They are not applied to the final reported labels in `test_site_dor_v4.csv`.
 
 ### Sanity checks built into the design
 
