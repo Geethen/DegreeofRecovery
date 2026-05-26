@@ -12,17 +12,23 @@ design choices described in paper_methods.md:
 """
 from __future__ import annotations
 
+import re
+from functools import lru_cache
 from pathlib import Path
 
 import duckdb
+import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
+import matplotlib.transforms as mtransforms
 import numpy as np
 import pandas as pd
+from matplotlib.patches import PathPatch, Rectangle
+from svgpath2mpl import parse_path
 
 
 ROOT = Path(__file__).resolve().parents[3]
 OUT_PNG = ROOT / "v4" / "plots" / "supp_dor_quality_metrics.png"
-OUT_PDF = ROOT / "v4" / "plots" / "supp_dor_quality_metrics.pdf"
+ICON_DIR = ROOT / "v4" / "plots" / "icons"
 
 V2_NEFF = ROOT / "v2" / "data" / "neff_calibration_mask_on" / "neff_calibration_summary.csv"
 V3_K_SWEEP = ROOT / "v3" / "data" / "k_sweep_summary.csv"
@@ -32,7 +38,7 @@ V4_SCORES = ROOT / "v4" / "data" / "test_site_dor_v4.csv"
 
 CLASS_ORDER = ["stable_nature", "stable_crop", "stable_built"]
 CLASS_LABELS = {
-    "stable_nature": "Stable\nnear-natural",
+    "stable_nature": "Stable\nnatural",
     "stable_crop": "Stable\ncropland",
     "stable_built": "Stable\nbuilt-up",
 }
@@ -55,6 +61,132 @@ SKY = "#56B4E9"
 PURPLE = "#CC79A7"
 GREY = "#999999"
 BLACK = "#222222"
+
+
+# ---------------------------------------------------------------------------
+# Scale/balance icons (shared visual identity with the main-text figure)
+# ---------------------------------------------------------------------------
+GREEN = "#009E73"
+DARK = "#222222"
+
+
+_VIEWBOX_RE = re.compile(r'viewBox="([^"]+)"')
+_PATH_D_RE = re.compile(r'<path[^>]*\bd="([^"]+)"')
+
+
+@lru_cache(maxsize=None)
+def _load_fa_icon(name: str):
+    svg = (ICON_DIR / f"{name}.svg").read_text(encoding="utf-8")
+    vb = list(map(float, _VIEWBOX_RE.search(svg).group(1).split()))
+    _, _, vb_w, vb_h = vb
+    d = _PATH_D_RE.search(svg).group(1)
+    path = parse_path(d)
+    verts = path.vertices.copy()
+    verts[:, 1] = vb_h - verts[:, 1]
+    path.vertices[:] = verts
+    bb = path.get_extents()
+    path.vertices[:, 0] -= bb.x0
+    path.vertices[:, 1] -= bb.y0
+    return path, (bb.width, bb.height)
+
+
+def _draw_fa_icon(ax: plt.Axes, name: str, cx: float, base_y: float,
+                  height: float, color: str) -> None:
+    path, (w, h) = _load_fa_icon(name)
+    bbox = ax.get_window_extent()
+    if bbox.width == 0 or bbox.height == 0 or h == 0:
+        return
+    aspect = bbox.height / bbox.width
+    sy = height / h
+    sx = sy * aspect
+    icon_w_axes = w * sx
+    tr = (mtransforms.Affine2D()
+          .scale(sx, sy)
+          .translate(cx - icon_w_axes / 2, base_y)
+          + ax.transAxes)
+    ax.add_patch(PathPatch(path, transform=tr,
+                           facecolor=color, edgecolor="none",
+                           clip_on=False, zorder=12))
+
+
+def _draw_pan_icon(ax, kind, cx, base_y, h, color):
+    _draw_fa_icon(ax, kind, cx, base_y, h, color)
+
+
+def _draw_scale(ax: plt.Axes, x: float, y: float, size: float,
+                left_kind: str, right_kind: str, tilt: str,
+                left_color: str, right_color: str,
+                beam_color: str = DARK) -> None:
+    arm = size * 0.55
+    if tilt == "balanced":
+        ang = 0.0
+    elif tilt == "left":
+        ang = np.deg2rad(13)
+    else:
+        ang = np.deg2rad(-13)
+
+    bbox = ax.get_window_extent()
+    aspect = bbox.height / bbox.width if bbox.width else 1.0
+    beam_cy = y + size * 0.18
+    dx = arm * np.cos(ang)
+    dy = arm * np.sin(ang) * aspect
+    lx, ly = x - dx, beam_cy - dy
+    rx, ry = x + dx, beam_cy + dy
+
+    base_w = size * 0.42
+    base_h = size * 0.06
+    ax.add_patch(Rectangle((x - base_w / 2, y - base_h), base_w, base_h,
+                           facecolor=beam_color, edgecolor=beam_color,
+                           transform=ax.transAxes, clip_on=False,
+                           zorder=8, linewidth=0))
+    ax.add_patch(mpatches.Polygon(
+        [(x - size * 0.18, y), (x + size * 0.18, y), (x, beam_cy)],
+        facecolor=beam_color, edgecolor=beam_color,
+        transform=ax.transAxes, clip_on=False, zorder=9, linewidth=0))
+    ax.plot([lx, rx], [ly, ry], color=beam_color, linewidth=1.2,
+            solid_capstyle="round",
+            transform=ax.transAxes, clip_on=False, zorder=10)
+    pan_drop = size * 0.18
+    ax.plot([lx, lx], [ly, ly - pan_drop], color=beam_color, linewidth=0.7,
+            transform=ax.transAxes, clip_on=False, zorder=10)
+    ax.plot([rx, rx], [ry, ry - pan_drop], color=beam_color, linewidth=0.7,
+            transform=ax.transAxes, clip_on=False, zorder=10)
+    pan_w = size * 0.36
+    pan_h = size * 0.08
+    left_pan_y = ly - pan_drop
+    right_pan_y = ry - pan_drop
+    ax.add_patch(mpatches.Ellipse((lx, left_pan_y), width=pan_w, height=pan_h,
+                                  facecolor=beam_color, edgecolor=beam_color,
+                                  transform=ax.transAxes, clip_on=False,
+                                  zorder=11, linewidth=0))
+    ax.add_patch(mpatches.Ellipse((rx, right_pan_y), width=pan_w, height=pan_h,
+                                  facecolor=beam_color, edgecolor=beam_color,
+                                  transform=ax.transAxes, clip_on=False,
+                                  zorder=11, linewidth=0))
+    icon_h = size * 0.62
+    _draw_pan_icon(ax, left_kind, lx, left_pan_y + pan_h * 0.3, icon_h,
+                   left_color)
+    _draw_pan_icon(ax, right_kind, rx, right_pan_y + pan_h * 0.3, icon_h,
+                   right_color)
+
+
+STABLE_SCALE = {
+    "stable_nature": ("tree", "tree", "balanced", GREEN, GREEN),
+    "stable_crop": ("tractor", "tractor", "balanced", "#0072B2", "#0072B2"),
+    "stable_built": ("building", "building", "balanced", "#E69F00", "#E69F00"),
+}
+
+
+def add_class_scales(ax: plt.Axes, class_keys: list, y: float = 1.10,
+                     size: float = 0.16) -> None:
+    """Draw scale icons above each x-tick position for class-grouped panels."""
+    n = len(class_keys)
+    for i, key in enumerate(class_keys):
+        if key not in STABLE_SCALE:
+            continue
+        frac = (i + 0.5) / n
+        left_kind, right_kind, tilt, lc, rc = STABLE_SCALE[key]
+        _draw_scale(ax, frac, y, size, left_kind, right_kind, tilt, lc, rc)
 
 
 def set_journal_style() -> None:
@@ -203,11 +335,12 @@ def main() -> None:
     )
     ax_d.set_xticks(x)
     ax_d.set_xticklabels([CLASS_LABELS[c] for c in CLASS_ORDER])
-    ax_d.set_title("Internal validation")
+    ax_d.set_title("Internal validation", pad=26)
     ax_d.set_ylabel("Held-out references (%)")
     ax_d.legend(frameon=False, loc="upper left", handlelength=1.2)
     clean_axis(ax_d)
     colour_class_ticks(ax_d, CLASS_ORDER, axis="x")
+    add_class_scales(ax_d, CLASS_ORDER)
     panel_label(ax_d, "d")
 
     # E. Threshold transfer from v3 pooled threshold to v4 per-class thresholds.
@@ -223,11 +356,12 @@ def main() -> None:
         ax_e.text(i, pct_changed.loc[cls] + 0.12, f"{int(transfer.loc[cls, 'sum'])}", ha="center", fontsize=6)
     ax_e.set_xticks(x)
     ax_e.set_xticklabels([CLASS_LABELS[c] for c in CLASS_ORDER])
-    ax_e.set_title("Threshold transfer check")
+    ax_e.set_title("Threshold transfer check", pad=26)
     ax_e.set_ylabel("Sites changing class (%)")
     ax_e.set_ylim(0, max(4.0, float(pct_changed.max()) + 1.0))
     clean_axis(ax_e)
     colour_class_ticks(ax_e, CLASS_ORDER, axis="x")
+    add_class_scales(ax_e, CLASS_ORDER)
     panel_label(ax_e, "e")
 
     # F. Final stable-site categories.
@@ -253,7 +387,7 @@ def main() -> None:
         bottom += vals
     ax_f.set_xticks(x)
     ax_f.set_xticklabels([CLASS_LABELS[c] for c in CLASS_ORDER])
-    ax_f.set_title("Stable-site DoR outcomes")
+    ax_f.set_title("Stable-site DoR outcomes", pad=26)
     ax_f.set_ylabel("Sites (%)")
     ax_f.set_ylim(0, 100)
     ax_f.legend(
@@ -266,12 +400,11 @@ def main() -> None:
     )
     clean_axis(ax_f)
     colour_class_ticks(ax_f, CLASS_ORDER, axis="x")
+    add_class_scales(ax_f, CLASS_ORDER)
     panel_label(ax_f, "f")
 
     fig.savefig(OUT_PNG, dpi=600, bbox_inches="tight")
-    fig.savefig(OUT_PDF, bbox_inches="tight")
     print(f"Wrote {OUT_PNG}")
-    print(f"Wrote {OUT_PDF}")
 
 
 if __name__ == "__main__":

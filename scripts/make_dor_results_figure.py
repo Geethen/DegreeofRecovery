@@ -14,16 +14,18 @@ Output: v4/plots/dor_results_main.{png,pdf}  (180 mm wide, 600 dpi PNG)
 """
 from __future__ import annotations
 
+import re
+from functools import lru_cache
 from pathlib import Path
 
 import matplotlib as mpl
-import matplotlib.path as mpath
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
+import matplotlib.transforms as mtransforms
 import numpy as np
 import pandas as pd
-from matplotlib.lines import Line2D
-from matplotlib.patches import FancyBboxPatch, Rectangle
+from matplotlib.patches import PathPatch, Rectangle
+from svgpath2mpl import parse_path
 
 # ---------------------------------------------------------------------------
 # Paths
@@ -32,7 +34,7 @@ REPO = Path(__file__).resolve().parents[1]
 V3_SCORES = REPO / "v3" / "data" / "test_site_dor_v3.csv"
 V4_SCORES = REPO / "v4" / "data" / "test_site_dor_v4.csv"
 OUT_PNG = REPO / "v4" / "plots" / "dor_results_main.png"
-OUT_PDF = REPO / "v4" / "plots" / "dor_results_main.pdf"
+ICON_DIR = REPO / "v4" / "plots" / "icons"
 OUT_PNG.parent.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------------------
@@ -59,7 +61,7 @@ CAT_ORDER = ["recovering", "degraded", "indistinguishable", "no data"]
 
 CAND_LABELS = {"crop_loss": "Cropland-loss", "built_loss": "Built-loss"}
 STABLE_LABELS = {
-    "stable_nature": "Stable\nnear-natural",
+    "stable_nature": "Stable\nnatural",
     "stable_crop": "Stable\ncropland",
     "stable_built": "Stable\nbuilt-up",
 }
@@ -111,97 +113,182 @@ def clean_axis(ax: plt.Axes, grid_axis: str = "y") -> None:
     ax.set_axisbelow(True)
 
 
-def panel_label(ax: plt.Axes, text: str) -> None:
-    ax.text(-0.18, 1.10, text, transform=ax.transAxes,
+def panel_label(ax: plt.Axes, text: str, x: float = -0.18) -> None:
+    ax.text(x, 1.10, text, transform=ax.transAxes,
             fontsize=9, fontweight="bold", va="top", ha="left")
 
 
 # ---------------------------------------------------------------------------
-# Simple vector icons (no external dependencies)
+# Font Awesome SVG icons → matplotlib Path patches
 # ---------------------------------------------------------------------------
-def _draw_icon(ax: plt.Axes, kind: str, x: float, y: float, size: float,
-               color: str) -> None:
-    """Draw a small class icon at axes-fraction coords (x, y).
+_VIEWBOX_RE = re.compile(r'viewBox="([^"]+)"')
+_PATH_D_RE = re.compile(r'<path[^>]*\bd="([^"]+)"')
 
-    size is in axes-fraction units (height of icon bounding box).
+
+@lru_cache(maxsize=None)
+def _load_fa_icon(name: str) -> tuple:
+    """Load a Font Awesome SVG icon as (mpl Path, (w, h)) in viewBox units.
+
+    The path is y-flipped (SVG y is down, matplotlib y is up) and translated
+    so the icon's bounding box has its lower-left corner at (0, 0).
     """
-    # Translate axes-fraction to display, draw in axes coords.
-    half = size / 2
-
-    if kind == "leaf":
-        # Stylised leaf: tear-drop oval tilted slightly, with central vein.
-        leaf = mpatches.Ellipse((x, y), width=size * 0.65, height=size,
-                                angle=20,
-                                facecolor=color, edgecolor=color,
-                                transform=ax.transAxes, clip_on=False,
-                                zorder=10, linewidth=0.6)
-        ax.add_patch(leaf)
-        # Midvein: rotated line aligned with the ellipse major axis
-        ang = np.deg2rad(20)
-        dx = np.sin(ang) * half * 0.85
-        dy = np.cos(ang) * half * 0.85
-        ax.plot([x - dx, x + dx], [y - dy, y + dy],
-                color="white", linewidth=0.8,
-                transform=ax.transAxes, clip_on=False, zorder=11)
-
-    elif kind == "wheat":
-        # Stylised wheat sheaf: vertical stem + three pairs of grain ovals.
-        ax.plot([x, x], [y - half, y + half * 0.4],
-                color=color, linewidth=1.2,
-                transform=ax.transAxes, clip_on=False, zorder=10)
-        for i, frac in enumerate([0.15, -0.15, -0.45]):
-            for side in (-1, 1):
-                ang_x = x + side * half * 0.4
-                ang_y = y + half * frac
-                e = mpatches.Ellipse((ang_x, ang_y),
-                                     width=half * 0.45, height=half * 0.7,
-                                     angle=30 * side,
-                                     facecolor=color, edgecolor=color,
-                                     transform=ax.transAxes,
-                                     clip_on=False, zorder=11, linewidth=0.4)
-                ax.add_patch(e)
-
-    elif kind == "building":
-        # Simple house: rectangle + triangular roof + door.
-        body_w = half * 1.4
-        body_h = half * 1.2
-        body = Rectangle((x - body_w / 2, y - half * 0.95),
-                         body_w, body_h,
-                         facecolor=color, edgecolor=color,
-                         transform=ax.transAxes, clip_on=False,
-                         zorder=10, linewidth=0.4)
-        ax.add_patch(body)
-        # Roof
-        roof = mpatches.Polygon(
-            [
-                (x - body_w / 2 - half * 0.1, y + half * 0.25),
-                (x + body_w / 2 + half * 0.1, y + half * 0.25),
-                (x, y + half * 0.95),
-            ],
-            facecolor=color, edgecolor=color,
-            transform=ax.transAxes, clip_on=False, zorder=11,
-            linewidth=0.4,
-        )
-        ax.add_patch(roof)
-        # Door
-        door = Rectangle((x - half * 0.16, y - half * 0.95),
-                         half * 0.32, half * 0.55,
-                         facecolor="white", edgecolor="white",
-                         transform=ax.transAxes, clip_on=False,
-                         zorder=12, linewidth=0)
-        ax.add_patch(door)
-
-    elif kind == "wheat-building":
-        # Composite: a small wheat sheaf and a small building side by side
-        _draw_icon(ax, "wheat", x - size * 0.32, y, size * 0.85, color)
-        _draw_icon(ax, "building", x + size * 0.32, y, size * 0.85, color)
+    svg = (ICON_DIR / f"{name}.svg").read_text(encoding="utf-8")
+    vb = list(map(float, _VIEWBOX_RE.search(svg).group(1).split()))
+    _, _, vb_w, vb_h = vb
+    d = _PATH_D_RE.search(svg).group(1)
+    path = parse_path(d)
+    # Flip vertically (SVG → mpl convention).
+    verts = path.vertices.copy()
+    verts[:, 1] = vb_h - verts[:, 1]
+    path.vertices[:] = verts
+    # Shift to origin using the actual rendered bbox so disparate icons share
+    # a consistent baseline.
+    bb = path.get_extents()
+    path.vertices[:, 0] -= bb.x0
+    path.vertices[:, 1] -= bb.y0
+    w = bb.width
+    h = bb.height
+    return path, (w, h)
 
 
-CAND_ICONS = {"crop_loss": "wheat", "built_loss": "building"}
-STABLE_ICONS = {
-    "stable_nature": "leaf",
-    "stable_crop": "wheat",
-    "stable_built": "building",
+def _draw_fa_icon(ax: plt.Axes, name: str, cx: float, base_y: float,
+                  height: float, color: str) -> None:
+    """Draw a Font Awesome icon, scaled so its rendered height is `height`
+    in axes fraction. The icon is horizontally centred at cx; its baseline
+    (lower edge of bbox) is at base_y.
+
+    Axes-fraction units are anisotropic (width != height in display pixels),
+    so we correct width-scaling using the axes aspect to keep icons un-skewed.
+    """
+    path, (w, h) = _load_fa_icon(name)
+    # Aspect = display-px-per-axes-fraction. Use it to choose the x-scale
+    # that yields equal display-height and display-width per icon-unit.
+    bbox = ax.get_window_extent()
+    if bbox.width == 0 or bbox.height == 0 or h == 0:
+        return
+    aspect = bbox.height / bbox.width  # >1 if axes are taller than wide
+    # Axes-frac per icon-unit (vertical) is height/h. Horizontal must satisfy
+    # x_axes_frac * bbox.width == y_axes_frac * bbox.height (per icon unit)
+    # so x = y * aspect.
+    sy = height / h
+    sx = sy * aspect
+    icon_w_axes = w * sx
+    # Build the transform: scale → translate → axes coords
+    tr = (mtransforms.Affine2D()
+          .scale(sx, sy)
+          .translate(cx - icon_w_axes / 2, base_y)
+          + ax.transAxes)
+    patch = PathPatch(path, transform=tr,
+                      facecolor=color, edgecolor="none",
+                      clip_on=False, zorder=12)
+    ax.add_patch(patch)
+
+
+def _draw_pan_icon(ax: plt.Axes, kind: str, cx: float, base_y: float,
+                   h: float, color: str) -> None:
+    """Dispatch: draw a class icon sitting on a pan with base at base_y."""
+    _draw_fa_icon(ax, kind, cx, base_y, h, color)
+
+
+def _draw_scale(ax: plt.Axes, x: float, y: float, size: float,
+                left_kind: str, right_kind: str,
+                tilt: str,
+                left_color: str, right_color: str,
+                beam_color: str = DARK) -> None:
+    """Draw a small balance scale with class icons sitting on each pan.
+
+    (x, y) is the centre of the scale's fulcrum/base in axes-fraction coords.
+    `size` is the total icon footprint height (axes-fraction).
+    `tilt` is one of {"left", "right", "balanced"} — which pan is lower.
+    """
+    # Beam half-length and tilt angle
+    arm = size * 0.55
+    if tilt == "balanced":
+        ang = 0.0
+    elif tilt == "left":
+        ang = np.deg2rad(13)   # beam tilts down on the left
+    else:  # "right"
+        ang = np.deg2rad(-13)
+
+    # Use a tilt-shape transform that accounts for axes aspect, so the
+    # angle reads visually even when the axes are not square.
+    bbox = ax.get_window_extent()
+    aspect = bbox.height / bbox.width if bbox.width else 1.0
+
+    beam_cy = y + size * 0.18  # beam sits above the fulcrum tip
+    dx = arm * np.cos(ang)
+    dy = arm * np.sin(ang) * aspect
+
+    lx, ly = x - dx, beam_cy - dy   # left pan attaches here
+    rx, ry = x + dx, beam_cy + dy   # right pan attaches here
+
+    # Fulcrum (triangle) and base
+    base_w = size * 0.42
+    base_h = size * 0.06
+    base = Rectangle((x - base_w / 2, y - base_h),
+                     base_w, base_h,
+                     facecolor=beam_color, edgecolor=beam_color,
+                     transform=ax.transAxes, clip_on=False,
+                     zorder=8, linewidth=0)
+    ax.add_patch(base)
+    fulcrum = mpatches.Polygon(
+        [
+            (x - size * 0.18, y),
+            (x + size * 0.18, y),
+            (x, beam_cy),
+        ],
+        facecolor=beam_color, edgecolor=beam_color,
+        transform=ax.transAxes, clip_on=False, zorder=9,
+        linewidth=0,
+    )
+    ax.add_patch(fulcrum)
+
+    # Beam
+    ax.plot([lx, rx], [ly, ry], color=beam_color, linewidth=1.2,
+            solid_capstyle="round",
+            transform=ax.transAxes, clip_on=False, zorder=10)
+
+    # Pan hangers
+    pan_drop = size * 0.18
+    ax.plot([lx, lx], [ly, ly - pan_drop], color=beam_color, linewidth=0.7,
+            transform=ax.transAxes, clip_on=False, zorder=10)
+    ax.plot([rx, rx], [ry, ry - pan_drop], color=beam_color, linewidth=0.7,
+            transform=ax.transAxes, clip_on=False, zorder=10)
+
+    # Pans (shallow arcs drawn as thin ellipses)
+    pan_w = size * 0.36
+    pan_h = size * 0.08
+    left_pan_y = ly - pan_drop
+    right_pan_y = ry - pan_drop
+    ax.add_patch(mpatches.Ellipse((lx, left_pan_y), width=pan_w, height=pan_h,
+                                  facecolor=beam_color, edgecolor=beam_color,
+                                  transform=ax.transAxes, clip_on=False,
+                                  zorder=11, linewidth=0))
+    ax.add_patch(mpatches.Ellipse((rx, right_pan_y), width=pan_w, height=pan_h,
+                                  facecolor=beam_color, edgecolor=beam_color,
+                                  transform=ax.transAxes, clip_on=False,
+                                  zorder=11, linewidth=0))
+
+    # Icons sitting on each pan
+    icon_h = size * 0.62
+    _draw_pan_icon(ax, left_kind, lx, left_pan_y + pan_h * 0.3,
+                   icon_h, left_color)
+    _draw_pan_icon(ax, right_kind, rx, right_pan_y + pan_h * 0.3,
+                   icon_h, right_color)
+
+
+# Scale configuration per class:
+# (left_icon, right_icon, tilt, left_color, right_color)
+# Convention: non-natural reference on the left, near-natural (tree) on the right.
+# Tilt direction indicates which reference pool the icon depicts as "heavier".
+CAND_SCALE = {
+    "crop_loss": ("tractor", "tree", "left", BLUE, GREEN),
+    "built_loss": ("building", "tree", "left", ORANGE, GREEN),
+}
+STABLE_SCALE = {
+    "stable_nature": ("tree", "tree", "balanced", GREEN, GREEN),
+    "stable_crop": ("tractor", "tractor", "balanced", BLUE, BLUE),
+    "stable_built": ("building", "building", "balanced", ORANGE, ORANGE),
 }
 
 
@@ -224,7 +311,7 @@ def proportions(df: pd.DataFrame, group_col: str, label_map: dict) -> pd.DataFra
 # Panels
 # ---------------------------------------------------------------------------
 def violin_panel(ax: plt.Axes, df: pd.DataFrame, group_col: str,
-                 label_map: dict, color_map: dict, icon_map: dict,
+                 label_map: dict, color_map: dict, scale_map: dict,
                  threshold: float | dict | None,
                  title: str) -> None:
     groups = list(label_map.keys())
@@ -293,7 +380,7 @@ def violin_panel(ax: plt.Axes, df: pd.DataFrame, group_col: str,
     ax.set_xlim(-0.6, len(groups) - 0.4)
     ax.set_ylabel("DoR score")
     ax.yaxis.set_major_locator(mpl.ticker.MultipleLocator(0.2))
-    ax.set_title(title, pad=16)
+    ax.set_title(title, pad=56)
 
     clean_axis(ax, grid_axis="y")
 
@@ -304,20 +391,27 @@ def violin_panel(ax: plt.Axes, df: pd.DataFrame, group_col: str,
                 fontsize=6, color=GREY,
                 transform=ax.get_xaxis_transform())
 
-    # Icons above the plot area, between title and top spine
+    # Scale icons above the plot area, between title and top spine
     n_groups = len(groups)
+    # Shrink scale slightly when more groups need to share the same width
+    scale_size = 0.26 if n_groups <= 2 else 0.20
     for i, grp in enumerate(groups):
         frac = (i + 0.5) / n_groups
-        _draw_icon(ax, icon_map[grp], frac, 1.05, 0.08, color_map[grp])
+        left_kind, right_kind, tilt, lc, rc = scale_map[grp]
+        _draw_scale(ax, frac, 1.08, scale_size,
+                    left_kind, right_kind, tilt, lc, rc)
 
 
 def stacked_bar_panel(ax: plt.Axes, props: pd.DataFrame, label_map: dict,
                       color_map: dict,
-                      title: str, show_legend: bool = False) -> None:
+                      title: str, show_legend: bool = False,
+                      slot_count: int | None = None) -> None:
     """Horizontal stacked bars with inline % labels and right-side n totals."""
     groups = list(label_map.keys())
     labels = [label_map[g].replace("\n", " ") for g in groups]
-    y_pos = np.arange(len(groups))[::-1]
+    slots = max(slot_count or len(groups), len(groups))
+    y_pos = (np.arange(len(groups))[::-1]
+             + (slots - len(groups)) / 2.0)
 
     left = np.zeros(len(groups))
     for cat in CAT_ORDER:
@@ -351,6 +445,7 @@ def stacked_bar_panel(ax: plt.Axes, props: pd.DataFrame, label_map: dict,
         tick.set_fontweight("bold")
 
     ax.set_xlim(0, 1)
+    ax.set_ylim(-0.5, slots - 0.5)
     ax.xaxis.set_major_formatter(mpl.ticker.PercentFormatter(xmax=1, decimals=0))
     ax.set_xlabel("Proportion of sites")
     ax.set_title(title, pad=8)
@@ -378,13 +473,13 @@ def main() -> None:
     cand_props = proportions(cand, "parent_label", CAND_LABELS)
     stab_props = proportions(stab, "parent_label", STABLE_LABELS)
 
-    # 180 mm x ~130 mm (two-column)
-    fig = plt.figure(figsize=(7.09, 5.7))
+    # 180 mm x ~155 mm (two-column)
+    fig = plt.figure(figsize=(7.09, 6.5))
     gs = fig.add_gridspec(
         2, 2,
-        left=0.10, right=0.93,
-        top=0.91, bottom=0.13,
-        hspace=0.55, wspace=0.36,
+        left=0.14, right=0.94,
+        top=0.87, bottom=0.11,
+        hspace=0.85, wspace=0.45,
     )
     ax_a = fig.add_subplot(gs[0, 0])
     ax_b = fig.add_subplot(gs[0, 1])
@@ -392,29 +487,27 @@ def main() -> None:
     ax_d = fig.add_subplot(gs[1, 1])
 
     violin_panel(ax_a, cand, "parent_label", CAND_LABELS, CAND_COLORS,
-                 CAND_ICONS, threshold=CANDIDATE_THRESHOLD,
+                 CAND_SCALE, threshold=CANDIDATE_THRESHOLD,
                  title="Candidate abandonment sites")
     panel_label(ax_a, "a")
 
     violin_panel(ax_b, stab, "parent_label", STABLE_LABELS, STABLE_COLORS,
-                 STABLE_ICONS, threshold=STABLE_THRESHOLDS,
+                 STABLE_SCALE, threshold=STABLE_THRESHOLDS,
                  title="Stable-site controls")
     panel_label(ax_b, "b")
 
     stacked_bar_panel(ax_c, cand_props, CAND_LABELS, CAND_COLORS,
                       title="Candidate abandonment — outcomes",
-                      show_legend=False)
-    panel_label(ax_c, "c")
+                      show_legend=False, slot_count=3)
+    panel_label(ax_c, "c", x=-0.28)
 
     stacked_bar_panel(ax_d, stab_props, STABLE_LABELS, STABLE_COLORS,
                       title="Stable-site controls — outcomes",
-                      show_legend=True)
-    panel_label(ax_d, "d")
+                      show_legend=True, slot_count=3)
+    panel_label(ax_d, "d", x=-0.28)
 
     fig.savefig(OUT_PNG, dpi=600, bbox_inches="tight")
-    fig.savefig(OUT_PDF, bbox_inches="tight")
     print(f"Saved {OUT_PNG}  ({OUT_PNG.stat().st_size/1024:.0f} KB)")
-    print(f"Saved {OUT_PDF}")
 
 
 if __name__ == "__main__":
