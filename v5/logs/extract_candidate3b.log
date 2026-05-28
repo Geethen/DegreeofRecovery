@@ -1,0 +1,31 @@
+[OK] GEE initialised with high-volume endpoint (project=ee-gsingh)
+  Points in asset: 93,081  ->  n_shards=125 (target 750/shard)
+  Resuming: 113/125 done, 12 previously failed (will retry)
+  AlphaEarth year: 2024 (64 bands A00..A63)
+  Loading existing parquet into buffer (v5_candidate_refs_alphaearth.parquet)...
+  [OK] Loaded 38,758 existing rows
+    shard 76 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 67: 757 rows
+    shard 76 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 76 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 75: 719 rows
+    shard 81: 743 rows
+  [ERROR] shard 76: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 91 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 85: 740 rows
+    shard 87: 714 rows
+    shard 98 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 93: 763 rows
+    shard 91: 731 rows
+    shard 98 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 106: 729 rows
+    shard 108: 710 rows
+    shard 118: 724 rows
+    shard 98: 702 rows
+
+  1 shards failed after retries: [76]
+  Re-run the same command to retry only the failed shards (checkpoint: v5_candidate_refs_alphaearth.parquet.checkpoint.json)
+
+[OK] Saved C:\Users\geethen.singh\degreeRecover\v5\data\v5_candidate_refs_alphaearth.parquet
+  Rows: 46,790   Size: 4.3 MB
+  Shards: 11 ok, 1 failed, 124 total processed

@@ -1,0 +1,76 @@
+Traceback (most recent call last):
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\ee\data.py", line 359, in _execute_cloud_call
+    return call.execute(num_retries=num_retries)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\googleapiclient\_helpers.py", line 130, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\googleapiclient\http.py", line 938, in execute
+    raise HttpError(resp, content, uri=self.uri)
+googleapiclient.errors.HttpError: <HttpError 429 when requesting https://earthengine-highvolume.googleapis.com/v1/projects/ee-gsingh/algorithms?prettyPrint=false&alt=json returned "Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.". Details: "Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.">
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\geethen.singh\degreeRecover\src\degree_of_recovery\gee.py", line 49, in init_gee
+    ee.Initialize(
+    ~~~~~~~~~~~~~^
+        project=project,
+        ^^^^^^^^^^^^^^^^
+        opt_url="https://earthengine-highvolume.googleapis.com",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\ee\_utils.py", line 39, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\ee\__init__.py", line 275, in Initialize
+    raise e
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\ee\__init__.py", line 257, in Initialize
+    ApiFunction.initialize()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\ee\apifunction.py", line 163, in initialize
+    signatures = data.getAlgorithms()
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\ee\data.py", line 1456, in getAlgorithms
+    return _cloud_api_utils.convert_algorithms(_execute_cloud_call(call))
+                                               ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\ee\data.py", line 361, in _execute_cloud_call
+    raise _translate_cloud_exception(e)  # pylint: disable=raise-missing-from
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ee.ee_exception.EEException: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\ee\data.py", line 359, in _execute_cloud_call
+    return call.execute(num_retries=num_retries)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\googleapiclient\_helpers.py", line 130, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\googleapiclient\http.py", line 938, in execute
+    raise HttpError(resp, content, uri=self.uri)
+googleapiclient.errors.HttpError: <HttpError 429 when requesting https://earthengine-highvolume.googleapis.com/v1/projects/ee-gsingh/algorithms?prettyPrint=false&alt=json returned "Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.". Details: "Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.">
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\geethen.singh\degreeRecover\v5\scripts\extraction\extract_stable_refs_alphaearth_v5.py", line 46, in <module>
+    init_gee()
+    ~~~~~~~~^^
+  File "C:\Users\geethen.singh\degreeRecover\src\degree_of_recovery\gee.py", line 59, in init_gee
+    ee.Initialize(project=project)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\ee\_utils.py", line 39, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\ee\__init__.py", line 275, in Initialize
+    raise e
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\ee\__init__.py", line 257, in Initialize
+    ApiFunction.initialize()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\ee\apifunction.py", line 163, in initialize
+    signatures = data.getAlgorithms()
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\ee\data.py", line 1456, in getAlgorithms
+    return _cloud_api_utils.convert_algorithms(_execute_cloud_call(call))
+                                               ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\geethen.singh\degreeRecover\.venv\Lib\site-packages\ee\data.py", line 361, in _execute_cloud_call
+    raise _translate_cloud_exception(e)  # pylint: disable=raise-missing-from
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ee.ee_exception.EEException: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.

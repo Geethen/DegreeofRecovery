@@ -1,0 +1,134 @@
+[OK] GEE initialised with high-volume endpoint (project=ee-gsingh)
+  Points in asset: 93,081  ->  n_shards=125 (target 750/shard)
+  Resuming: 66/125 done, 0 previously failed (will retry)
+  AlphaEarth year: 2024 (64 bands A00..A63)
+  Loading existing parquet into buffer (v5_candidate_refs_alphaearth.parquet)...
+  [OK] Loaded 3,749 existing rows
+    shard 64: 784 rows
+    shard 66: 782 rows
+    shard 67 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 68 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 67 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 68 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 69: 745 rows
+    shard 70: 744 rows
+    shard 67 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 67: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 71: 702 rows
+    shard 72 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 68: 737 rows
+    shard 74 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 73: 753 rows
+    shard 75 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 74: 740 rows
+    shard 72: 742 rows
+    shard 76 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 75 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 76 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 75 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 77: 798 rows
+    shard 78: 763 rows
+  [ERROR] shard 75: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 81 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 76 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 80: 753 rows
+    shard 79: 762 rows
+    shard 81 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 76: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 84 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 81 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 84 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 82: 740 rows
+  [ERROR] shard 81: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 83: 747 rows
+    shard 85 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 85 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 87 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 86: 725 rows
+    shard 85 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 84: 769 rows
+    shard 87 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 85: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 87 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 88: 750 rows
+    shard 90 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 91 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 90: 734 rows
+  [ERROR] shard 87: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 89: 766 rows
+    shard 93 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 91 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 92: 748 rows
+    shard 94: 739 rows
+    shard 91 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 93 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 96: 704 rows
+    shard 93 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 91: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 93: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 97: 705 rows
+    shard 98 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 95: 732 rows
+    shard 100 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 100 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 98 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 101: 758 rows
+    shard 99: 804 rows
+    shard 98 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 103 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 98: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 100: 749 rows
+    shard 103 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 102: 716 rows
+    shard 104 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 105: 728 rows
+    shard 104 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 106 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 106 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 104 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 106 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 107: 726 rows
+  [ERROR] shard 106: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 108 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 103: 730 rows
+    shard 104: 748 rows
+    shard 108 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 111 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 108 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 112: 752 rows
+    shard 110: 727 rows
+  [ERROR] shard 108: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 114 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 111: 727 rows
+    shard 115 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 114 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 113: 726 rows
+    shard 115 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 117 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 116: 742 rows
+    shard 115 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 114: 761 rows
+    shard 118 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 117: 724 rows
+    shard 119 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 115: 773 rows
+    shard 118 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 118 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 121 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 119: 729 rows
+    shard 120: 725 rows
+    shard 122 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 118: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 124 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 121: 768 rows
+    shard 122 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 123: 707 rows
+    shard 124: 763 rows
+    shard 122: 762 rows
+
+  12 shards failed after retries: [67, 75, 76, 81, 85, 87, 91, 93, 98, 106, 108, 118]
+  Re-run the same command to retry only the failed shards (checkpoint: v5_candidate_refs_alphaearth.parquet.checkpoint.json)
+
+[OK] Saved C:\Users\geethen.singh\degreeRecover\v5\data\v5_candidate_refs_alphaearth.parquet
+  Rows: 38,758   Size: 3.6 MB
+  Shards: 47 ok, 12 failed, 113 total processed

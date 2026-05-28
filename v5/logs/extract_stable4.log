@@ -1,0 +1,1299 @@
+[OK] GEE initialised with high-volume endpoint (project=ee-gsingh)
+  Points in asset: 877,649  ->  n_shards=1171 (target 750/shard)
+  AlphaEarth year: 2024 (64 bands A00..A63)
+    shard 3 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 2 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 1 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 3 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 1 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 3 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 1 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 0 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 3: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 4 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 0 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 4 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 0 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 4 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 0: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 2 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 2 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 5 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 5 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 2: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 5 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 6 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 6 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 5: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 7 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 6 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 7 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 7 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 6: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 1: User memory limit exceeded.
+    shard 8 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 7: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 10 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 8 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 10 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 8 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 4: User memory limit exceeded.
+    shard 9 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 8: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 12 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 11 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 12 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 12 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 11 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 12: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 9 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 11 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 13 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 11: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 13 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 13 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 14 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 13: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 10 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 14 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 10: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 14 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 16 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 9 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 14: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 9: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 17 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 18 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 17 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 18 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 17 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 18 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 17: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 15 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 18: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 19 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 20 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 19 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 20 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 19 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 16 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 20 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 19: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 20: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 21 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 22 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 21 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 22 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 21 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 15 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 22 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 15 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 22: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 15: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 16 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 23 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 16: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 23 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 23 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 25 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 25 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 23: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 26 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 25 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 21: User memory limit exceeded.
+    shard 26 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 25: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 26 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 28 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 24 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 28 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 24 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 24 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 28 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 24: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 26: User memory limit exceeded.
+  [ERROR] shard 28: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 30 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 31 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 30 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 31 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 30 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 31 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 30: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 31: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 33 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 32 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 32 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 32 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 27 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 29 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 33 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 29 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 33 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 29 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 33: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 29: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 34 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 32: User memory limit exceeded.
+    shard 34 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 35 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 34 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 27 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 35 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 27 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 35 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 27: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 35: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 37 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 38 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 36 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 37 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 37 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 36 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 36 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 37: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 34: User memory limit exceeded.
+  [ERROR] shard 36: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 41 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 39 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 39 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 39 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 41 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 41 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 39: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 38 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 41: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 38 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 43 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 43 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 38: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 43 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 44 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 44 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 43: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 42 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 45 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 44 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 40 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 45 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 44: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 45 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 46 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 45: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 46 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 42 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 46 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 42 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 42: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 46: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 49 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 48 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 49 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 48 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 47 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 49 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 40 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 48 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 40 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 49: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 40: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 50 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 51 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 47 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 50 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 50 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 47 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 50: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 47: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 52 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 52 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 51 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 52 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 51 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 52: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 51: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 48: User memory limit exceeded.
+    shard 54 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 56 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 54 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 56 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 54 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 56 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 54: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 56: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 53 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 57 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 58 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 57 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 58 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 57 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 57: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 58 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 55 retry 1/3 (tileScale 2->4) after 2s: Computation timed out.
+  [ERROR] shard 58: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 55 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 60 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 53 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 60 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 60 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 53 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 60: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 53: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 62 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 61 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 62 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 62 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 61 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 59 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 61 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 59 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 61: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 63 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 59 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 63 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 59: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 55 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 64 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 55: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 65 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 64 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 65 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 62: User memory limit exceeded.
+    shard 63 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 65 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 63: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 65: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 67 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 67 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 68 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 68 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 67 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 68 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 64 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 68: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 64: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 69 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 66 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 70 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 69 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 70 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 69 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 70 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 69: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 70: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 71 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 72 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 71 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 72 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 67: User memory limit exceeded.
+    shard 71 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 72 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 66 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 71: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 72: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 74 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 74 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 75 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 74 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 75 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 74: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 75 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 76 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 66 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 75: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 66: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 76 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 78 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 73 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 73 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 78 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 73 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 78 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 73: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 77 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 78: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 79 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 80 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 79 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 80 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 76 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 79 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 79: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 77 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 76: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 82 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 77 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 82 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 77: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 83 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 83 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 82 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 83 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 82: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 83: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 84 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 80 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 85 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 84 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 85 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 84 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 81 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 84: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 81 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 81 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 86 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 86 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 81: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 86 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 87 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 85 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 86: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 80: User memory limit exceeded.
+    shard 88 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 85: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 88 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 90 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 88 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 90 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 88: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 90 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 91 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 91 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 90: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 87 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 91 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 92 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 91: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 89 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 92 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 89 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 92 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 89 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 89: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 87 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 92: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 95 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 87: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 96 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 95 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 96 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 93 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 95 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 96 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 94 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 94 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 96: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 94 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 97 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 94: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 97 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 98 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 98 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 97 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 97: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 98 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 99 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 98: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 99 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 95: User memory limit exceeded.
+    shard 93 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 99 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 93 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 99: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 93: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 102 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 103 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 101 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 103 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 101 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 103 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 103: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 101 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 100 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 104 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 101: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 104 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 105 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 104 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 105 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 104: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 105 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 102 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 106 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 106 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 102 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 100 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 106 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 106: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 102: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 107 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 108 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 107 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 105: User memory limit exceeded.
+    shard 108 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 107 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 108 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 107: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 108: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 110 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 110 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 111 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 100 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 109 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 110 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 100: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 110: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 112 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 113 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 112 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 113 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 112 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 113 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 113: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 112: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 114 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 115 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 115 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 109 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 114 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 111 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 115 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 114 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 115: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 114: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 116 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 116 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 117 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 117 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 116 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 117 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 116: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 117: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 118 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 119 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 109 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 118 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 109: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 118 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 120 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 111 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 118: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 111: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 121 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 122 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 121 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 122 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 121 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 122 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 122: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 119 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 121: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 124 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 123 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 123 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 124 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 123 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 124 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 123: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 120 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 125 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 120 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 125 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 120: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 119 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 125 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 119: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 125: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 127 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 128 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 127 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 128 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 127 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 128 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 128: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 126 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 127: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 124: User memory limit exceeded.
+    shard 129 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 130 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 129 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 130 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 129 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 130 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 129: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 130: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 132 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 133 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 132 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 126 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 133 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 126 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 133 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 126: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 131 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 134 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 131 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 134 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 131 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 134 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 131: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 132 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 135 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 134: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 136 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 135 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 136 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 135 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 136 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 135: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 136: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 133: User memory limit exceeded.
+    shard 137 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 138 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 137 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 137 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 132: User memory limit exceeded.
+    shard 138 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 137: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 138 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 141 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 141 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 138: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 141 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 142 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 141: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 142 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 142 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 143 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 140 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 143 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 139 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 142: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 144 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 143 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 144 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 143: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 144 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 145 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 144: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 145 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 146 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 145 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 146 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 145: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 140 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 147 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 139 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 147 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 140 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 147 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 147: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 140: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 148 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 146 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 149 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 149 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 146: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 149 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 150 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 139 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 149: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 150 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 139: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 150 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 152 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 150: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 152 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 148 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 152 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 148 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 152: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 148: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 154 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 155 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 153 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 155 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 154 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 155 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 151 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 155: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 154 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 151 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 151 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 154: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 151: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 157 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 158 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 157 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 158 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 156 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 157 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 158 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 157: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 158: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 159 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 160 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 159 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 160 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 156 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 156 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 159 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 153 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 159: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 156: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 161 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 162 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 161 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 162 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 161 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 162 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 161: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 160 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 163 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 162: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 153 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 163 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 153: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 163 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 165 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 163: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 165 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 166 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 165 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 160: User memory limit exceeded.
+    shard 164 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 165: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 167 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 168 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 167 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 168 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 167 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 168 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 167: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 168: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 169 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 169 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 164 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 166 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 170 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 170 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 166 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 170 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 166: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 170: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 171 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 169 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 171 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 169: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 171 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 173 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 171: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 173 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 164 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 174 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 172 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 164: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 172 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 175 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 175 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 172 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 175 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 172: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 174 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 173 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 173: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 174 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 177 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 174: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 177 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 178 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 177 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 178 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 175: User memory limit exceeded.
+  [ERROR] shard 177: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 178 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 178: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 180 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 176 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 176 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 180 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 176 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 180 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 179 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 176: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 179 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 182 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 182 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 179 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 182 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 182: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 181 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 179: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 183 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 180: User memory limit exceeded.
+    shard 183 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 184 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 183 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 184 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 183: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 184 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 186 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 186 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 184: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 186 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 187 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 186: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 181 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 187 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 185 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 181 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 187 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 181: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 187: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 189 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 190 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 190 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 189 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 190 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 189 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 190: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 185 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 189: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 192 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 188 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 185 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 192 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 192 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 185: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 192: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 194 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 193 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 193 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 194 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 191 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 193 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 194 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 193: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 194: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 195 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 196 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 195 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 188 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 196 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 188 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 196 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 188: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 191 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 196: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 198 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 191 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 198 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 191: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 198 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 199 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 199 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 198: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 200 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 199 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 200 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 199: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 200 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 201 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 195 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 201 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 197 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 200: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 197 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 202 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 197 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 202 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 202 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 197: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 203 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 202: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 204 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 203 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 195: User memory limit exceeded.
+    shard 204 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 203 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 204 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 201 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 203: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 201: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 207 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 206 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 206 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 207 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 206 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 207 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 204: User memory limit exceeded.
+    shard 205 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 207: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 206: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 209 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 210 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 209 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 210 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 209 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 210 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 209: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 210: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 211 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 212 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 211 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 211 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 212 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 212 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 211: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 205 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 208 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 212: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 208 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 214 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 208 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 214 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 214 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 208: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 215 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 214: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 216 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 215 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 215 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 216 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 205 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 205: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 216 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 217 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 213 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 216: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 213 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 218 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 213 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 218 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 213: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 215: User memory limit exceeded.
+    shard 218 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 219 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 219 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 218: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 217 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 219 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 217 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 219: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 217: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 220 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 222 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 220 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 222 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 220 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 220: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 222 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 223 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 224 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 224 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 223 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 221 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 221 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 223 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 221 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 223: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 221: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 225 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 226 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 226 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 222: User memory limit exceeded.
+    shard 225 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 225 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 227 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 225: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 227 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 228 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 224 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 227 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 228 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 226 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 227: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 226: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 229 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 230 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 229 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 229 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 228 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 224: User memory limit exceeded.
+    shard 230 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 228: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 230 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 232 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 230: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 232 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 233 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 229: User memory limit exceeded.
+    shard 232 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 233 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 232: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 233 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 235 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 233: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 235 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 236 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 235 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 231 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 236 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 231 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 236 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 231 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 236: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 234 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 237 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 234 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 237 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 234 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 237 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 234: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 237: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 238 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 239 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 238 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 239 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 235: User memory limit exceeded.
+    shard 238 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 231: User memory limit exceeded.
+    shard 239 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 238: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 242 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 239: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 242 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 242 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 243 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 241 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 243 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 242: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 244 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 243 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 244 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 244 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 243: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 240 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 244: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 245 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 245 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 246 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 246 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 245 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 246 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 241 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 245: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 247 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 241 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 247 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 241: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 247 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 248 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 240 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 247: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 240 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 249 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 240: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 250 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 246: User memory limit exceeded.
+    shard 249 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 251 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 250 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 250 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 251 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 251 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 250: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 252 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 251: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 248 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 253 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 248 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 253 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 248: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 254 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 249 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 253 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 249: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 253: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 255 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 256 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 255 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 256 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 255 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 252 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 256 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 252 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 254 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 256: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 254 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 257 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 257 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 254: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 257 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 258 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 257: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 258 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 259 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 258 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 259 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 259 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 258: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 255: User memory limit exceeded.
+  [ERROR] shard 252: User memory limit exceeded.
+    shard 260 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 259: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 263 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 260 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 263 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 260 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 263 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 260: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 264 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 262 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 263: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 264 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 265 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 264 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 265 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 264: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 265 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 261 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 266 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 266 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 261 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 262 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 266 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 261 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 266: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 267 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 261: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 267 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 268 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 268 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 267 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 262 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 267: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 268 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 265: User memory limit exceeded.
+  [ERROR] shard 268: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 262: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 271 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 272 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 271 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 272 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 271 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 272 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 271: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 273 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 272: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 273 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 274 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 273 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 269 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 274 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 273: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 274 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 275 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 270 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 274: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 276 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 270 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 276 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 270 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 270: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 269 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 276 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 269 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 276: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 269: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 278 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 279 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 278 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 279 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 278 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 275 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 277 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 279 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 275 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 279: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 275: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 280 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 281 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 280 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 280 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 281 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 281 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 280: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 282 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 281: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 282 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 278: User memory limit exceeded.
+    shard 283 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 277 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 282 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 277 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 282: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 277: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 285 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 286 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 285 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 286 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 286 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 285 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 286: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 285: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 287 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 283 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 287 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 288 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 284 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 288 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 287 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 288 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 287: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 288: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 289 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 290 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 289 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 290 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 283 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 289 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 290 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 290: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 289: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 291 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 292 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 284 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 284 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 292 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 284: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 292 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 293 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 292: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 293 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 283: User memory limit exceeded.
+    shard 294 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 293 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 294 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 293: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 294 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 295 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 291 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 296 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 295 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 296 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 295 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 295: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 296 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 297 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 297 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 296: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 297 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 294: User memory limit exceeded.
+    shard 298 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 297: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 300 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 298 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 300 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 300 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 298 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 291 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 300: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 301 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 299 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 299 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 291: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 299 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 302 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 299: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 302 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 303 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 302 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 303 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 302: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 303 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 304 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 298: User memory limit exceeded.
+    shard 304 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 305 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 305 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 304 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 304: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 305 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 301 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 306 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 301 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 306 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 301: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 306 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 307 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 303: User memory limit exceeded.
+  [ERROR] shard 306: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 307 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 309 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 307 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 309 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 305: User memory limit exceeded.
+  [ERROR] shard 307: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 310 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 311 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 310 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 311 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 310 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 311 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 309 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 311: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 309: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 312 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 308 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 308 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 313 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 313 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 308 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 313 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 308: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 310: User memory limit exceeded.
+    shard 314 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 315 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 315 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 314 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 314 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 315 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 314: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 316 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 313: User memory limit exceeded.
+    shard 316 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 315: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 318 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 316 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 318 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 316: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 312 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 318 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 317 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 318: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 317 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 320 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 317 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 320 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 317: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 321 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 320 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 321 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 320: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 322 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 321 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 322 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 319 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 321: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 312 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 312: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 323 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 324 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 323 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 323 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 324 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+  [ERROR] shard 323: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 324 retry 3/3 (tileScale 8->16) after 8s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 325 retry 1/3 (tileScale 2->4) after 2s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.
+    shard 325 retry 2/3 (tileScale 4->8) after 4s: Too Many Requests: Request was rejected because the request rate or concurrency limit was exceeded.

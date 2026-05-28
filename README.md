@@ -165,6 +165,19 @@ uv run v3/scripts/analysis/export_knn_shp.py
 
 ---
 
+## Writing workflow
+
+The methods write-up is markdown-first. `paper_methods.md` is the source of truth; the docx is a regenerated export, **never** hand-edited.
+
+- **Source:** `paper_methods.md` — edit this for all prose, table, and equation changes.
+- **Figures:** `scripts/make_dor_results_figure.py` and `v4/scripts/reporting/make_supp_quality_figure.py` write PNGs into `v4/plots/`. The md embeds those PNGs by path.
+- **Styling reference:** `scripts/reference.docx` — open in Word and edit to change fonts, margins, or heading styles. Content paragraphs in this file are ignored by pandoc; only style definitions are copied.
+- **Build:** `python scripts/build_docx.py` regenerates the figures and writes `build/paper_methods.docx`. Use `--skip-figures` for prose-only rebuilds, `--open` to launch the result in Word.
+
+For coauthor review, share `build/paper_methods.docx`; collect their comments and reconcile them back into `paper_methods.md`, then rebuild.
+
+---
+
 ## Network storage
 
 Large data files not tracked in git are stored at:  

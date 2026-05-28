@@ -1,0 +1,11 @@
+[OK] GEE initialised with high-volume endpoint (project=ee-gsingh)
+  Points in asset: 93,081  ->  n_shards=125 (target 750/shard)
+  Resuming: 124/125 done, 1 previously failed (will retry)
+  AlphaEarth year: 2024 (64 bands A00..A63)
+  Loading existing parquet into buffer (v5_candidate_refs_alphaearth.parquet)...
+  [OK] Loaded 46,790 existing rows
+    shard 76: 742 rows
+
+[OK] Saved C:\Users\geethen.singh\degreeRecover\v5\data\v5_candidate_refs_alphaearth.parquet
+  Rows: 47,532   Size: 4.4 MB
+  Shards: 1 ok, 0 failed, 125 total processed
