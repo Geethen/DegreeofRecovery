@@ -136,7 +136,7 @@ def process_shard_with_escalation(
     db_conn,
     lock,
     schema_checked,
-    tile_scales=(TILE_SCALE, 4, 8, 16),
+    tile_scales=(TILE_SCALE, 4, 8, 16, 32, 64),
     backoff: int = 2,
 ) -> int:
     """Run `process_shard` with tileScale escalation on retry."""
@@ -188,18 +188,9 @@ def run(
 
     samples = ee.FeatureCollection(samples_asset)
     if test_mode:
-        n_shards = 2
         samples = samples.limit(500)
-        print("  *** TEST MODE: 500 points × 2 shards ***")
-
-    if n_shards is None:
-        n_points = retry_gee(lambda: samples.size().getInfo())
-        n_shards = max(1, math.ceil(n_points / TARGET_SHARD_SIZE))
-        print(
-            f"  Points in asset: {n_points:,}  ->  "
-            f"n_shards={n_shards} (target {TARGET_SHARD_SIZE}/shard)"
-        )
-    elif verbose:
+        print("  *** TEST MODE: 500 points ***")
+    else:
         n_points = retry_gee(lambda: samples.size().getInfo())
         print(f"  Points in asset: {n_points:,}")
 
@@ -214,24 +205,26 @@ def run(
             processed = set(cp.get("done", []))
             prior_failed = set(cp.get("failed", []))
         print(
-            f"  Resuming: {len(processed)}/{n_shards} done, "
+            f"  Resuming: {len(processed)} done, "
             f"{len(prior_failed)} previously failed (will retry)"
         )
 
     image = build_alphaearth_image(year)
     print(f"  AlphaEarth year: {year} (64 bands A00..A63)")
 
-    samples_sharded = (
-        samples.randomColumn("shard_rand", seed=SEED).map(
-            lambda f: f.set(
-                "shard_idx",
-                ee.Number(f.get("shard_rand"))
-                .multiply(n_shards)
-                .floor()
-                .min(n_shards - 1),
-            )
-        )
+    # Parent-based sharding: one shard per parent_id. Each parent's reference
+    # points lie within an 8 km buffer around the parent geometry (BUFFER_STEPS_M
+    # ceiling in sample_stable_references_v5.py), so GEE only loads AlphaEarth
+    # tiles from one small region per request — naturally aligned with the
+    # AlphaEarth UTM tile footprint and bounded in memory.
+    import random
+    parent_ids = retry_gee(
+        lambda: samples.aggregate_array("parent_id").distinct().getInfo()
     )
+    parent_ids = [str(p) for p in parent_ids]
+    random.Random(SEED).shuffle(parent_ids)
+    n_shards = len(parent_ids)
+    print(f"  Parent-based sharding: {n_shards} parent sites (shuffled)")
 
     db_conn = duckdb.connect()
     if os.path.exists(output_path):
@@ -272,7 +265,7 @@ def run(
     shard_indices = [i for i in range(n_shards) if i not in processed]
 
     def make_shard(i):
-        return samples_sharded.filter(ee.Filter.eq("shard_idx", i))
+        return samples.filter(ee.Filter.eq("parent_id", parent_ids[i]))
 
     schema_checked = [False]
 
