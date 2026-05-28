@@ -245,12 +245,29 @@ def run(
 
     lock = Lock()
     failed = set()
+    flush_counter = [0]
+    FLUSH_EVERY = 10
 
     def save_checkpoint():
         with lock, open(checkpoint_file, "w") as f:
             json.dump(
                 {"done": sorted(processed), "failed": sorted(failed)}, f
             )
+
+    def flush_parquet():
+        # Atomically write in-memory buffer to disk so kills don't lose work.
+        try:
+            buf_rows = db_conn.execute("SELECT count(*) FROM data").fetchone()[0]
+        except Exception:
+            return
+        if buf_rows == 0:
+            return
+        tmp = output_path + ".tmp"
+        db_conn.execute(f"COPY data TO '{tmp}' (FORMAT PARQUET, COMPRESSION ZSTD)")
+        if os.path.exists(output_path):
+            os.remove(output_path)
+        os.rename(tmp, output_path)
+        tqdm.write(f"  [flush] {buf_rows:,} rows -> {os.path.basename(output_path)}")
 
     shard_indices = [i for i in range(n_shards) if i not in processed]
 
@@ -290,6 +307,10 @@ def run(
                         failed.discard(idx)
                         save_checkpoint()
                         tqdm.write(f"    shard {idx}: {n} rows")
+                        flush_counter[0] += 1
+                        if flush_counter[0] % FLUSH_EVERY == 0:
+                            with lock:
+                                flush_parquet()
                 except Exception as e:
                     failed.add(idx)
                     save_checkpoint()

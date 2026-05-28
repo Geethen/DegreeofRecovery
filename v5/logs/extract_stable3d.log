@@ -1,0 +1,348 @@
+[OK] GEE initialised with high-volume endpoint (project=ee-gsingh)
+  Points in asset: 877,649  ->  n_shards=1171 (target 750/shard)
+  AlphaEarth year: 2024 (64 bands A00..A63)
+    shard 2 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 0 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 1 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 0 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 2 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 1 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 0 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 2 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 1 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 0: User memory limit exceeded.
+  [ERROR] shard 2: User memory limit exceeded.
+  [ERROR] shard 1: User memory limit exceeded.
+    shard 3 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 3 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 5 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 4 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 5 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 3 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 3: User memory limit exceeded.
+    shard 5 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 4 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 6 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 4 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 6 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 5: User memory limit exceeded.
+    shard 6 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 4: User memory limit exceeded.
+  [ERROR] shard 6: User memory limit exceeded.
+    shard 8 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 9 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 7 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 9 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 9 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 8 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 7 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 9: User memory limit exceeded.
+    shard 7 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 8 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 10 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 7: User memory limit exceeded.
+    shard 10 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 8: User memory limit exceeded.
+    shard 12 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 10 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 11 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 10: User memory limit exceeded.
+    shard 12 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 11 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 11 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 13 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 12 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 11: User memory limit exceeded.
+    shard 14 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 14 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 13 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 12: User memory limit exceeded.
+    shard 13 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 15 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 14 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 15 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 14: User memory limit exceeded.
+    shard 15 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 13: User memory limit exceeded.
+    shard 16 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 15: User memory limit exceeded.
+    shard 16 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 16 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 17 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 18 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 17 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 16: User memory limit exceeded.
+    shard 18 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 17 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 19 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 18 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 19 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 19 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 17: User memory limit exceeded.
+  [ERROR] shard 19: User memory limit exceeded.
+  [ERROR] shard 18: User memory limit exceeded.
+    shard 21 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 20 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 22 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 21 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 20 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 22 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 21 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 21: User memory limit exceeded.
+    shard 20 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 22 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 22: User memory limit exceeded.
+    shard 23 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 20: User memory limit exceeded.
+    shard 24 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 24 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 23 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 25 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 24 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 25 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 24: User memory limit exceeded.
+    shard 23 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 25 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 26 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 23: User memory limit exceeded.
+  [ERROR] shard 25: User memory limit exceeded.
+    shard 26 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 27 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 28 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 27 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 26 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 28 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 26: User memory limit exceeded.
+    shard 28 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 27 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 29 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 28: User memory limit exceeded.
+  [ERROR] shard 27: User memory limit exceeded.
+    shard 29 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 30 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 30 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 31 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 29 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 29: User memory limit exceeded.
+    shard 30 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 32 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 31 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 32 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 32 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 30: User memory limit exceeded.
+    shard 31 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 32: User memory limit exceeded.
+    shard 33 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 31: User memory limit exceeded.
+    shard 34 retry 1/3 (tileScale 2->4) after 2s: Computation timed out.
+    shard 33 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 33 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 34 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 35 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 34 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 34: User memory limit exceeded.
+  [ERROR] shard 33: User memory limit exceeded.
+    shard 36 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 35 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 36 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 37 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 36 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 37 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 35 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 36: User memory limit exceeded.
+    shard 38 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 38 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 35: User memory limit exceeded.
+    shard 37 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 39 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 38 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 37: User memory limit exceeded.
+    shard 40 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 39 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 40 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 39 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 38: User memory limit exceeded.
+  [ERROR] shard 39: User memory limit exceeded.
+    shard 40 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 42 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 41 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 42 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 40: User memory limit exceeded.
+    shard 42 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 43 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 41 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 43 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 42: User memory limit exceeded.
+    shard 43 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 41 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 44 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 43: User memory limit exceeded.
+  [ERROR] shard 41: User memory limit exceeded.
+    shard 44 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 45 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 46 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 44 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 45 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 46 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 46 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 46: User memory limit exceeded.
+    shard 45 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 44: User memory limit exceeded.
+    shard 47 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 45: User memory limit exceeded.
+    shard 47 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 47 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 49 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 48 retry 1/3 (tileScale 2->4) after 2s: Computation timed out.
+    shard 48 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 49 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 47: User memory limit exceeded.
+    shard 49 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 48 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 50 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 48: User memory limit exceeded.
+    shard 50 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 50 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 49: User memory limit exceeded.
+    shard 52 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 51 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 50: User memory limit exceeded.
+    shard 51 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 52 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 53 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 52 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 53 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 51 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 53 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 52: User memory limit exceeded.
+  [ERROR] shard 51: User memory limit exceeded.
+  [ERROR] shard 53: User memory limit exceeded.
+    shard 54 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 56 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 56 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 55 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 56 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 54 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 55 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 55 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 56: User memory limit exceeded.
+    shard 54 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 54: User memory limit exceeded.
+    shard 57 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 55: User memory limit exceeded.
+    shard 57 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 59 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 57 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 58 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 59 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 57: User memory limit exceeded.
+    shard 59 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 58 retry 2/3 (tileScale 4->8) after 4s: Computation timed out.
+    shard 60 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 60 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 58 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 59: User memory limit exceeded.
+    shard 61 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 61 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 60 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 58: User memory limit exceeded.
+  [ERROR] shard 60: User memory limit exceeded.
+    shard 61 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 63 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 61: User memory limit exceeded.
+    shard 62 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 63 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 63 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 64 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 62 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 64 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 63: User memory limit exceeded.
+    shard 62 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 64 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 62: User memory limit exceeded.
+    shard 65 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 66 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 66 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 65 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 64: User memory limit exceeded.
+    shard 66 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 67 retry 1/3 (tileScale 2->4) after 2s: Computation timed out.
+    shard 65 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 66: User memory limit exceeded.
+  [ERROR] shard 65: User memory limit exceeded.
+    shard 68 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 67 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 69 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 68 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 67 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 68 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 69 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 67: User memory limit exceeded.
+  [ERROR] shard 68: User memory limit exceeded.
+    shard 69 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 70 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 71 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 70 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 69: User memory limit exceeded.
+    shard 71 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 70 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 72 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 71 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 70: User memory limit exceeded.
+    shard 73 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+  [ERROR] shard 71: User memory limit exceeded.
+    shard 72 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 74 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 74 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 72 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 73 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 74 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 72: User memory limit exceeded.
+  [ERROR] shard 74: User memory limit exceeded.
+    shard 73 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 73: User memory limit exceeded.
+    shard 75 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 77 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 76 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 77 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 75 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 77 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 76 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 75 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 76 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 77: User memory limit exceeded.
+  [ERROR] shard 75: User memory limit exceeded.
+  [ERROR] shard 76: User memory limit exceeded.
+    shard 80 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 78 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 79 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 80 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 79 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 80 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 78 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 80: User memory limit exceeded.
+    shard 81 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 79 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 78 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 81 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 79: User memory limit exceeded.
+  [ERROR] shard 78: User memory limit exceeded.
+    shard 81 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 81: User memory limit exceeded.
+    shard 82 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 82 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 84 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 83 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 82 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 84 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+    shard 83 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 82: User memory limit exceeded.
+    shard 84 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 85 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 83 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+  [ERROR] shard 84: User memory limit exceeded.
+    shard 85 retry 2/3 (tileScale 4->8) after 4s: User memory limit exceeded.
+  [ERROR] shard 83: User memory limit exceeded.
+    shard 85 retry 3/3 (tileScale 8->16) after 8s: User memory limit exceeded.
+    shard 86 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
+    shard 87 retry 1/3 (tileScale 2->4) after 2s: User memory limit exceeded.
