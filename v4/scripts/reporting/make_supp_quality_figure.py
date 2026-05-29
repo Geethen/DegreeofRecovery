@@ -440,7 +440,6 @@ def render(neff, k_sweep, v4_summary, scores, buffers, out_png: Path) -> None:
     panel_label(ax_f, "f")
 
     fig.savefig(out_png, dpi=600, bbox_inches="tight")
-    fig.savefig(out_png.with_suffix(".pdf"), bbox_inches="tight")
     plt.close(fig)
     print(f"Wrote {out_png}")
 
