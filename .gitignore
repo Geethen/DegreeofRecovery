@@ -37,6 +37,7 @@ scratch/
 *.7z
 *.zip
 *.tar.gz
+*.msi
 
 # Large derived CSVs (per-point sampling-strategy data, re-derivable from parquets)
 v2/data/*/sampling_strategy_selected_points.csv
