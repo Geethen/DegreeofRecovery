@@ -38,7 +38,7 @@ BASE_DIR = Path(__file__).resolve().parents[3]
 V5_DATA  = BASE_DIR / "v5" / "data"
 V5_PLOTS = BASE_DIR / "v5" / "plots"
 
-STABLE_REFS_PATH = BASE_DIR / "v4" / "data" / "v4_stable_refs_alphaearth.parquet"
+STABLE_REFS_PATH = BASE_DIR / "v5" / "data" / "v5_stable_refs_alphaearth.parquet"
 CAND_REFS_PATH   = BASE_DIR / "v2" / "data" / "recover_reference_samples_v2_mask_on_large_alphaearth.parquet"
 TEST_SITES_CAND  = BASE_DIR / "v1" / "data" / "test_site_alphaearth_2024.parquet"
 TEST_SITES_STAB  = BASE_DIR / "v4" / "data" / "test_site_alphaearth_2024_v4.parquet"
@@ -47,7 +47,7 @@ STRATEGY    = "random_100"
 EMBED_COLS  = [f"A{i:02d}" for i in range(64)]
 EPS         = 1e-12
 
-THRESHOLDS  = [0, 25, 50, 75, 100, 150, 200, 300, 500, 1000, 2000]
+THRESHOLDS  = [0, 25, 50, 75, 100, 150, 200, 300, 500, 1000, 2000, 3000, 4000]
 KNN_K       = 5
 MIN_REFS    = 5     # below this, the score is not defined at knn5
 
@@ -55,17 +55,13 @@ STABILITY_TOL = 0.005   # |delta median DoR| below this counts as plateaued
 
 PALETTE = {
     "stable_nature": "#009E73",
-    "stable_crop":   "#0072B2",
     "stable_built":  "#E69F00",
     "built_loss":    "#D55E00",
-    "crop_loss":     "#CC79A7",
 }
 LABEL_NAMES = {
     "stable_nature": "Stable near-natural",
-    "stable_crop":   "Stable cropland",
     "stable_built":  "Stable built-up",
     "built_loss":    "Built-loss (candidate)",
-    "crop_loss":     "Crop-loss (candidate)",
 }
 
 
@@ -324,8 +320,12 @@ def plot_built_loss_trajectories(per_site: pd.DataFrame,
     })
 
     sub = per_site[per_site["parent_label"] == "built_loss"].copy()
+    if sub.empty:
+        return
     pivot = sub.pivot(index="parent_id", columns="min_dist_m", values="dor")
     pivot = pivot.dropna()
+    if pivot.empty:
+        return
 
     fig, ax = plt.subplots(1, 1, figsize=(4.5, 3.5))
     thrs = sorted([int(t) for t in pivot.columns])
@@ -358,24 +358,32 @@ def main() -> None:
     refs_stable = load_refs_with_emb(STABLE_REFS_PATH, strategy=STRATEGY)
     print(f"  {len(refs_stable):,} rows, {refs_stable['parent_id'].nunique()} parents")
 
-    print("Loading candidate refs (with embeddings) ...")
-    refs_cand = load_refs_with_emb(CAND_REFS_PATH, strategy=None)
-    print(f"  {len(refs_cand):,} rows, {refs_cand['parent_id'].nunique()} parents")
+    has_cand = CAND_REFS_PATH.exists() and TEST_SITES_CAND.exists()
+    if has_cand:
+        print("Loading candidate refs (with embeddings) ...")
+        refs_cand = load_refs_with_emb(CAND_REFS_PATH, strategy=None)
+        print(f"  {len(refs_cand):,} rows, {refs_cand['parent_id'].nunique()} parents")
+    else:
+        print(f"  [skip] candidate refs/test sites missing — running stable-only sweep")
 
     print("Loading test-site embeddings ...")
     test_emb_stab = load_test_emb(TEST_SITES_STAB)
-    test_emb_cand = load_test_emb(TEST_SITES_CAND)
-    print(f"  stable: {len(test_emb_stab)}, candidate: {len(test_emb_cand)}")
+    print(f"  stable: {len(test_emb_stab)}")
+    if has_cand:
+        test_emb_cand = load_test_emb(TEST_SITES_CAND)
+        print(f"  candidate: {len(test_emb_cand)}")
 
     print("\nScoring stable sites at each threshold ...")
     per_site_stab = score_all_thresholds(refs_stable, test_emb_stab, THRESHOLDS)
     print(f"  {per_site_stab['parent_id'].nunique()} sites x {len(THRESHOLDS)} thresholds")
 
-    print("Scoring candidate sites at each threshold ...")
-    per_site_cand = score_all_thresholds(refs_cand, test_emb_cand, THRESHOLDS)
-    print(f"  {per_site_cand['parent_id'].nunique()} sites x {len(THRESHOLDS)} thresholds")
-
-    per_site = pd.concat([per_site_stab, per_site_cand], ignore_index=True)
+    if has_cand:
+        print("Scoring candidate sites at each threshold ...")
+        per_site_cand = score_all_thresholds(refs_cand, test_emb_cand, THRESHOLDS)
+        print(f"  {per_site_cand['parent_id'].nunique()} sites x {len(THRESHOLDS)} thresholds")
+        per_site = pd.concat([per_site_stab, per_site_cand], ignore_index=True)
+    else:
+        per_site = per_site_stab
     per_site_out = V5_DATA / "dor_stability_per_site.csv"
     per_site.to_csv(per_site_out, index=False)
     print(f"  Wrote {per_site_out}")

@@ -27,8 +27,11 @@ from svgpath2mpl import parse_path
 
 
 ROOT = Path(__file__).resolve().parents[3]
-OUT_PNG = ROOT / "v4" / "plots" / "supp_dor_quality_metrics.png"
-ICON_DIR = ROOT / "v4" / "plots" / "icons"
+PLOTS_DIR = ROOT / "v4" / "plots"
+ICON_DIR = PLOTS_DIR / "icons"
+# Two versions are written: greyscale and colour. Pick between them later.
+OUT_GREY = PLOTS_DIR / "supp_dor_quality_metrics_grey.png"
+OUT_COLOUR = PLOTS_DIR / "supp_dor_quality_metrics_colour.png"
 
 V2_NEFF = ROOT / "v2" / "data" / "neff_calibration_mask_on" / "neff_calibration_summary.csv"
 V3_K_SWEEP = ROOT / "v3" / "data" / "k_sweep_summary.csv"
@@ -36,40 +39,87 @@ V4_REFS = ROOT / "v4" / "data" / "v4_stable_refs_alphaearth.parquet"
 V4_SUMMARY = ROOT / "v4" / "data" / "within_parent_summary_v4.csv"
 V4_SCORES = ROOT / "v4" / "data" / "test_site_dor_v4.csv"
 
-CLASS_ORDER = ["stable_nature", "stable_crop", "stable_built"]
-CLASS_LABELS = {
-    "stable_nature": "Stable\nnatural",
-    "stable_crop": "Stable\ncropland",
-    "stable_built": "Stable\nbuilt-up",
-}
-# Shared palette with the main-text figure
-CATEGORY_ORDER = ["recovering", "indistinguishable", "degraded", "no_data"]
-CATEGORY_COLORS = {
-    "recovering": "#009E73",
-    "degraded": "#D55E00",
-    "indistinguishable": "#999999",
-    "no_data": "#E5E5E5",
-}
-CLASS_COLORS = {
-    "stable_nature": "#009E73",   # green
-    "stable_crop":   "#0072B2",   # blue
-    "stable_built":  "#E69F00",   # orange
-}
-BLUE = "#0072B2"
-ORANGE = "#E69F00"
-SKY = "#56B4E9"
-PURPLE = "#CC79A7"
 GREY = "#999999"
 BLACK = "#222222"
+DARK = "#222222"
+
+CLASS_ORDER = ["stable_nature", "stable_built"]
+CLASS_LABELS = {
+    "stable_nature": "Stable\nnatural",
+    "stable_built": "Stable\nbuilt-up",
+}
+CATEGORY_ORDER = ["recovering", "indistinguishable", "degraded", "no_data"]
+
+# ---------------------------------------------------------------------------
+# Palettes — greyscale and colour, matching the main-text figure conventions.
+# Two series share an axis in some panels; in greyscale they separate by
+# marker/linestyle (lines) or hatch (bars), in colour by hue.
+# ---------------------------------------------------------------------------
+GREY_PALETTE = {
+    "category_style": {
+        "recovering":        dict(facecolor="#E2E2E2", hatch="///"),
+        "degraded":          dict(facecolor="#4D4D4D", hatch=""),
+        "indistinguishable": dict(facecolor="#B0B0B0", hatch="..."),
+        "no_data":           dict(facecolor="#D2D2D2", hatch="xxx"),
+    },
+    "class_colors": {
+        "stable_nature": "#9A9A9A",
+        "stable_built":  "#6E6E6E",
+    },
+    "series_dark": "#333333",
+    "series_mid":  "#777777",
+    "abstain_fill": "#FFFFFF",
+    "abstain_hatch": "...",
+}
+COLOUR_PALETTE = {
+    "category_style": {
+        "recovering":        dict(facecolor="#009E73", hatch=""),
+        "degraded":          dict(facecolor="#D55E00", hatch=""),
+        "indistinguishable": dict(facecolor="#999999", hatch=""),
+        "no_data":           dict(facecolor="#E5E5E5", hatch=""),
+    },
+    "class_colors": {
+        "stable_nature": "#009E73",   # green
+        "stable_built":  "#E69F00",   # orange
+    },
+    "series_dark": "#0072B2",   # blue
+    "series_mid":  "#E69F00",   # orange
+    "abstain_fill": "#999999",
+    "abstain_hatch": "",
+}
+
+# Active palette globals — rebound by apply_palette() before each render.
+CATEGORY_STYLE: dict = GREY_PALETTE["category_style"]
+CLASS_COLORS: dict = GREY_PALETTE["class_colors"]
+SERIES_DARK: str = GREY_PALETTE["series_dark"]
+SERIES_MID: str = GREY_PALETTE["series_mid"]
+ABSTAIN_FILL: str = GREY_PALETTE["abstain_fill"]
+ABSTAIN_HATCH: str = GREY_PALETTE["abstain_hatch"]
+
+
+def apply_palette(name: str) -> None:
+    """Rebind the active palette globals to 'grey' or 'colour'."""
+    global CATEGORY_STYLE, CLASS_COLORS, SERIES_DARK, SERIES_MID
+    global ABSTAIN_FILL, ABSTAIN_HATCH, STABLE_SCALE
+    pal = {"grey": GREY_PALETTE, "colour": COLOUR_PALETTE}[name]
+    CATEGORY_STYLE = pal["category_style"]
+    CLASS_COLORS = pal["class_colors"]
+    SERIES_DARK = pal["series_dark"]
+    SERIES_MID = pal["series_mid"]
+    ABSTAIN_FILL = pal["abstain_fill"]
+    ABSTAIN_HATCH = pal["abstain_hatch"]
+    # Balance-scale icons follow the class shades.
+    STABLE_SCALE = {
+        "stable_nature": ("tree", "tree", "balanced",
+                          CLASS_COLORS["stable_nature"], CLASS_COLORS["stable_nature"]),
+        "stable_built": ("building", "building", "balanced",
+                         CLASS_COLORS["stable_built"], CLASS_COLORS["stable_built"]),
+    }
 
 
 # ---------------------------------------------------------------------------
 # Scale/balance icons (shared visual identity with the main-text figure)
 # ---------------------------------------------------------------------------
-GREEN = "#009E73"
-DARK = "#222222"
-
-
 _VIEWBOX_RE = re.compile(r'viewBox="([^"]+)"')
 _PATH_D_RE = re.compile(r'<path[^>]*\bd="([^"]+)"')
 
@@ -170,11 +220,9 @@ def _draw_scale(ax: plt.Axes, x: float, y: float, size: float,
                    right_color)
 
 
-STABLE_SCALE = {
-    "stable_nature": ("tree", "tree", "balanced", GREEN, GREEN),
-    "stable_crop": ("tractor", "tractor", "balanced", "#0072B2", "#0072B2"),
-    "stable_built": ("building", "building", "balanced", "#E69F00", "#E69F00"),
-}
+# STABLE_SCALE is (re)built per palette by apply_palette(); initialise it here
+# so add_class_scales() can resolve the name before the first apply_palette().
+apply_palette("grey")
 
 
 def add_class_scales(ax: plt.Axes, class_keys: list, y: float = 1.10,
@@ -207,6 +255,7 @@ def set_journal_style() -> None:
             "ytick.major.size": 2.8,
             "lines.linewidth": 1.2,
             "lines.markersize": 3.5,
+            "hatch.linewidth": 0.5,
             "pdf.fonttype": 42,
             "ps.fonttype": 42,
             "savefig.facecolor": "white",
@@ -257,35 +306,17 @@ def weighted_rates(df: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def main() -> None:
-    set_journal_style()
-    OUT_PNG.parent.mkdir(parents=True, exist_ok=True)
-
-    neff = pd.read_csv(V2_NEFF)
-    k_sweep = pd.read_csv(V3_K_SWEEP)
-    v4_summary = pd.read_csv(V4_SUMMARY)
-    scores = pd.read_csv(V4_SCORES)
-
-    con = duckdb.connect()
-    buffers = con.execute(
-        """
-        SELECT parent_id, max(buffer_m_used) AS buffer_m_used
-        FROM read_parquet(?)
-        WHERE strategy = 'random_100'
-        GROUP BY parent_id
-        """,
-        [str(V4_REFS)],
-    ).df()
-    con.close()
-    buffers["buffer_km"] = buffers["buffer_m_used"] / 1000.0
-
+def render(neff, k_sweep, v4_summary, scores, buffers, out_png: Path) -> None:
+    """Build the six-panel diagnostic figure with the currently active palette."""
     # 180 mm × 130 mm — matches main-text Figure 1 proportions
     fig, axes = plt.subplots(2, 3, figsize=(7.09, 5.1), constrained_layout=True)
     ax_a, ax_b, ax_c, ax_d, ax_e, ax_f = axes.ravel()
 
     # A. Sample-size diagnostics.
-    ax_a.plot(neff["size"], neff["median_ci_width"], marker="o", color=BLUE, label="Median")
-    ax_a.plot(neff["size"], neff["p90_ci_width"], marker="s", color=ORANGE, label="90th percentile")
+    ax_a.plot(neff["size"], neff["median_ci_width"], marker="o", linestyle="-",
+              color=SERIES_DARK, label="Median")
+    ax_a.plot(neff["size"], neff["p90_ci_width"], marker="s", linestyle="--",
+              color=SERIES_MID, label="90th percentile")
     ax_a.axvline(30, color=GREY, linestyle=":", linewidth=0.9)
     ax_a.axvline(100, color=BLACK, linestyle="--", linewidth=0.9)
     ax_a.set_title("Reference sample-size calibration")
@@ -298,7 +329,7 @@ def main() -> None:
     # B. Buffer radius use.
     buffer_order = [1, 1.5, 2, 3, 5, 8]
     counts = buffers["buffer_km"].round(1).value_counts().reindex(buffer_order, fill_value=0)
-    ax_b.bar([str(x) for x in buffer_order], counts.values, color=BLUE, alpha=0.85)
+    ax_b.bar([str(x) for x in buffer_order], counts.values, color=SERIES_DARK, alpha=0.85)
     ax_b.set_title("Adaptive buffer radius used")
     ax_b.set_xlabel("Radius covering selected refs (km)")
     ax_b.set_ylabel("Parents")
@@ -307,8 +338,10 @@ def main() -> None:
 
     # C. k choice.
     mean_cos = k_sweep[k_sweep["variant"] == "mean_cos"].sort_values("k")
-    ax_c.plot(mean_cos["k"], mean_cos["bal_err"] * 100, marker="o", color=BLUE, label="Balanced error (%)")
-    ax_c.plot(mean_cos["k"], mean_cos["brier"] * 100, marker="s", color=ORANGE, label="Brier × 100")
+    ax_c.plot(mean_cos["k"], mean_cos["bal_err"] * 100, marker="o", linestyle="-",
+              color=SERIES_DARK, label="Balanced error (%)")
+    ax_c.plot(mean_cos["k"], mean_cos["brier"] * 100, marker="s", linestyle="--",
+              color=SERIES_MID, label="Brier × 100")
     ax_c.axvline(5, color=BLACK, linestyle="--", linewidth=0.9)
     ax_c.text(5, 0.95, "k = 5", transform=ax_c.get_xaxis_transform(), ha="center", va="top", fontsize=6)
     ax_c.set_title("kNN scorer selection")
@@ -325,13 +358,14 @@ def main() -> None:
     val_rates = weighted_rates(val).set_index("parent_label").reindex(CLASS_ORDER)
     x = np.arange(len(CLASS_ORDER))
     width = 0.38
-    ax_d.bar(x - width / 2, val_rates["error_rate"] * 100, width, label="Error", color=PURPLE)
+    ax_d.bar(x - width / 2, val_rates["error_rate"] * 100, width, label="Error",
+             facecolor=SERIES_DARK, edgecolor=BLACK, linewidth=0.5)
     ax_d.bar(
         x + width / 2,
         val_rates["abstain_rate"] * 100,
         width,
         label="Indistinguishable",
-        color=GREY,
+        facecolor=ABSTAIN_FILL, edgecolor=BLACK, linewidth=0.5, hatch=ABSTAIN_HATCH,
     )
     ax_d.set_xticks(x)
     ax_d.set_xticklabels([CLASS_LABELS[c] for c in CLASS_ORDER])
@@ -351,7 +385,7 @@ def main() -> None:
         .reindex(CLASS_ORDER)
     )
     pct_changed = transfer["sum"] / transfer["count"] * 100
-    ax_e.bar(x, pct_changed, color=SKY)
+    ax_e.bar(x, pct_changed, color=SERIES_MID, edgecolor=BLACK, linewidth=0.5)
     for i, cls in enumerate(CLASS_ORDER):
         ax_e.text(i, pct_changed.loc[cls] + 0.12, f"{int(transfer.loc[cls, 'sum'])}", ha="center", fontsize=6)
     ax_e.set_xticks(x)
@@ -375,13 +409,15 @@ def main() -> None:
     bottom = np.zeros(len(CLASS_ORDER))
     for category in CATEGORY_ORDER:
         vals = cat_pct[category].to_numpy()
+        style = CATEGORY_STYLE[category]
         ax_f.bar(
             x,
             vals,
             bottom=bottom,
-            color=CATEGORY_COLORS[category],
+            facecolor=style["facecolor"],
+            hatch=style["hatch"],
             label=category.replace("_", " "),
-            edgecolor="white",
+            edgecolor=BLACK,
             linewidth=0.5,
         )
         bottom += vals
@@ -403,8 +439,37 @@ def main() -> None:
     add_class_scales(ax_f, CLASS_ORDER)
     panel_label(ax_f, "f")
 
-    fig.savefig(OUT_PNG, dpi=600, bbox_inches="tight")
-    print(f"Wrote {OUT_PNG}")
+    fig.savefig(out_png, dpi=600, bbox_inches="tight")
+    fig.savefig(out_png.with_suffix(".pdf"), bbox_inches="tight")
+    plt.close(fig)
+    print(f"Wrote {out_png}")
+
+
+def main() -> None:
+    set_journal_style()
+    PLOTS_DIR.mkdir(parents=True, exist_ok=True)
+
+    neff = pd.read_csv(V2_NEFF)
+    k_sweep = pd.read_csv(V3_K_SWEEP)
+    v4_summary = pd.read_csv(V4_SUMMARY)
+    scores = pd.read_csv(V4_SCORES)
+
+    con = duckdb.connect()
+    buffers = con.execute(
+        """
+        SELECT parent_id, max(buffer_m_used) AS buffer_m_used
+        FROM read_parquet(?)
+        WHERE strategy = 'random_100'
+        GROUP BY parent_id
+        """,
+        [str(V4_REFS)],
+    ).df()
+    con.close()
+    buffers["buffer_km"] = buffers["buffer_m_used"] / 1000.0
+
+    for palette, out_png in (("grey", OUT_GREY), ("colour", OUT_COLOUR)):
+        apply_palette(palette)
+        render(neff, k_sweep, v4_summary, scores, buffers, out_png)
 
 
 if __name__ == "__main__":

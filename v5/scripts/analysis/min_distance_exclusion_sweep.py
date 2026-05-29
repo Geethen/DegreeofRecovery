@@ -21,7 +21,7 @@ neighbourhood. This script tests whether 100 m is feasible per-class, or
 whether 30/50 m is the largest survivable floor.
 
 Inputs (read-only, no re-sampling):
-  v4/data/v4_stable_refs_alphaearth.parquet                                  -- stable refs (v4 sampler)
+  v5/data/v5_stable_refs_alphaearth.parquet                                  -- stable refs (v5 sampler, 4 km inner exclusion + diagnostic refs)
   v2/data/recover_reference_samples_v2_mask_on_large_alphaearth.parquet      -- candidate (loss-site) refs (v2 sampler)
 
 Outputs:
@@ -47,13 +47,13 @@ BASE_DIR = Path(__file__).resolve().parents[3]
 V5_DATA  = BASE_DIR / "v5" / "data"
 V5_PLOTS = BASE_DIR / "v5" / "plots"
 
-STABLE_REFS_PATH = BASE_DIR / "v4" / "data" / "v4_stable_refs_alphaearth.parquet"
+STABLE_REFS_PATH = BASE_DIR / "v5" / "data" / "v5_stable_refs_alphaearth.parquet"
 CAND_REFS_PATH   = BASE_DIR / "v2" / "data" / "recover_reference_samples_v2_mask_on_large_alphaearth.parquet"
 TEST_SITES_CAND  = BASE_DIR / "v1" / "data" / "test_site_alphaearth_2024.parquet"
 TEST_SITES_STAB  = BASE_DIR / "v4" / "data" / "test_site_alphaearth_2024_v4.parquet"
 
 STRATEGY    = "random_100"   # the strategy v4 scoring uses
-MIN_DIST_THRESHOLDS = [0, 30, 50, 100, 200, 300, 500, 1000]
+MIN_DIST_THRESHOLDS = [0, 30, 50, 100, 200, 300, 500, 1000, 2000, 3000, 4000, 5000, 6000]
 EMBED_COLS  = [f"A{i:02d}" for i in range(64)]
 EPS         = 1e-12
 
@@ -62,17 +62,13 @@ BUILT_LOSS_LABEL = "built_loss"
 
 PALETTE = {
     "stable_nature": "#009E73",
-    "stable_crop":   "#0072B2",
     "stable_built":  "#E69F00",
     "built_loss":    "#D55E00",
-    "crop_loss":     "#CC79A7",
 }
 LABEL_NAMES = {
     "stable_nature": "Stable near-natural",
-    "stable_crop":   "Stable cropland",
     "stable_built":  "Stable built-up",
     "built_loss":    "Built-loss (candidate)",
-    "crop_loss":     "Crop-loss (candidate)",
 }
 
 
@@ -386,11 +382,15 @@ def main() -> None:
     refs_stable = load_refs(STABLE_REFS_PATH, strategy=STRATEGY)
     print(f"  {len(refs_stable):,} rows, {refs_stable['parent_id'].nunique()} parents")
 
-    print("Loading candidate refs ...")
-    refs_cand = load_refs(CAND_REFS_PATH, strategy=None)
-    print(f"  {len(refs_cand):,} rows, {refs_cand['parent_id'].nunique()} parents")
-
-    all_refs = pd.concat([refs_stable, refs_cand], ignore_index=True)
+    has_cand = CAND_REFS_PATH.exists() and TEST_SITES_CAND.exists()
+    if has_cand:
+        print("Loading candidate refs ...")
+        refs_cand = load_refs(CAND_REFS_PATH, strategy=None)
+        print(f"  {len(refs_cand):,} rows, {refs_cand['parent_id'].nunique()} parents")
+        all_refs = pd.concat([refs_stable, refs_cand], ignore_index=True)
+    else:
+        print(f"  [skip] candidate refs/test sites missing — running stable-only sweep")
+        all_refs = refs_stable
 
     print("\nComputing per-site survival ...")
     per_site = per_site_survival(all_refs, MIN_DIST_THRESHOLDS)
@@ -422,44 +422,46 @@ def main() -> None:
     print(f"  Wrote {V5_PLOTS / 'min_distance_survival.png'}")
 
     # -----------------------------------------------------------------------
-    # Built-loss deep-dive
+    # Built-loss deep-dive (candidate-pool only)
     # -----------------------------------------------------------------------
-    print("\nLoading built-loss ref embeddings for deep-dive ...")
-    built_pids = sorted(per_site.loc[per_site["parent_label"] == BUILT_LOSS_LABEL,
-                                     "parent_id"].unique().tolist())
-    print(f"  {len(built_pids)} built-loss parents")
+    if has_cand:
+        print("\nLoading built-loss ref embeddings for deep-dive ...")
+        built_pids = sorted(per_site.loc[per_site["parent_label"] == BUILT_LOSS_LABEL,
+                                         "parent_id"].unique().tolist())
+        print(f"  {len(built_pids)} built-loss parents")
 
-    refs_built_emb = load_refs_with_embeddings(CAND_REFS_PATH, built_pids, strategy=None)
-    print(f"  Loaded {len(refs_built_emb):,} ref rows with embeddings")
+        refs_built_emb = load_refs_with_embeddings(CAND_REFS_PATH, built_pids, strategy=None)
+        print(f"  Loaded {len(refs_built_emb):,} ref rows with embeddings")
 
-    print("Loading candidate test-site embeddings ...")
-    test_emb_cand = load_test_centroids_embedding(TEST_SITES_CAND)
-    print(f"  {len(test_emb_cand)} candidate test sites")
+        print("Loading candidate test-site embeddings ...")
+        test_emb_cand = load_test_centroids_embedding(TEST_SITES_CAND)
+        print(f"  {len(test_emb_cand)} candidate test sites")
 
-    closest_df = built_loss_closest(refs_built_emb, test_emb_cand)
-    closest_out = V5_DATA / "min_distance_built_loss_closest.csv"
-    closest_df.to_csv(closest_out, index=False)
-    print(f"  Wrote {closest_out}")
+        closest_df = built_loss_closest(refs_built_emb, test_emb_cand)
+        closest_out = V5_DATA / "min_distance_built_loss_closest.csv"
+        closest_df.to_csv(closest_out, index=False)
+        print(f"  Wrote {closest_out}")
 
-    print("\nBuilt-loss closest-bad-ref distance distribution:")
-    if not closest_df.empty:
-        for q in (0.05, 0.10, 0.25, 0.50, 0.75, 0.90):
-            v = float(closest_df["closest_bad_m"].quantile(q))
-            print(f"  q{int(q*100):02d} = {v:>8.1f} m")
-        for r in (30, 50, 100, 200, 300):
-            frac = float((closest_df["closest_bad_m"] < r).mean())
-            print(f"  fraction of built-loss parents with closest bad ref < {r} m: "
-                  f"{frac*100:5.1f}%")
-        # Cosine of the closest bad ref
-        for q in (0.05, 0.10, 0.25, 0.50):
-            v = float(closest_df["closest_bad_cosine"].quantile(q))
-            print(f"  closest_bad_cosine q{int(q*100):02d} = {v:.4f}")
+        print("\nBuilt-loss closest-bad-ref distance distribution:")
+        if not closest_df.empty:
+            for q in (0.05, 0.10, 0.25, 0.50, 0.75, 0.90):
+                v = float(closest_df["closest_bad_m"].quantile(q))
+                print(f"  q{int(q*100):02d} = {v:>8.1f} m")
+            for r in (30, 50, 100, 200, 300):
+                frac = float((closest_df["closest_bad_m"] < r).mean())
+                print(f"  fraction of built-loss parents with closest bad ref < {r} m: "
+                      f"{frac*100:5.1f}%")
+            for q in (0.05, 0.10, 0.25, 0.50):
+                v = float(closest_df["closest_bad_cosine"].quantile(q))
+                print(f"  closest_bad_cosine q{int(q*100):02d} = {v:.4f}")
 
-    print("\nWriting built-loss deep-dive figure ...")
-    plot_built_loss_closest(per_site, closest_df,
-                            V5_PLOTS / "min_distance_built_loss_closest.png",
-                            V5_PLOTS / "min_distance_built_loss_closest.pdf")
-    print(f"  Wrote {V5_PLOTS / 'min_distance_built_loss_closest.png'}")
+        print("\nWriting built-loss deep-dive figure ...")
+        plot_built_loss_closest(per_site, closest_df,
+                                V5_PLOTS / "min_distance_built_loss_closest.png",
+                                V5_PLOTS / "min_distance_built_loss_closest.pdf")
+        print(f"  Wrote {V5_PLOTS / 'min_distance_built_loss_closest.png'}")
+    else:
+        print("\n[skip] Built-loss deep-dive — candidate refs/test sites missing")
 
     # -----------------------------------------------------------------------
     # Recommendation
