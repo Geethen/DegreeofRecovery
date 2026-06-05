@@ -34,7 +34,7 @@ v1 used a fixed 1 km buffer around every parent. v2 instead samples within a **l
 1 km → 1.5 km → 2 km → 3 km → 5 km → 8 km
 ```
 
-This guarantees that parents in landscapes with sparse natural cover (or sparse degraded cover) still receive enough good and bad references to support scoring, while parents in well-mixed landscapes still draw their references from the tightest available radius. The output schema records, per reference point, the actual `dist_m` to the parent and the smallest `buffer_m_used` covering the selected set, so users can filter to a fixed radius post-hoc if desired.
+The maximum buffer is clipped to the **RESOLVE 2017 ecoregion containing the parent**, so candidate references are local both in distance and in ecological setting. This avoids drawing references that are physically nearby but fall across a major ecoregion boundary. The output schema records, per reference point, the actual `dist_m` to the parent, the smallest `buffer_m_used` covering the selected set, and the parent ecoregion identifier `eco_id`, so users can filter to a fixed radius or inspect ecoregion membership post-hoc.
 
 ### 3. Balanced class targets and oversample-then-select
 

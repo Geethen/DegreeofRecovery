@@ -1,0 +1,32 @@
+[OK] GEE initialized (project=ee-gsingh)
+
+######################################################################
+# ECOREGION 38
+######################################################################
+  Name: Central bushveld
+  Building extraction stack (AEF + natural + eco_id)...
+  Grid: 1933 cells (10km), 100 FSCS clusters/cell
+  Resuming: 1925/1933 cells done
+  Loading existing parquet into buffer...
+  [OK] Loaded 184,576 existing rows
+  Processing with 20 workers...
+
+FSCS cells:   0%|          | 0/1933 [00:00<?, ?it/s]                                                    FSCS cells:   0%|          | 0/1933 [00:04<?, ?it/s]FSCS cells: 100%|█████████▉| 1926/1933 [00:04<00:00, 416.56it/s]                                                                FSCS cells: 100%|█████████▉| 1926/1933 [00:04<00:00, 416.56it/s]                                                                FSCS cells: 100%|█████████▉| 1926/1933 [00:05<00:00, 416.56it/s]                                                                FSCS cells: 100%|█████████▉| 1926/1933 [00:07<00:00, 416.56it/s]                                                                FSCS cells: 100%|█████████▉| 1926/1933 [00:12<00:00, 416.56it/s]                                                                FSCS cells: 100%|█████████▉| 1926/1933 [00:19<00:00, 416.56it/s]FSCS cells: 100%|█████████▉| 1926/1933 [00:20<00:00, 416.56it/s]                                                                FSCS cells: 100%|█████████▉| 1926/1933 [00:33<00:00, 416.56it/s]FSCS cells: 100%|█████████▉| 1932/1933 [00:33<00:00, 42.17it/s]                                                                FSCS cells: 100%|█████████▉| 1932/1933 [00:47<00:00, 42.17it/s]FSCS cells: 100%|██████████| 1933/1933 [00:47<00:00, 25.93it/s]FSCS cells: 100%|██████████| 1933/1933 [00:47<00:00, 40.59it/s]
+    Cell 1658: 31 pts (k=100, px=32585)
+    Cell 999: 99 pts (k=100, px=1000000)
+    Cell 263: 99 pts (k=100, px=1000000)
+    Retry 1/3 after 2s: Image.constant: Parameter 'value' is required and may not be null.
+    Cell 1509: 17 pts (k=100, px=27821)
+    Retry 2/3 after 4s: Image.constant: Parameter 'value' is required and may not be null.
+    Cell 413: 34 pts (k=100, px=27390)
+  [ERROR] Cell 1366: Image.constant: Parameter 'value' is required and may not be null.
+    Cell 355: 63 pts (k=100, px=136568)
+    Cell 1834: 99 pts (k=100, px=1000000)
+
+  1 cells failed after retries: [1366]
+
+  Cells: 7 with data, 1 failed, 1932 total processed
+
+[OK] Saved: /data/P-Prosjekter2/155020_recover/WP1/degree_of_recovery/v1-ecoregion/data/ref_samples_eco38.parquet
+  Total: 185,018 points (162,055 natural, 22,963 transformed)
+  Size: 14.2 MB

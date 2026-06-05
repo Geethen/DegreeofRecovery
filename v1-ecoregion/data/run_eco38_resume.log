@@ -1,0 +1,46 @@
+[OK] GEE initialized (project=ee-gsingh)
+
+######################################################################
+# ECOREGION 38
+######################################################################
+  Name: Central bushveld
+  Building extraction stack (AEF + natural + eco_id)...
+  Grid: 1933 cells (10km), 100 FSCS clusters/cell
+  Resuming: 1925/1933 cells done
+  Loading existing parquet into buffer...
+  [OK] Loaded 184,576 existing rows
+  Processing with 20 workers...
+
+FSCS cells:   0%|          | 0/1933 [00:00<?, ?it/s]                                                    FSCS cells:   0%|          | 0/1933 [00:19<?, ?it/s]FSCS cells: 100%|█████████▉| 1926/1933 [00:19<00:00, 99.79it/s]                                                               FSCS cells: 100%|█████████▉| 1926/1933 [00:19<00:00, 99.79it/s]                                                               FSCS cells: 100%|█████████▉| 1926/1933 [00:19<00:00, 99.79it/s]                                                               FSCS cells: 100%|█████████▉| 1926/1933 [00:20<00:00, 99.79it/s]                                                               FSCS cells: 100%|█████████▉| 1926/1933 [00:20<00:00, 99.79it/s]                                                               FSCS cells: 100%|█████████▉| 1926/1933 [00:21<00:00, 99.79it/s]                                                               FSCS cells: 100%|█████████▉| 1926/1933 [00:21<00:00, 99.79it/s]                                                               FSCS cells: 100%|█████████▉| 1926/1933 [00:25<00:00, 99.79it/s]FSCS cells: 100%|██████████| 1933/1933 [00:25<00:00, 75.97it/s]
+    Retry 1/3 after 2s: Dictionary.get: Dictionary does not contain key: '77'.
+    Retry 1/3 after 2s: Dictionary.get: Dictionary does not contain key: '17'.
+    Retry 1/3 after 2s: Image.constant: Parameter 'value' is required and may not be null.
+    Retry 1/3 after 2s: Dictionary.get: Dictionary does not contain key: '79'.
+    Retry 1/3 after 2s: Dictionary.get: Dictionary does not contain key: '99'.
+    Retry 1/3 after 2s: Dictionary.get: Dictionary does not contain key: '99'.
+    Retry 1/3 after 2s: Dictionary.get: Dictionary does not contain key: '99'.
+    Retry 1/3 after 2s: Dictionary.get: Dictionary does not contain key: '31'.
+    Retry 2/3 after 4s: Dictionary.get: Dictionary does not contain key: '77'.
+    Retry 2/3 after 4s: Dictionary.get: Dictionary does not contain key: '17'.
+    Retry 2/3 after 4s: Image.constant: Parameter 'value' is required and may not be null.
+    Retry 2/3 after 4s: Dictionary.get: Dictionary does not contain key: '79'.
+    Retry 2/3 after 4s: Dictionary.get: Dictionary does not contain key: '99'.
+    Retry 2/3 after 4s: Dictionary.get: Dictionary does not contain key: '99'.
+    Retry 2/3 after 4s: Dictionary.get: Dictionary does not contain key: '99'.
+    Retry 2/3 after 4s: Dictionary.get: Dictionary does not contain key: '31'.
+  [ERROR] Cell 413: Dictionary.get: Dictionary does not contain key: '77'.
+  [ERROR] Cell 355: Dictionary.get: Dictionary does not contain key: '79'.
+  [ERROR] Cell 1366: Image.constant: Parameter 'value' is required and may not be null.
+  [ERROR] Cell 1509: Dictionary.get: Dictionary does not contain key: '17'.
+  [ERROR] Cell 1834: Dictionary.get: Dictionary does not contain key: '99'.
+  [ERROR] Cell 999: Dictionary.get: Dictionary does not contain key: '99'.
+  [ERROR] Cell 263: Dictionary.get: Dictionary does not contain key: '99'.
+  [ERROR] Cell 1658: Dictionary.get: Dictionary does not contain key: '31'.
+
+  8 cells failed after retries: [413, 355, 1366, 1509, 1834, 999, 263, 1658]
+
+  Cells: 0 with data, 8 failed, 1925 total processed
+
+[OK] Saved: /data/P-Prosjekter2/155020_recover/WP1/degree_of_recovery/v1-ecoregion/data/ref_samples_eco38.parquet
+  Total: 184,576 points (161,654 natural, 22,922 transformed)
+  Size: 14.1 MB

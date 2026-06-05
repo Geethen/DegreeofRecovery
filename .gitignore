@@ -32,12 +32,19 @@ pyrightconfig.json
 # Local scratch / experiments
 scratch/
 
-# Large data / binaries
-*.parquet
-*.7z
-*.zip
-*.tar.gz
-*.msi
+# Ignore files currently above the 10 MB threshold
+v1-ecoregion/data/ref_samples_eco38.parquet
+v1-ecoregion/data/ref_samples_eco61.parquet
+v1-ecoregion/data/ref_samples_eco62.parquet
+v1-ecoregion/data/ref_samples_eco81.parquet
+v1-ecoregion/data/ref_samples_eco92.parquet
+v1-ecoregion/data/ref_samples_eco97.parquet
+v1-ecoregion/data/ref_samples_eco203.parquet
+v1-ecoregion/data/ref_samples_eco268.parquet
+v1-ecoregion/data/run_all.log
+v4/data/within_parent_site_scores_v4.csv
+v5/data/v5_candidate_refs_alphaearth.parquet
+v5/data/v5_stable_refs_alphaearth.parquet
 
 # Large derived CSVs (per-point sampling-strategy data, re-derivable from parquets)
 v2/data/*/sampling_strategy_selected_points.csv

@@ -1,0 +1,20 @@
+[OK] GEE initialized (project=ee-gsingh)
+
+######################################################################
+# ECOREGION 61
+######################################################################
+  Name: Victoria Basin forest-savanna
+  Building extraction stack (AEF + natural + eco_id)...
+  Grid: 2210 cells (10km), 100 FSCS clusters/cell
+  Resuming: 2210/2210 cells done
+  Loading existing parquet into buffer...
+  [OK] Loaded 208,911 existing rows
+  Processing with 20 workers...
+
+FSCS cells:   0%|          | 0/2210 [00:00<?, ?it/s]FSCS cells: 100%|██████████| 2210/2210 [00:00<00:00, 337991.32it/s]
+
+  Cells: 0 with data, 0 failed, 2210 total processed
+
+[OK] Saved: /data/P-Prosjekter2/155020_recover/WP1/degree_of_recovery/v1-ecoregion/data/ref_samples_eco61.parquet
+  Total: 208,911 points (158,550 natural, 50,361 transformed)
+  Size: 16.2 MB

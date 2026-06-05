@@ -12,7 +12,8 @@
       "Bash(ls \"P:\\\\155020_recover\\\\WP1\\\\degree_of_recovery\\\\\" 2>&1)",
       "Read(//p/155020_recover/WP1/**)",
       "Bash(python -c ' *)",
-      "Bash(python v5/scripts/sampling/sample_stable_references_v5.py --export --verbose)"
+      "Bash(python v5/scripts/sampling/sample_stable_references_v5.py --export --verbose)",
+      "Bash(grep -v '^$')"
     ]
   }
 }
