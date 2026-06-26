@@ -127,8 +127,8 @@ class TestBootstrapCi:
 
 
 class TestClassify:
-    def test_recovering_when_ci_fully_above_threshold(self):
-        assert classify(0.7, 0.6, 0.8, threshold=0.5) == "recovering"
+    def test_regenerating_when_ci_fully_above_threshold(self):
+        assert classify(0.7, 0.6, 0.8, threshold=0.5) == "regenerating"
 
     def test_degraded_when_ci_fully_below_threshold(self):
         assert classify(0.3, 0.2, 0.4, threshold=0.5) == "degraded"

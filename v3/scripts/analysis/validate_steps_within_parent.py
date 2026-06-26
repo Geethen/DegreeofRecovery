@@ -18,7 +18,7 @@ For each parent p:
 
 Ground truth (assumes near-perfect labels; some label noise possible):
   probe "good" → correct = NOT "degraded"   (false alarm = "degraded")
-  probe "bad"  → correct = NOT "recovering" (miss = "recovering")
+    probe "bad"  → correct = NOT "regenerating" (miss = "regenerating")
 
 Thresholds:
   --calibration {global, per_fold}
@@ -60,7 +60,6 @@ from degree_of_recovery.core_batch import (
     CAT_INDISTINGUISHABLE,
     CAT_NAMES,
     CAT_NO_DATA,
-    CAT_RECOVERING,
     bootstrap_ci_batch,
     classify_batch,
     cosine_dist_matrix,
@@ -233,14 +232,14 @@ def metrics(cats: np.ndarray, true_label: str) -> dict:
     n = max(len(cats), 1)
     if true_label == "good":
         return dict(
-            true_rate=float((cats == "recovering").sum() / n),
+            true_rate=float((cats == "regenerating").sum() / n),
             error_rate=float((cats == "degraded").sum() / n),
             abstain_rate=float((cats == "indistinguishable").sum() / n),
             no_data_rate=float((cats == "no_data").sum() / n),
         )
     return dict(
         true_rate=float((cats == "degraded").sum() / n),
-        error_rate=float((cats == "recovering").sum() / n),
+        error_rate=float((cats == "regenerating").sum() / n),
         abstain_rate=float((cats == "indistinguishable").sum() / n),
         no_data_rate=float((cats == "no_data").sum() / n),
     )
@@ -535,12 +534,12 @@ def main() -> None:
     print("=" * 78)
     print(
         "probe=good: held-out good ref  |  error = wrongly called 'degraded'\n"
-        "probe=bad:  held-out bad ref   |  error = wrongly called 'recovering'\n"
+        "probe=bad:  held-out bad ref   |  error = wrongly called 'regenerating'\n"
         "Note: labels assumed mostly correct; some label noise expected.\n"
         "brier: 0=perfect  0.25=random\n"
     )
     for probe in ("good", "bad"):
-        tag = "GOOD probe (false-degraded)" if probe == "good" else "BAD probe  (false-recovering)"
+        tag = "GOOD probe (false-degraded)" if probe == "good" else "BAD probe  (false-regenerating)"
         print(f"\n{'-'*78}\n  {tag}\n{'-'*78}")
         print(f"  {'step':<33} {'n':>5}  {'true%':>6}  {'error%':>6}  "
               f"{'abstain%':>9}  {'brier':>6}")

@@ -24,7 +24,9 @@ figstyle.py, the figures, or v5_methods.md.
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
+from datetime import datetime
 from pathlib import Path
 
 import duckdb
@@ -53,7 +55,9 @@ def load_sites() -> pd.DataFrame:
     """Join per-site DoR + CI (at the chosen buffer) to parent lat/lon and GHM.
 
     Mirrors plot_ghm_scatter's filtering: drop sites without a computable DoR or
-    without a GHM value, exactly as the static scatter does."""
+    without a GHM value, exactly as the static scatter does. Also left-joins the
+    ecoregion percentile rank (see score_test_sites_by_ecoregion.py) so each site
+    carries its DoR *and* its rank within its ecoregion's reference distribution."""
     ps = pd.read_csv(V5_DATA / "buffer_extent_per_site.csv")
     ps = ps[(ps.inner_m == INNER_M) & (ps.outer_m == OUTER_M)].copy()
     ps = ps.dropna(subset=["dor"])
@@ -74,7 +78,25 @@ def load_sites() -> pd.DataFrame:
     df = ps.merge(geo, on="parent_id", how="left")
     df["ghm"] = df["parent_id"].map(ghm)
     df = df.dropna(subset=["lat", "lon", "ghm"]).reset_index(drop=True)
+
+    df = df.merge(load_percentiles(), on="parent_id", how="left")
     return df
+
+
+def load_percentiles() -> pd.DataFrame:
+    """Ecoregion percentile ranks per parent (test_site_ecoregion_percentile.csv).
+
+    Returns parent_id + the percentile columns used by the panel. Absent file =>
+    empty frame so the merge is a no-op and the inspector still builds."""
+    p = V5_DATA / "test_site_ecoregion_percentile.csv"
+    cols = ["parent_id", "eco_id", "pct_vs_all", "pct_vs_good",
+            "pct_vs_bad", "pct_dor", "n_refs_good", "n_refs_bad"]
+    if not p.exists():
+        return pd.DataFrame(columns=cols)
+    pct = pd.read_csv(p)
+    pct["parent_id"] = pct["parent_id"].astype(str)
+    keep = [c for c in cols if c in pct.columns]
+    return pct[keep]
 
 
 def load_thresholds() -> dict[str, float]:
@@ -91,6 +113,12 @@ def load_thresholds() -> dict[str, float]:
 
 def build_payload(df: pd.DataFrame, thr: dict[str, float]) -> list[dict]:
     """One record per site for embedding in the page."""
+    def _opt(v, nd=1):
+        return None if pd.isna(v) else round(float(v), nd)
+
+    def _optint(v):
+        return None if pd.isna(v) else int(v)
+
     recs = []
     for r in df.itertuples(index=False):
         recs.append({
@@ -104,8 +132,36 @@ def build_payload(df: pd.DataFrame, thr: dict[str, float]) -> list[dict]:
             "ghm": round(float(r.ghm), 4),
             "n_good": None if pd.isna(r.n_good) else int(r.n_good),
             "n_bad": None if pd.isna(r.n_bad) else int(r.n_bad),
+            # ecoregion percentile rank (score_test_sites_by_ecoregion.py)
+            "eco_id": _optint(getattr(r, "eco_id", float("nan"))),
+            "pct_all": _opt(getattr(r, "pct_vs_all", float("nan"))),
+            "pct_good": _opt(getattr(r, "pct_vs_good", float("nan"))),
+            "pct_bad": _opt(getattr(r, "pct_vs_bad", float("nan"))),
+            "pct_dor": _opt(getattr(r, "pct_dor", float("nan"))),
         })
     return recs
+
+
+def _build_stamp() -> str:
+    """A short provenance string for the footer: build date + git short-SHA
+    (with a '-dirty' marker if the tree has uncommitted changes), so a saved
+    copy of this page can be traced back to the run that produced it."""
+    date = datetime.now().strftime("%Y-%m-%d")
+    sha = ""
+    try:
+        sha = subprocess.run(
+            ["git", "-C", str(ROOT), "rev-parse", "--short", "HEAD"],
+            capture_output=True, text=True, timeout=5,
+        ).stdout.strip()
+        dirty = subprocess.run(
+            ["git", "-C", str(ROOT), "status", "--porcelain"],
+            capture_output=True, text=True, timeout=5,
+        ).stdout.strip()
+        if sha and dirty:
+            sha += "-dirty"
+    except (OSError, subprocess.SubprocessError):
+        pass
+    return f"built {date}" + (f" · {sha}" if sha else "")
 
 
 def render_html(records: list[dict], thr: dict[str, float]) -> str:
@@ -122,7 +178,8 @@ def render_html(records: list[dict], thr: dict[str, float]) -> str:
     data_json = json.dumps(records, separators=(",", ":"))
     config_json = json.dumps(config)
     return _HTML_TEMPLATE.replace("/*__DATA__*/", data_json) \
-                         .replace("/*__CONFIG__*/", config_json)
+                         .replace("/*__CONFIG__*/", config_json) \
+                         .replace("__BUILD__", _build_stamp())
 
 
 # --- The page. Plotly from CDN; subplots = one panel per class; click -> panel.
@@ -141,6 +198,13 @@ _HTML_TEMPLATE = r"""<!DOCTYPE html>
   header { padding:14px 20px 8px; border-bottom:1px solid var(--line); background:#fff; }
   header h1 { margin:0 0 2px; font-size:18px; }
   header p { margin:0; font-size:12.5px; color:var(--muted); }
+  header p.legend { margin-top:5px; font-size:12px; }
+  header p.note { margin-top:4px; font-size:12px; max-width:74ch; }
+  header p.note em { font-style:italic; color:var(--ink); }
+  .lk { font-weight:700; margin:0 3px 0 12px; vertical-align:middle; }
+  .lk.fit { color:#444; } .lk.one { color:#bbb; } .lk.half { color:#bbb; }
+  .lk:first-child { margin-left:0; }
+  .stamp { font-variant-numeric:tabular-nums; }
   .wrap { display:flex; gap:0; align-items:stretch; min-height:calc(100vh - 64px); }
   #plot { flex:1 1 auto; min-width:0; padding:8px 4px; }
   #panel { flex:0 0 330px; border-left:1px solid var(--line); background:#fff;
@@ -158,12 +222,20 @@ _HTML_TEMPLATE = r"""<!DOCTYPE html>
   .call { font-size:13px; padding:7px 10px; border-radius:6px; margin:2px 0 14px;
           border:1px solid var(--line); background:#f6f6f6; }
   .call b { font-weight:700; }
+  .pcthead { font-size:12.5px; font-weight:700; color:var(--ink); margin:10px 0 2px;
+             display:flex; justify-content:space-between; align-items:baseline; }
+  .pcthead .eco { font-weight:400; font-size:11px; color:var(--muted);
+                  font-family:ui-monospace,Menlo,monospace; }
+  .pctnum { font-variant-numeric:tabular-nums; font-size:12.5px; }
+  .pctbar { height:5px; background:#eee; border-radius:3px; overflow:hidden; margin-top:2px; }
+  .pctfill { height:100%; border-radius:3px; }
   a.maplink { display:block; padding:9px 12px; margin:7px 0; border-radius:7px;
               text-decoration:none; font-size:13.5px; font-weight:600;
               border:1px solid var(--line); color:#fff; }
   a.ge { background:#1a73e8; } a.ge:hover { background:#1664cf; }
   a.wb { background:#0a7d4f; } a.wb:hover { background:#086a43; }
   a.es { background:#444; }    a.es:hover { background:#333; }
+  .status { min-height:1.2em; margin:6px 0 0; font-size:12px; color:var(--muted); }
   .coords { font-size:12px; color:var(--muted); margin:8px 0 2px;
             font-variant-numeric:tabular-nums; }
   footer { font-size:11.5px; color:var(--muted); padding:6px 20px 14px;
@@ -173,10 +245,20 @@ _HTML_TEMPLATE = r"""<!DOCTYPE html>
 </head>
 <body>
 <header>
-  <h1>Degree-of-Recovery site inspector</h1>
+  <h1>Degree-of-Regeneration site inspector</h1>
   <p>DoR vs parent human-modification gradient (GHM) at the chosen reference
      buffer (<span id="bufstr"></span>). Click any point to inspect that site on
      the ground. Companion to <code>buffer_ghm_scatter.png</code>.</p>
+  <p class="legend">
+     <span class="lk fit">━</span> OLS fit (DoR on GHM)
+     <span class="lk one">– –</span> 1:1 line (y = x)
+     <span class="lk half">·····</span> per-class call threshold (<code>0.5*</code> = uncalibrated guide)
+     &nbsp;·&nbsp; ρ = Spearman rank, R² = linear fit, n = sites
+  </p>
+  <p class="note">A near-flat fit is the expected, healthy result: DoR should
+     <em>not</em> track GHM. A steep slope or high R² would flag that the score is
+     being driven by the surrounding modification gradient rather than on-site
+     recovery — worth inspecting on the ground.</p>
 </header>
 <div class="wrap">
   <div id="plot"></div>
@@ -225,6 +307,24 @@ function spearman(xs, ys) {
   return num/Math.sqrt(dx*dy);
 }
 
+// Ordinary-least-squares fit of y on x, plus Pearson r. Returns the fitted line
+// endpoints over the observed x-range so it can be drawn as a Plotly shape.
+function linfit(xs, ys) {
+  const n = xs.length;
+  if (n < 3) return null;
+  const mx = xs.reduce((a,b)=>a+b,0)/n, my = ys.reduce((a,b)=>a+b,0)/n;
+  let sxx=0, sxy=0, syy=0;
+  for (let i=0;i<n;i++){ const a=xs[i]-mx, b=ys[i]-my; sxx+=a*a; sxy+=a*b; syy+=b*b; }
+  if (sxx === 0 || syy === 0) return null;
+  const slope = sxy / sxx;
+  const intercept = my - slope * mx;
+  const r = sxy / Math.sqrt(sxx * syy);
+  const x0 = Math.min(...xs), x1 = Math.max(...xs);
+  return { slope, intercept, r, r2: r*r,
+           x0, y0: intercept + slope*x0,
+           x1, y1: intercept + slope*x1 };
+}
+
 // Explicit per-panel domains (we lay the grid out by hand rather than using
 // Plotly's `grid:` so the inter-panel gaps are generous and nothing squashes).
 const COL_GAP = 0.07, ROW_GAP = 0.13;   // fraction of paper between panels
@@ -240,11 +340,15 @@ classes.forEach((c, i) => {
   traces.push({
     type: 'scatter', mode: 'markers',
     x: g.map(d=>d.ghm), y: g.map(d=>d.dor),
-    customdata: g.map(d=>d.parent_id),
+    // customdata[0] = parent_id (click lookup); [1] = class label (hover)
+    customdata: g.map(d=>[d.parent_id, CONFIG.classLabels[c]]),
     marker: { size: 7, color: color, opacity: 0.6,
               line: { color:'white', width:0.5 } },
     xaxis: xId, yaxis: yId, name: CONFIG.classLabels[c], showlegend: false,
-    hovertemplate: 'GHM %{x:.3f}<br>DoR %{y:.3f}<extra></extra>',
+    hovertemplate: '<b>%{customdata[1]}</b><br>'
+                 + 'DoR %{y:.3f} · GHM %{x:.3f}<br>'
+                 + '<span style="font-size:10px">%{customdata[0]} · click to inspect</span>'
+                 + '<extra></extra>',
   });
 
   const col = i % ncol, row = Math.floor(i / ncol);
@@ -253,21 +357,47 @@ classes.forEach((c, i) => {
   const y1 = 1 - row * (cellH + ROW_GAP);   // top of this panel (paper coords)
   const y0 = y1 - cellH;
 
-  // DoR = 0.5 reference line (spans this panel's x-domain only)
+  // Per-class call threshold (the boundary the side-panel "Call" actually uses).
+  // Calibrated classes get their v4 threshold; uncalibrated (loss) classes fall
+  // back to a 0.5 guide, drawn lighter and labelled so the difference is clear.
+  const thr = CONFIG.thresholds[c];
+  const tVal = (thr === undefined ? 0.5 : thr);
+  const tCal = thr !== undefined;
   shapes.push({ type:'line', xref:xId+' domain', yref:yId,
-                x0:0, x1:1, y0:0.5, y1:0.5,
-                line:{ color:'#bbb', width:1, dash:'dot' } });
+                x0:0, x1:1, y0:tVal, y1:tVal,
+                line:{ color: tCal ? '#999' : '#ccc', width:1, dash:'dot' } });
+  annotations.push({
+    xref:xId+' domain', yref:yId, x:0.98, y:tVal,
+    text: tCal ? tVal.toFixed(2) : '0.5*',
+    showarrow:false, xanchor:'right', yanchor:'bottom',
+    font:{ size:9, color: tCal ? '#999' : '#bbb' },
+  });
+  // 1:1 identity line (y = x). DoR and GHM share the [0,1] scale, so the
+  // diagonal is a visual reference for "DoR tracks the modification gradient";
+  // it is NOT an expected relationship, just a fixed guide.
+  shapes.push({ type:'line', xref:xId, yref:yId, layer:'below',
+                x0:0, x1:1, y0:0, y1:1,
+                line:{ color:'#ccc', width:1, dash:'dash' } });
+  // OLS fit of DoR on GHM, drawn across the observed GHM range in the class hue.
+  const fit = linfit(g.map(d=>d.ghm), g.map(d=>d.dor));
+  if (fit) {
+    shapes.push({ type:'line', xref:xId, yref:yId,
+                  x0:fit.x0, y0:fit.y0, x1:fit.x1, y1:fit.y1,
+                  line:{ color:color, width:1.6 } });
+  }
   // class title above the panel
   annotations.push({
     xref:'paper', yref:'paper', x:(x0+x1)/2, y:Math.min(y1+0.025, 1.0),
     text:'<b>'+CONFIG.classLabels[c]+'</b>', showarrow:false,
     font:{ size:13, color:color }, xanchor:'center', yanchor:'bottom',
   });
-  // Spearman ρ + n, inside the panel
+  // Spearman ρ (rank), R² (linear fit) + n, inside the panel
   const rs = spearman(g.map(d=>d.ghm), g.map(d=>d.dor));
+  const rsStr = isNaN(rs) ? '–' : (rs>=0?'+':'') + rs.toFixed(2);
+  const r2Str = fit ? fit.r2.toFixed(2) : '–';
   annotations.push({
     xref:xId+' domain', yref:yId+' domain', x:0.04, y:0.96,
-    text:'ρ = '+(isNaN(rs)?'–':(rs>=0?'+':'')+rs.toFixed(2))+'<br>n = '+g.length,
+    text:'ρ = '+rsStr+'<br>R² = '+r2Str+'<br>n = '+g.length,
     showarrow:false, align:'left', xanchor:'left', yanchor:'top',
     font:{ size:11, color:'#222' },
     bgcolor:'rgba(255,255,255,0.85)', bordercolor:'#ddd', borderwidth:1,
@@ -329,9 +459,75 @@ function call(d) {
   const t = CONFIG.thresholds[d.parent_label];
   if (t === undefined) return '<span style="color:#888">not calibrated for this class</span>';
   const lo = d.dor_lo, hi = d.dor_hi;
-  if (lo !== null && lo > t)  return '<b style="color:#009E73">recovering</b> (CI entirely above '+t.toFixed(2)+')';
+  if (lo !== null && lo > t)  return '<b style="color:#009E73">regenerating</b> (CI entirely above '+t.toFixed(2)+')';
   if (hi !== null && hi < t)  return '<b style="color:#D55E00">degraded</b> (CI entirely below '+t.toFixed(2)+')';
   return '<b style="color:#888">indistinguishable</b> (CI spans '+t.toFixed(2)+')';
+}
+
+// Ecoregion percentile block: where this site's 2024 embedding ranks within its
+// ecoregion's reference distribution (score_test_sites_by_ecoregion.py). Higher
+// pct_good = more like the ecoregion's natural refs; higher pct_bad = more like
+// its degraded refs; pct_dor blends the two into a single 0-100 regeneration rank.
+function pctBar(label, v, color) {
+  if (v === null || v === undefined || isNaN(v)) {
+    return '<tr><td class="k">'+label+'</td><td class="v">–</td></tr>';
+  }
+  const w = Math.max(0, Math.min(100, v));
+  return '<tr><td class="k">'+label+'</td>'
+       + '<td class="v" style="padding-bottom:2px">'
+       + '<div class="pctnum">'+v.toFixed(1)+'</div>'
+       + '<div class="pctbar"><div class="pctfill" style="width:'+w+'%;background:'+color+'"></div></div>'
+       + '</td></tr>';
+}
+
+function pctBlock(d) {
+  if (d.pct_all === null && d.pct_dor === null) return '';
+  const eco = (d.eco_id === null || d.eco_id === undefined) ? '?' : d.eco_id;
+  return '<div class="pcthead">Ecoregion percentile <span class="eco">eco '+eco+'</span></div>'
+       + '<table class="kv">'
+       + pctBar('vs good refs', d.pct_good, '#009E73')
+       + pctBar('vs bad refs',  d.pct_bad,  '#D55E00')
+       + pctBar('vs all refs',  d.pct_all,  '#666')
+       + pctBar('recovery rank (pct_dor)', d.pct_dor, '#1a73e8')
+       + '</table>';
+}
+
+function copyTextToClipboard(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.setAttribute('readonly', '');
+  ta.style.position = 'fixed';
+  ta.style.left = '-9999px';
+  ta.style.top = '0';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try {
+    document.execCommand('copy');
+  } finally {
+    document.body.removeChild(ta);
+  }
+  return Promise.resolve();
+}
+
+function wireClipboardBackup() {
+  const status = document.getElementById('link-status');
+  if (!status) return;
+  const links = document.querySelectorAll('#panel .maplink.ge, #panel .maplink.wb');
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      copyTextToClipboard(link.href)
+        .then(() => {
+          status.textContent = 'Link copied to clipboard. Paste it if the new tab does not open.';
+        })
+        .catch(() => {
+          status.textContent = 'Could not copy automatically. Use the link address from the browser if it does not open.';
+        });
+    });
+  });
 }
 
 function showSite(d) {
@@ -358,20 +554,24 @@ function showSite(d) {
     + '<tr><td class="k">GHM</td><td class="v">'+fmt(d.ghm,3)+'</td></tr>'
     + '<tr><td class="k">paired refs (good / bad)</td><td class="v">'+fmt(d.n_good,0)+' / '+fmt(d.n_bad,0)+'</td></tr>'
     + '</table>'
+    + pctBlock(d)
     + '<div class="call"><b>Call:</b> '+call(d)+'</div>'
     + '<a class="maplink ge" id="ge-link" target="_blank" rel="noopener">Open in Google Earth ↗</a>'
     + '<a class="maplink wb" id="wb-link" target="_blank" rel="noopener">Esri Wayback (imagery time-series) ↗</a>'
     + '<a class="maplink es" id="es-link" target="_blank" rel="noopener">Esri World Imagery (current) ↗</a>'
+    + '<div class="status" id="link-status">Tip: Ctrl-click to force a new tab. Google Earth opens with a red pin at the site; the link is also copied to your clipboard as a backup.</div>'
     + '<div class="coords">lat '+d.lat+', lon '+d.lon+'</div>';
   document.getElementById('ge-link').href = ge;
   document.getElementById('wb-link').href = wb;
   document.getElementById('es-link').href = es;
+  wireClipboardBackup();
 }
 
 document.getElementById('plot').on('plotly_click', ev => {
   const pt = ev.points[0];
   if (!pt || pt.customdata === undefined) return;
-  const d = byId[pt.customdata];
+  const pid = Array.isArray(pt.customdata) ? pt.customdata[0] : pt.customdata;
+  const d = byId[pid];
   if (d) showSite(d);
 });
 
@@ -381,7 +581,8 @@ document.getElementById('bufstr').textContent =
 document.getElementById('foot').innerHTML =
   DATA.length + ' sites across ' + classes.length + ' classes at the chosen buffer · '
   + 'GHM is a diagnostic, not an optimisation target · '
-  + 'scores are read from <code>buffer_extent_per_site.csv</code> (no recomputation).';
+  + 'scores are read from <code>buffer_extent_per_site.csv</code> (no recomputation) · '
+  + '<span class="stamp">__BUILD__</span>';
 </script>
 </body>
 </html>

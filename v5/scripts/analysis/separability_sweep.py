@@ -22,7 +22,7 @@ Definition (pooled across all sites, per class):
                refs in the buffer (r itself excluded);
       m_b(r) = mean of the k=5 smallest cosine distances from r to *bad* refs;
       s(r)   = m_b / (m_g + m_b)      [the same DoR functional form]
-  A known-good ref is a positive (it *should* score high / recovering); a
+    A known-good ref is a positive (it *should* score high / regenerating); a
   known-bad ref is a negative. Pool s(r) and the true labels across all parents
   of the class, sweep the threshold over the pooled score distribution, and pick
   the threshold maximising MCC. Report F1 and MCC at that threshold, plus the

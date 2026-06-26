@@ -75,7 +75,7 @@ def classify(score: float, ci_lo: float, ci_hi: float, threshold: float) -> str:
     if not (np.isfinite(score) and np.isfinite(ci_lo) and np.isfinite(ci_hi)):
         return "no_data"
     if ci_lo > threshold:
-        return "recovering"
+        return "regenerating"
     if ci_hi < threshold:
         return "degraded"
     return "indistinguishable"

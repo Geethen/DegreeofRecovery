@@ -36,6 +36,8 @@ Usage:
 import argparse
 import json
 import os
+import re
+import shutil
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from threading import Lock
@@ -57,6 +59,9 @@ SCALE = 10                   # metres (AlphaEarth native)
 SEED = 42
 MAX_WORKERS = 20
 CELL_TIMEOUT_S = 300        # max seconds per cell before treating as failed
+CHECKPOINT_EVERY = 25       # write checkpoint at most every N cell completions
+FORCE_RESUME = False        # set by --force_resume: re-open a "done" eco and
+                            # fill only its missed cells (appends, never wipes)
 
 # WorldCover transformed classes (excluded from "natural")
 WC_CROP = 40
@@ -121,6 +126,41 @@ def parent_ecoregion_ids():
 
     ids = parents.map(tag).aggregate_array("eco_id").distinct().getInfo()
     return sorted({int(i) for i in ids if i is not None and int(i) >= 0})
+
+
+def parent_ecoregion_ids_noncrop():
+    """Like parent_ecoregion_ids() but excludes ecoregions whose parents are
+    exclusively crop_loss or stable_crop (i.e. keeps only ecoregions that have
+    at least one built_loss parent)."""
+    parents = (
+        ee.FeatureCollection(SAMPLES_ASSET)
+        .filter(ee.Filter.neq("r", "stable_stable"))
+        .map(lambda ft: ft.setGeometry(ft.geometry().centroid(5)))
+    )
+    ecoregions = ee.FeatureCollection(ECOREGIONS_ASSET)
+
+    def tag(ft):
+        match = ecoregions.filterBounds(ft.geometry()).first()
+        return ft.set(
+            "eco_id",
+            ee.Algorithms.If(match, ee.Feature(match).get("ECO_ID"), -1),
+        )
+
+    tagged = parents.map(tag)
+    all_info = tagged.select(["r", "eco_id"]).getInfo()
+
+    import collections
+    eco_labels = collections.defaultdict(set)
+    for f in all_info["features"]:
+        r = f["properties"]["r"]
+        eco_id = int(f["properties"]["eco_id"])
+        if eco_id >= 0:
+            eco_labels[eco_id].add(r)
+
+    crop_types = {"crop_loss", "stable_crop"}
+    keep = sorted(eid for eid, labels in eco_labels.items()
+                  if not labels <= crop_types)
+    return keep
 
 
 # ── Natural mask (DoR datasets: WorldCover + HABLOSS exclusion) ─────
@@ -312,7 +352,16 @@ def run_ecoregion(eco_id, aef22, aef22_fscs, extraction_stack,
     checkpoint_file = os.path.join(
         DATA_DIR, f"ref_samples_eco{eco_id}.checkpoint.json")
 
-    if os.path.exists(output_path) and not os.path.exists(checkpoint_file):
+    parts_dir = os.path.join(DATA_DIR, f"ref_samples_eco{eco_id}_parts")
+
+    # An ecoregion is genuinely "done" only when the consolidated parquet exists
+    # AND there is no checkpoint AND no leftover parts dir. (Bug-2 history: many
+    # parquets were written from only one session's subset, then the checkpoint
+    # deleted — so a bare parquet is NOT proof of completeness. We now also seed
+    # processed_cells from the parquet below so a re-run only fills MISSED cells
+    # and appends, never overwrites.)
+    if (os.path.exists(output_path) and not os.path.exists(checkpoint_file)
+            and not os.path.isdir(parts_dir) and not FORCE_RESUME):
         existing = duckdb.sql(
             f"SELECT count(*) FROM '{output_path}'").fetchone()[0]
         n_nat = duckdb.sql(
@@ -364,31 +413,91 @@ def run_ecoregion(eco_id, aef22, aef22_fscs, extraction_stack,
         grid_features = retry_gee(
             lambda: grid_unfiltered.getInfo()["features"])
 
-    # Checkpoint
+    # ── Checkpoint + resume (Bug-2 fix) ──────────────────────────────
+    # Rows are written incrementally to per-cell parquet PARTS on disk
+    # (parts_dir) the instant a cell completes, so a kill never loses prior
+    # work and a resume always reloads it — even when the consolidated
+    # output_path parquet doesn't exist yet. The final consolidated parquet
+    # is built from {existing output_path} ∪ {all parts} at the very end.
+    os.makedirs(parts_dir, exist_ok=True)
+
     processed_cells = set()
     if os.path.exists(checkpoint_file):
         with open(checkpoint_file, "r") as f:
             processed_cells = set(json.load(f))
-        print(f"  Resuming: {len(processed_cells)}/{total_cells} cells done")
+        print(f"  Resuming from checkpoint: "
+              f"{len(processed_cells)}/{total_cells} cells done")
+
+    # Seed from any parts already on disk (covers a kill between part-write and
+    # checkpoint-write — the part is authoritative, so mark its cell done).
+    for pf in os.listdir(parts_dir):
+        m = re.match(r"cell_(\d+)\.parquet$", pf)
+        if m:
+            processed_cells.add(int(m.group(1)))
+
+    # Seed from the existing consolidated parquet (covers the Bug-2 case: parquet
+    # exists, checkpoint was deleted, no parts). Cells already captured there are
+    # skipped; only MISSED cells get processed and appended.
+    if os.path.exists(output_path):
+        try:
+            existing_cells = duckdb.sql(
+                f"SELECT DISTINCT cell_index FROM '{output_path}'").fetchall()
+            for (ci,) in existing_cells:
+                if ci is not None:
+                    processed_cells.add(int(ci))
+            print(f"  Seeded {len(existing_cells):,} cells from existing "
+                  f"parquet (will append missed cells only)")
+        except Exception as e:
+            print(f"  [WARN] could not seed from existing parquet: {e}")
+
+    if processed_cells:
+        print(f"  Total already-done cells: {len(processed_cells):,}/"
+              f"{total_cells}")
 
     lock = Lock()
 
     def save_checkpoint():
+        # Atomic, lock-free file write (Bug-1 fix): snapshot the done-set under
+        # the lock, then write to a temp file and os.replace() into place. A
+        # rename is a metadata op on CIFS (far less hang-prone than truncating
+        # the live file), and crucially the write happens OUTSIDE the lock, so a
+        # slow/hung CIFS write can never block other workers from progressing.
         with lock:
-            with open(checkpoint_file, "w") as f:
-                json.dump(sorted(processed_cells), f)
+            snapshot = sorted(processed_cells)
+        tmp = f"{checkpoint_file}.tmp.{os.getpid()}.{id(snapshot)}"
+        with open(tmp, "w") as f:
+            json.dump(snapshot, f)
+        os.replace(tmp, checkpoint_file)
 
-    db_conn = duckdb.connect()
-    if os.path.exists(output_path):
-        print("  Loading existing parquet into buffer...")
-        db_conn.execute(
-            f"CREATE TABLE data AS SELECT * FROM '{output_path}'")
-        existing = db_conn.execute(
-            "SELECT count(*) FROM data").fetchone()[0]
-        print(f"  [OK] Loaded {existing:,} existing rows")
+    def write_part(df, cell_idx):
+        """Write one cell's rows to its own parquet part, atomically."""
+        part_path = os.path.join(parts_dir, f"cell_{cell_idx}.parquet")
+        tmp = f"{part_path}.tmp.{os.getpid()}"
+        # duckdb COPY of an in-memory df; one connection per call keeps this
+        # thread-safe without sharing a global connection.
+        con = duckdb.connect()
+        try:
+            con.register("df_part", df)
+            con.execute(
+                f"COPY df_part TO '{tmp}' (FORMAT PARQUET, COMPRESSION ZSTD)")
+        finally:
+            con.close()
+        os.replace(tmp, part_path)
 
     successful = 0
     failed_cells = []
+
+    completed_counter = {"n": 0}
+
+    def mark_done(cell_idx):
+        """Record a cell as processed and checkpoint periodically (Bug-1 fix:
+        batched so we don't hammer the CIFS mount on every cell)."""
+        with lock:
+            processed_cells.add(cell_idx)
+            completed_counter["n"] += 1
+            due = completed_counter["n"] % CHECKPOINT_EVERY == 0
+        if due:
+            save_checkpoint()
 
     def process_cell(cell_idx):
         if cell_idx in processed_cells:
@@ -406,14 +515,12 @@ def run_ecoregion(eco_id, aef22, aef22_fscs, extraction_stack,
             ).getNumber(aef22.bandNames().get(0)).getInfo()
         except Exception as e:
             tqdm.write(f"    Cell {cell_idx}: geom error — {e}")
-            processed_cells.add(cell_idx)
-            save_checkpoint()
+            mark_done(cell_idx)
             return 0
 
         if pixel_count is None or pixel_count < 10:
             tqdm.write(f"    Cell {cell_idx}: skip ({pixel_count} pixels)")
-            processed_cells.add(cell_idx)
-            save_checkpoint()
+            mark_done(cell_idx)
             return 0
 
         # Adaptive cluster count: can't have more clusters than pixels
@@ -431,8 +538,7 @@ def run_ecoregion(eco_id, aef22, aef22_fscs, extraction_stack,
             )
         except Exception as e:
             tqdm.write(f"    Cell {cell_idx}: FSCS failed — {e}")
-            processed_cells.add(cell_idx)
-            save_checkpoint()
+            mark_done(cell_idx)
             return 0
 
         sampled = extraction_stack.reduceRegions(
@@ -455,22 +561,14 @@ def run_ecoregion(eco_id, aef22, aef22_fscs, extraction_stack,
         if df is not None and not df.empty:
             df["eco_id"] = eco_id
             df["cell_index"] = cell_idx
-            with lock:
-                try:
-                    db_conn.execute("SELECT 1 FROM data LIMIT 0")
-                    table_exists = True
-                except duckdb.CatalogException:
-                    table_exists = False
-                if table_exists:
-                    db_conn.execute("INSERT INTO data SELECT * FROM df")
-                else:
-                    db_conn.execute("CREATE TABLE data AS SELECT * FROM df")
-            processed_cells.add(cell_idx)
-            save_checkpoint()
+            # Persist immediately to this cell's own parquet part. A kill after
+            # this point keeps the data; the cell is only marked done AFTER the
+            # part is safely on disk, so done ⇒ data exists.
+            write_part(df, cell_idx)
+            mark_done(cell_idx)
             return len(df)
 
-        processed_cells.add(cell_idx)
-        save_checkpoint()
+        mark_done(cell_idx)
         return 0
 
     effective_workers = min(max_workers, total_cells)
@@ -495,6 +593,9 @@ def run_ecoregion(eco_id, aef22, aef22_fscs, extraction_stack,
                 failed_cells.append(cell_idx)
                 tqdm.write(f"  [ERROR] Cell {cell_idx}: {e}")
 
+    # Flush the final checkpoint (last batch may not have hit CHECKPOINT_EVERY).
+    save_checkpoint()
+
     if failed_cells:
         print(f"\n  {len(failed_cells)} cells failed after retries: "
               f"{failed_cells}")
@@ -503,43 +604,66 @@ def run_ecoregion(eco_id, aef22, aef22_fscs, extraction_stack,
           f"{len(failed_cells)} failed, "
           f"{len(processed_cells)} total processed")
 
-    try:
-        buf_rows = db_conn.execute(
-            "SELECT count(*) FROM data").fetchone()[0]
-    except Exception:
-        buf_rows = 0
+    # ── Consolidate (Bug-2 fix): final parquet = existing parquet ∪ all parts.
+    # Building over the FULL accumulated data (prior sessions' rows on disk +
+    # this session's parts) means a resume APPENDS and never overwrites. The
+    # DISTINCT ON (geo) dedup runs across everything, so re-touched cells don't
+    # duplicate points.
+    part_files = sorted(
+        os.path.join(parts_dir, p) for p in os.listdir(parts_dir)
+        if re.match(r"cell_\d+\.parquet$", p))
 
-    if buf_rows == 0:
+    sources = []
+    if os.path.exists(output_path):
+        sources.append(output_path)
+    sources.extend(part_files)
+
+    if not sources:
         print(f"  [WARN] No data extracted for eco_id={eco_id}")
-        db_conn.close()
         return
 
+    db_conn = duckdb.connect()
+    union_sql = " UNION ALL BY NAME ".join(
+        f"SELECT * FROM '{s}'" for s in sources)
+    tmp_out = f"{output_path}.tmp.{os.getpid()}"
     db_conn.execute(f"""
         COPY (
             SELECT DISTINCT ON (geo) *
-            FROM data
-        ) TO '{output_path}'
+            FROM ({union_sql})
+        ) TO '{tmp_out}'
         (FORMAT PARQUET, COMPRESSION ZSTD)
     """)
+    os.replace(tmp_out, output_path)
 
     final_rows = db_conn.execute(
         f"SELECT count(*) FROM '{output_path}'").fetchone()[0]
+    final_cells = db_conn.execute(
+        f"SELECT count(DISTINCT cell_index) FROM '{output_path}'").fetchone()[0]
     n_natural = db_conn.execute(f"""
         SELECT count(*) FROM '{output_path}'
         WHERE "natural" = 1
     """).fetchone()[0]
+    db_conn.close()
     file_mb = os.path.getsize(output_path) / 1e6
 
     print(f"\n[OK] Saved: {output_path}")
     print(f"  Total: {final_rows:,} points "
           f"({n_natural:,} natural, "
-          f"{final_rows - n_natural:,} transformed)")
+          f"{final_rows - n_natural:,} transformed) "
+          f"across {final_cells:,} cells")
     print(f"  Size: {file_mb:.1f} MB")
 
-    db_conn.close()
-
-    if not failed_cells and os.path.exists(checkpoint_file):
-        os.remove(checkpoint_file)
+    # Only declare the ecoregion DONE (delete checkpoint + parts) when every
+    # cell was attempted with no failures. Otherwise leave both so the next run
+    # resumes and the parts aren't lost.
+    if not failed_cells:
+        if os.path.exists(checkpoint_file):
+            os.remove(checkpoint_file)
+        shutil.rmtree(parts_dir, ignore_errors=True)
+        print(f"  [DONE] checkpoint + parts cleaned up")
+    else:
+        print(f"  [PARTIAL] kept checkpoint + parts ({len(part_files)} parts) "
+              f"for resume")
 
 
 # ── CLI ─────────────────────────────────────────────────────────────
@@ -551,6 +675,9 @@ def main():
                        help="Single ecoregion ECO_ID")
     group.add_argument("--all", action="store_true",
                        help="All ecoregions containing DoR parents")
+    parser.add_argument("--skip_crop", action="store_true",
+                       help="Skip ecoregions whose parents are exclusively "
+                            "crop_loss or stable_crop (built_loss ecoregions only)")
     parser.add_argument("--n_clusters", type=int, default=N_CLUSTERS,
                         help=f"FSCS clusters per grid cell "
                              f"(default {N_CLUSTERS})")
@@ -558,7 +685,15 @@ def main():
                         help=f"Grid cell size in metres (default {GRID_SCALE})")
     parser.add_argument("--max_workers", type=int, default=MAX_WORKERS)
     parser.add_argument("--project", default=PROJECT)
+    parser.add_argument("--force_resume", action="store_true",
+                        help="Re-open ecoregions that already have a parquet but "
+                             "may be missing cells (Bug-2 recovery): seeds done-"
+                             "cells from the existing parquet and fills/appends "
+                             "only the missed cells. Never overwrites prior data.")
     args = parser.parse_args()
+
+    global FORCE_RESUME
+    FORCE_RESUME = args.force_resume
 
     init_gee(args.project)
 
@@ -577,8 +712,12 @@ def main():
         run_ecoregion(args.eco_id, aef22, aef22_fscs, extraction_stack,
                       args.n_clusters, args.max_workers, args.grid_scale)
     else:
-        eco_ids = parent_ecoregion_ids()
-        print(f"[OK] {len(eco_ids)} ecoregions contain DoR parents: {eco_ids}")
+        if args.skip_crop:
+            eco_ids = parent_ecoregion_ids_noncrop()
+            print(f"[OK] {len(eco_ids)} non-crop ecoregions (built_loss parents): {eco_ids}")
+        else:
+            eco_ids = parent_ecoregion_ids()
+            print(f"[OK] {len(eco_ids)} ecoregions contain DoR parents: {eco_ids}")
         for eco_id in eco_ids:
             run_ecoregion(eco_id, aef22, aef22_fscs, extraction_stack,
                           args.n_clusters, args.max_workers, args.grid_scale)

@@ -1,0 +1,41 @@
+Metadata - v5 built-loss Degree of Recovery point shapefile
+===========================================================
+Generated:    2026-06-26
+File:         test_site_dor_v5_built_loss.shp
+Features:     90 built-loss abandonment test sites
+Geometry:     Point
+CRS:          EPSG:4326 (WGS84)
+Sort order:   DESCENDING by dor_knn (rank 1 = most recovered)
+
+Scoring (v5):
+  - 2024 AlphaEarth 64-band embedding, mean per site.
+  - Reference annulus: inner exclusion 4 km, outer ceiling 5 km,
+    expanding to 8 km when the per-pool count target is unmet.
+  - Near-natural (good) pool = non-crop/non-built/non-water WorldCover,
+    minus HABLOSS-loss pixels; built-up (bad) pool = built-up pixels.
+  - DoR = d_bad5 / (d_nat5 + d_bad5), 5-nearest-neighbour cosine distance.
+  - 2,000-bootstrap 95% CI; threshold 0.4948 (stable_built calibration).
+
+Category breakdown (cat_knn): recovering 39, indistinguishable 33, degraded 18.
+
+Fields:
+  rank       Descending rank by dor_knn (1 = most recovered / highest DoR).
+  parent_id  GEE system:index of the built-loss parent site.
+  lbl        Upstream abandonment label (always 'built_loss' here).
+  class      DoR scoring class (built_loss).
+  n_good     Number of near-natural (good) reference pixels used.
+  n_bad      Number of built-up (bad) reference pixels used.
+  dor_knn    Primary Degree of Recovery: mean cosine distance to 5 nearest bad refs / (5-NN nat dist + 5-NN bad dist). 1=natural, 0=built.
+  knn_ci_lo  Lower bound, 95% bootstrap CI of dor_knn (2,000 resamples).
+  knn_ci_hi  Upper bound, 95% bootstrap CI of dor_knn.
+  t_knn      Operating threshold applied (stable_built = 0.4948).
+  cat_knn    Category from dor_knn CI vs t_knn: recovering / degraded / indistinguishable.
+  dor_med    Secondary DoR using median (not 5-NN) reference distances.
+  med_ci_lo  Lower bound, 95% bootstrap CI of dor_median.
+  med_ci_hi  Upper bound, 95% bootstrap CI of dor_median.
+  cat_med    Category from dor_median vs 0.5.
+  eco_id     RESOLVE 2017 ecoregion ECO_ID the site falls in.
+  pct_good   Ecoregion percentile rank of similarity to the ecoregion's natural-reference cloud (0-100; high = natural-like).
+  pct_bad    Ecoregion percentile rank of similarity to the ecoregion's built-reference cloud (0-100; high = built-like).
+  pct_dor    Directional ecoregion DoR percentile = (pct_good + (100-pct_bad))/2. NaN for 2 sites whose ecoregion lacks an FSCS reference file.
+  geometry   Point, EPSG:4326 (WGS84), parent-site centroid (lon, lat).

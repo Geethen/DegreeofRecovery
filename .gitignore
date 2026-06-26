@@ -53,6 +53,13 @@ v2/data/*/sampling_strategy_selected_points_diem.csv
 # Claude scheduled-tasks lockfile (runtime state, not source)
 .claude/scheduled_tasks.lock
 
+# Ecoregion sampler runtime outputs
+v1-ecoregion/data/ref_samples_eco*.parquet
+v1-ecoregion/data/ref_samples_eco*.checkpoint.json
+v1-ecoregion/data/ref_samples_eco*.checkpoint.json.bak
+v1-ecoregion/data/ref_samples_eco*_parts/
+v1-ecoregion/data/run_all_*.log
+
 # OS
 .DS_Store
 Thumbs.db

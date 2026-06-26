@@ -19,11 +19,11 @@ EPS = 1e-12
 
 # Category integer codes (decoded only at output time).
 CAT_NO_DATA = 0
-CAT_RECOVERING = 1
+CAT_REGENERATING = 1
 CAT_DEGRADED = 2
 CAT_INDISTINGUISHABLE = 3
 CAT_NAMES = np.array(
-    ["no_data", "recovering", "degraded", "indistinguishable"], dtype=object
+    ["no_data", "regenerating", "degraded", "indistinguishable"], dtype=object
 )
 
 
@@ -100,7 +100,7 @@ def classify_batch(
 ) -> np.ndarray:
     """Vectorised CI classifier with a deadband and a score-margin.
 
-    Calls ``recovering`` when the CI lower bound clears the upper deadband
+    Calls ``regenerating`` when the CI lower bound clears the upper deadband
     edge (``lo > t_hi``) *and* the point score lies at least ``delta`` above
     that edge (``score - t_hi >= delta``); mirrored for ``degraded`` below
     ``t_lo``. Sites that satisfy neither are returned as ``indistinguishable``.
@@ -115,6 +115,6 @@ def classify_batch(
     rec = finite & (lo > t_hi) & ((score - t_hi) >= delta)
     deg = finite & (hi < t_lo) & ((t_lo - score) >= delta)
     out[finite] = CAT_INDISTINGUISHABLE
-    out[rec] = CAT_RECOVERING
+    out[rec] = CAT_REGENERATING
     out[deg] = CAT_DEGRADED
     return out

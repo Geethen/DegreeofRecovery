@@ -11,7 +11,7 @@ Mirrors v3/scripts/analysis/validate_steps_within_parent.py but:
 
 The probe semantics are unchanged:
   - probe = 'good' (held-out natural-state ref): error = wrongly called 'degraded'
-  - probe = 'bad'  (held-out degraded-state ref): error = wrongly called 'recovering'
+    - probe = 'bad'  (held-out degraded-state ref): error = wrongly called 'regenerating'
 
 For stable_built parents, the validator still computes error in this frame —
 but at scoring time the test-site itself is expected to land near the bad
@@ -33,7 +33,6 @@ from degree_of_recovery.core_batch import (
     CAT_INDISTINGUISHABLE,
     CAT_NAMES,
     CAT_NO_DATA,
-    CAT_RECOVERING,
     bootstrap_ci_batch,
     classify_batch,
     cosine_dist_matrix,
@@ -180,14 +179,14 @@ def metrics(cats: np.ndarray, true_label: str) -> dict:
     n = max(len(cats), 1)
     if true_label == "good":
         return dict(
-            true_rate=float((cats == "recovering").sum() / n),
+            true_rate=float((cats == "regenerating").sum() / n),
             error_rate=float((cats == "degraded").sum() / n),
             abstain_rate=float((cats == "indistinguishable").sum() / n),
             no_data_rate=float((cats == "no_data").sum() / n),
         )
     return dict(
         true_rate=float((cats == "degraded").sum() / n),
-        error_rate=float((cats == "recovering").sum() / n),
+        error_rate=float((cats == "regenerating").sum() / n),
         abstain_rate=float((cats == "indistinguishable").sum() / n),
         no_data_rate=float((cats == "no_data").sum() / n),
     )
@@ -446,7 +445,7 @@ def main() -> None:
     print("=" * 78)
     for probe in ("good", "bad"):
         tag = ("GOOD probe (false-degraded)" if probe == "good"
-               else "BAD probe  (false-recovering)")
+               else "BAD probe  (false-regenerating)")
         print(f"\n{'-'*78}\n  {tag}\n{'-'*78}")
         print(f"  {'step':<33} {'n':>5}  {'true%':>6}  {'error%':>6}  "
               f"{'abstain%':>9}  {'brier':>6}")

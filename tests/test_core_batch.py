@@ -10,7 +10,7 @@ from degree_of_recovery.core_batch import (
     CAT_INDISTINGUISHABLE,
     CAT_NAMES,
     CAT_NO_DATA,
-    CAT_RECOVERING,
+    CAT_REGENERATING,
     bootstrap_ci_batch,
     classify_batch,
     cosine_dist_matrix,
@@ -109,13 +109,13 @@ class TestBootstrapCiBatch:
 
 class TestClassifyBatch:
     def test_categories(self):
-        # Order: recovering, degraded, indistinguishable, no_data, indistinguishable (delta gate fails)
+        # Order: regenerating, degraded, indistinguishable, no_data, indistinguishable (delta gate fails)
         score = np.array([0.70, 0.30, 0.50, np.nan, 0.55])
         lo = np.array([0.65, 0.20, 0.40, 0.40, 0.51])
         hi = np.array([0.75, 0.40, 0.60, 0.60, 0.59])
         out = classify_batch(score, lo, hi, t_lo=0.45, t_hi=0.55, delta=0.05)
 
-        assert out[0] == CAT_RECOVERING       # lo > t_hi and score - t_hi >= delta
+        assert out[0] == CAT_REGENERATING     # lo > t_hi and score - t_hi >= delta
         assert out[1] == CAT_DEGRADED         # hi < t_lo and t_lo - score >= delta
         assert out[2] == CAT_INDISTINGUISHABLE
         assert out[3] == CAT_NO_DATA
@@ -127,5 +127,5 @@ class TestClassifyBatch:
         hi = np.array([0.75, 0.4])
         out = classify_batch(score, lo, hi, t_lo=0.45, t_hi=0.55, delta=0.05)
         names = CAT_NAMES[out]
-        assert names[0] == "recovering"
+        assert names[0] == "regenerating"
         assert names[1] == "degraded"
