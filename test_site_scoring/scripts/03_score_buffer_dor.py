@@ -87,16 +87,16 @@ def load_parent_embeddings(con) -> dict[str, np.ndarray]:
     frames = []
     for p in (TS_STABLE, TS_CAND):
         frames.append(con.execute(
-            f"SELECT CAST(parent_id AS VARCHAR) key, {embed_sql} "
+            f'SELECT CAST(parent_id AS VARCHAR) emb_key, {embed_sql} '
             f"FROM read_parquet('{p}')").df())
     if TS_MISSING.exists():
         frames.append(con.execute(
-            f"SELECT CAST(PLOTID AS VARCHAR) key, {embed_sql} "
+            f'SELECT CAST(PLOTID AS VARCHAR) emb_key, {embed_sql} '
             f"FROM read_parquet('{TS_MISSING}')").df())
     df = pd.concat(frames, ignore_index=True).dropna(subset=EMBED_COLS)
     return {
         k: g[EMBED_COLS].to_numpy(dtype=float).mean(axis=0)
-        for k, g in df.groupby("key", sort=False)
+        for k, g in df.groupby("emb_key", sort=False)
     }
 
 
