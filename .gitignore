@@ -60,6 +60,33 @@ v1-ecoregion/data/ref_samples_eco*.checkpoint.json.bak
 v1-ecoregion/data/ref_samples_eco*_parts/
 v1-ecoregion/data/run_all_*.log
 
+# Test-site scoring generated outputs
+test_site_scoring/REPORT_degree_of_regeneration.docx
+test_site_scoring/data/ghm_281_no_parent.csv
+test_site_scoring/data/target_groups.parquet
+test_site_scoring/data/test_site_alphaearth_2024_missing.parquet
+test_site_scoring/data/ref_samples_eco*_2024.parquet
+test_site_scoring/data/test_site_scores_combined.cpg
+test_site_scoring/data/test_site_scores_combined.dbf
+test_site_scoring/data/test_site_scores_combined.gpkg
+test_site_scoring/data/test_site_scores_combined.prj
+test_site_scoring/data/test_site_scores_combined.shp
+test_site_scoring/data/test_site_scores_combined.shx
+test_site_scoring/data/test_site_scores_combined_METADATA.md
+test_site_scoring/data/v5_extra_refs_281_alphaearth.parquet
+test_site_scoring/figures/dor_local_vs_ecoregion.pdf
+test_site_scoring/figures/dor_local_vs_ecoregion.png
+test_site_scoring/figures/workflow_dor.html
+test_site_scoring/figures/workflow_dor.pdf
+test_site_scoring/figures/workflow_dor.png
+test_site_scoring/figures/workflow_dor_nature.html
+test_site_scoring/figures/workflow_dor_nature.pdf
+test_site_scoring/figures/workflow_dor_nature.png
+test_site_scoring/logs/*.log
+test_site_scoring/report/combined_inspector.html
+test_site_scoring/scripts/07_build_combined_inspector.py
+test_site_scoring/scripts/08_plot_local_vs_ecoregion.py
+
 # OS
 .DS_Store
 Thumbs.db
